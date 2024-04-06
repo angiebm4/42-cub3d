@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:55:37 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/02/20 10:44:57 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:32:32 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 // #define MAGENTA			"\x1b[35m"
 # define C_CYAN   			"\x1b[36m"
 // #define WHITE  			"\x1B[37m"
-// #define ORANGE 			"\x1B[38;2;255;128;0m"
+# define C_ORANGE 			"\x1B[38;2;255;128;0m"
 // #define ROSE   			"\x1B[38;2;255;151;203m"
 // #define LBLUE  			"\x1B[38;2;53;149;240m"
 // #define GRAY  			"\x1B[38;2;176;174;174m"
