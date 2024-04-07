@@ -8,6 +8,10 @@ int error(int msg)
         ft_printf("%sOPEN ERROR\n%s", C_ORANGE, CLEAR);
     else if (msg == ERROR_MALLOC)
         ft_printf("%sMALLOC ERROR\n%s", C_ORANGE, CLEAR);
+    else if (msg == ERROR_FILE_CONTENT)
+        ft_printf("%sINVALID FILE CONTENT\n%s", C_ORANGE, CLEAR);
+    else if (msg == ERROR_MLX_TEX_CREATE)
+        ft_printf("%sTEXTURE CREATE FAIL MLX FUNCTION\n%s", C_ORANGE, CLEAR);
     return(1);
 }
 

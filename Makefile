@@ -15,15 +15,15 @@ CFLAGS =-Wall -Werror -Wextra -Imlx
 LIB = libft/libft.a
 MLX= mlx/libmlx.a
 
-VPATH = src:
+VPATH = src:src/parser:
 
 SRC =		main.c
 
-PARSER =
+PARSER =	init_map.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
-		#$(PARSER:%.c=$(OBJ_DIR)%.o)
+		$(PARSER:%.c=$(OBJ_DIR)%.o)
 
 all: $(NAME)
 
