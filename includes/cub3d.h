@@ -14,6 +14,7 @@
 # define ERROR_MALLOC           3
 # define ERROR_FILE_CONTENT     4
 # define ERROR_MLX_TEX_CREATE   5
+# define ERROR_MLX_INIT         6
 
 /* VALID CHARACTERS */
 # define VALID_CHARS "01NSWED "
