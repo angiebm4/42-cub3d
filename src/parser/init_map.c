@@ -25,6 +25,13 @@ int which_texture(char *line)
     return(nb_tex);
 }
 
+int save_map(t_cube *cube, int file)
+{
+
+}
+
+int save_rgv(char *line, t_cube *cube)
+
 int init_textures(t_cube *cube, int file)
 {
     char    *line;
@@ -42,6 +49,8 @@ int init_textures(t_cube *cube, int file)
         {
             free(line);
             line = get_next_line(file);
+            if (line == NULL)
+                return(error(ERROR_FILE_CONTENT));
         }
         tex = which_texture(line);
         if (tex < 0 || tex > 4)
@@ -58,6 +67,21 @@ int init_textures(t_cube *cube, int file)
         free(line);
         free(file_name);
         line = get_next_line(file);
+    }
+    while(flag < 6)
+    {
+        if (!ft_strcmp(line, "\n"))
+        {
+            free(line);
+            line = get_next_line(file);
+            if (line == NULL)
+                return(error(ERROR_FILE_CONTENT));
+        }
+        if (!ft_strncmp(line, "C ", 2))
+        {
+            save_rgv(&line[2], cube)
+            flag++;
+        }
     }
 
     return (0);
@@ -80,7 +104,7 @@ int    init_data(t_cube *cube, char *fd)
     if (cube->grafic->mlx == NULL)
         return(error(ERROR_MLX_INIT));
     init_textures(cube, file);
-    
+    save_map(cube, file);    
     // check_map(cube);
     return (0);
 }
