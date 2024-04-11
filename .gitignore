@@ -4,3 +4,9 @@ obj/
 
 # Executables
 /cub3D
+
+# VSCode folder
+.vscode
+
+# MAC temporal files
+.DS_Stoer
