@@ -1,0 +1,6 @@
+# Objects
+*.o
+obj/
+
+# Executables
+/cub3D
