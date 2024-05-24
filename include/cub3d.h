@@ -44,9 +44,9 @@ struct  s_mlx
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 
-	void        *textures[5];	/* Textures */
-	t_pixel     *floor;			/* Floor pixel color */
-	t_pixel     *ceiling;		/* Ceiling pixel color */
+	void        *textures[TEXTURES_COUNT];	/* Textures */
+	t_pixel     *floor;						/* Floor pixel color */
+	t_pixel     *ceiling;					/* Ceiling pixel color */
 };
 
 struct  s_pixel
