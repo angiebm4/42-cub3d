@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "../include/cub3d.h"
 
 int error(int msg)
 {
