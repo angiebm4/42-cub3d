@@ -36,8 +36,6 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(LIB) $(MLX) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -o $(NAME)
 	@echo "$(GREEN)[OK]\n$(CLEAR)$(GREEN)Success!$(CLEAR)\n"
 
-# -lz ¿?¿?¿?
-
 $(OBJ_DIR)%.o: %.c
 	@echo "$(PINK)Compiling Object.$(CLEAR)"
 	@mkdir -p $(OBJ_DIR)
@@ -63,6 +61,10 @@ clear:
 re: fclean all
 .PHONY: clean fclean re all run
 
-del: 
-	@echo $(OBJ)
+r: run
+run: all
+	@./$(NAME) def_map.cub
 
+v: valgrind
+valgrind: all
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) def_map.cub
