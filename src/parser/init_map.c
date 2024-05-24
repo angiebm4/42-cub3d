@@ -4,7 +4,7 @@
 {
     if ()
 }*/
-
+/*
 int which_texture(char *line)
 {
     int nb_tex;
@@ -60,7 +60,7 @@ int init_textures(t_cube *cube, int file)
         file_name = ft_strdup(&line[3]);
         if (file_name == NULL)
             return(error(ERROR_MALLOC));
-        cube->grafic->textures[tex] = mlx_xpm_file_to_image(cube->grafic->mlx, file_name, &status, &status); /* TODO: el tamaño de la textura¿?¿?*/
+        cube->grafic->textures[tex] = mlx_xpm_file_to_image(cube->grafic->mlx, file_name, &status, &status);
         if (cube->grafic->textures[tex] == NULL)
             return(error(ERROR_MLX_TEX_CREATE));
         flag++;
@@ -85,11 +85,13 @@ int init_textures(t_cube *cube, int file)
     }
 
     return (0);
-}
+}*/
 
 int    init_data(t_cube *cube, char *fd)
 {
-    int file;
+    (void) cube, (void) fd;
+
+    /*int file;
 
     ft_bzero(cube, sizeof(t_cube));
 
@@ -104,7 +106,7 @@ int    init_data(t_cube *cube, char *fd)
     if (cube->grafic->mlx == NULL)
         return(error(ERROR_MLX_INIT));
     init_textures(cube, file);
-    save_map(cube, file);    
+    save_map(cube, file);    */
     // check_map(cube);
     return (0);
 }
