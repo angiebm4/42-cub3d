@@ -10,3 +10,6 @@ obj/
 
 # MAC temporal files
 .DS_Store
+
+# Libf lib
+libft.a
