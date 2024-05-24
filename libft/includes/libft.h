@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:55:11 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/23 11:24:14 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:50:23 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*ft_itoa(int n);
 void	*ft_free_split(char **memory);
 double	ft_atof(char *str);
 void	*ft_mfree(int count, ...);
+void	ft_close(int *fd);
 
 // put
 void	ft_putchar_fd(char c, int fd);
