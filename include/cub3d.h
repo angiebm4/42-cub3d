@@ -1,6 +1,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 
@@ -27,10 +31,23 @@
 # define EAST_TEXTURE   3
 # define DOOR_TEXTURE   4
 # define TEXTURES_COUNT 5
+# define ALGO ["EJEMPLO", "ALGO MAS", "PEPO"]
+
+/* Default pixel value */
+# define PIXEL_DEFAULT	-1
+# define PIXEL_MIN		0
+# define PIXEL_MAX		255
 
 typedef struct  s_cube  t_cube;
 typedef struct  s_mlx   t_mlx;
 typedef struct  s_pixel t_pixel;
+
+struct  s_pixel
+{
+	int red;	/* r */
+	int blue;	/* g */
+	int green;	/* b */
+};
 
 struct   s_cube
 {
@@ -45,16 +62,36 @@ struct  s_mlx
 	void    *win;		/* Window reference*/
 
 	void        *textures[TEXTURES_COUNT];	/* Textures */
-	t_pixel     *floor;						/* Floor pixel color */
-	t_pixel     *ceiling;					/* Ceiling pixel color */
+	t_pixel     floor;						/* Floor pixel color */
+	t_pixel     ceiling;					/* Ceiling pixel color */
 };
 
-struct  s_pixel
+/*_____________________________________________________________________*/
+
+typedef struct s_parser
 {
-	int red;	/* r */
-	int blue;	/* g */
-	int green;	/* b */
-};
+	int		fd;	/* File descriptor of the config file */
+	
+	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
+	int		textures_fds[TEXTURES_COUNT];	/* File descriptors of the textures */
+
+	t_pixel	floor;		/* Floor pixel color readed */
+	t_pixel	ceiling;	/* Ceiling pixel color readed */
+
+	char	**map;		/* Map readed */
+
+}				t_parsed_data;
+
+
+void	parse(int argc, char **argv, t_parsed_data *parsed);
+void	destroy_parsed(t_parsed_data *parsed);
+void	parse_print(int output, t_parsed_data *parsed);
+
+/*_____________________________________________________________________*/
+
+/* Pixel utils */
+void	reset_pixel(t_pixel *pixel);
+int		pixel_is_valid(t_pixel *pixel);
 
 /* FIXME: DEBBUGING */
 void    print_data(t_cube *cube);

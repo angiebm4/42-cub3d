@@ -22,7 +22,9 @@ VPATH = src:src/parser
 
 SRC =		main.c
 
-PARSER =	init_map.c
+PARSER =	init_map.c	\
+			parse.c		\
+			pixel.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
