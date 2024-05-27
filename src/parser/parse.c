@@ -40,8 +40,9 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 	/* TODO: Rest of parse */
 }
 
-void	parse_print(int output, t_parsed_data parsed)
+void	parse_print(int output, t_parsed_data *parsed)
 {
+	(void)output, (void)parsed;
 	/* TODO: msg to report the parser */
 }
 
