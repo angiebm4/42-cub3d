@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
     t_parsed_data   parsed;
 
     parse(argc, argv, &parsed);
-    parse_print(STDOUT_FILENO, &parsed);
     destroy_parsed(&parsed);
 
     
