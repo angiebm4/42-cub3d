@@ -4,13 +4,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define HEIGTH 500
-# define WEIGTH 500
+# define WINDOW_HEIGTH 500
+# define WINDOW_WEIGTH 500
 
 /* ERROR DEFINE */
 # define ERROR_SUCCESS			0
@@ -31,7 +32,13 @@
 # define EAST_TEXTURE   3
 # define DOOR_TEXTURE   4
 # define TEXTURES_COUNT 5
-# define VIEWS_PLACEHOLDERS "NO.SO.WE.EA.DO"
+# define VIEWS_PLACEHOLDERS "NO.SO.WE.EA.DO.F.C"
+# define SEPARATOR_PLACEHOLDER '.'
+
+# define COMMENT_SET	"@#;//"
+# define EMPTY_SET		" \t"
+
+# define CONFIG_EXTENSION	".cub"
 
 /* Default pixel value */
 # define PIXEL_DEFAULT	-1
@@ -86,6 +93,7 @@ typedef struct s_parser
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
+void    parse_file(t_parsed_data *parsed);
 
 /*_____________________________________________________________________*/
 
