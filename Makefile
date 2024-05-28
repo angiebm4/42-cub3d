@@ -24,7 +24,8 @@ SRC =		main.c
 
 PARSER =	init_map.c	\
 			parse.c		\
-			pixel.c
+			pixel.c		\
+			parse_print.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
@@ -68,10 +69,12 @@ re: fclean all
 
 ###############################################################################
 
+TRY_MAP=maps/def_map.cub
+
 r: run
 run: all
-	@./$(NAME) def_map.cub
+	@./$(NAME) $(TRY_MAP)
 
 v: valgrind
 valgrind: all
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) def_map.cub
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(TRY_MAP)
