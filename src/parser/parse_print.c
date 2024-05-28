@@ -13,7 +13,7 @@ static void print_textures(t_parsed_data *parsed)
 	char **phs;
 
 	index = -1;
-	phs = ft_split(VIEWS_PLACEHOLDERS, '.');
+	phs = ft_split(VIEWS_PLACEHOLDERS, SEPARATOR_PLACEHOLDER);
 	if (!phs)
 		return ;
 
