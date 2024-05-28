@@ -34,24 +34,23 @@ static void print_textures(t_parsed_data *parsed)
 
 /* ################################################################################################## */
 
-static void	check_pixels(t_pixel *pixel, char **appears, char **is_correct)
+static void	check_pixel(t_pixel *pixel, char **check)
 {
 	if (pixel_is_default(pixel))
-		*appears = PARSE_ERROR;
+		check[0] = PARSE_ERROR;
 	else
-		*appears = PARSE_OK;
+		check[0] = PARSE_OK;
 
 	if(pixel_is_valid(pixel))
-		*is_correct = PARSE_ERROR;
+		check[1] = PARSE_ERROR;
 	else
-		*is_correct = PARSE_OK;
+		check[1] = PARSE_OK;
 }
 
 
 static void	print_pixels(t_parsed_data *parsed)
 {
-	char	*appears;
-	char	*is_correct;
+	char	*check[2];
 
 	printf("· Pixels summary:\n");
 	printf("\t%s%s%s\n", C_CYAN, PIXEL_LINE_SPACING, CLEAR);
@@ -59,12 +58,12 @@ static void	print_pixels(t_parsed_data *parsed)
 	printf("\t%s%s%s\n", C_CYAN, PIXEL_LINE_SPACING, CLEAR);
 
 	/* Floor pixel */
-	check_pixels(&parsed->floor, &appears, &is_correct);
-	printf("\t|  FLOOR  |   %s   |   %s   |\n", appears, is_correct);
+	check_pixel(&parsed->floor, check);
+	printf("\t|  FLOOR  |   %s   |   %s   |\n", check[0], check[1]);
 	printf("\t%s\n", PIXEL_LINE_SPACING);
 
-	check_pixels(&parsed->ceiling, &appears, &is_correct);
-	printf("\t| CEILING |   %s   |   %s   |\n", appears, is_correct);
+	check_pixel(&parsed->ceiling, check);
+	printf("\t| CEILING |   %s   |   %s   |\n", check[0], check[1]);
 	printf("\t%s\n", PIXEL_LINE_SPACING);
 }
 
