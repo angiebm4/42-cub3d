@@ -31,7 +31,7 @@
 # define EAST_TEXTURE   3
 # define DOOR_TEXTURE   4
 # define TEXTURES_COUNT 5
-# define ALGO ["EJEMPLO", "ALGO MAS", "PEPO"]
+# define VIEWS_PLACEHOLDERS "NO.SO.WE.EA.DO"
 
 /* Default pixel value */
 # define PIXEL_DEFAULT	-1
@@ -85,13 +85,15 @@ typedef struct s_parser
 
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
-void	parse_print(int output, t_parsed_data *parsed);
+void	parse_print(t_parsed_data *parsed);
 
 /*_____________________________________________________________________*/
 
 /* Pixel utils */
 void	reset_pixel(t_pixel *pixel);
 int		pixel_is_valid(t_pixel *pixel);
+int		pixel_is_default(t_pixel *pixel);
+void	pixel_copy(t_pixel *dest, t_pixel *src);
 
 /* FIXME: DEBBUGING */
 void    print_data(t_cube *cube);
