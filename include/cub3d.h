@@ -95,6 +95,10 @@ void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
 void    parse_file(t_parsed_data *parsed);
 
+int 	line_is_empty(char *line, char *empty_set);
+int 	line_is_comment(char *line, char *comment_set);
+int 	line_is_placeholder(char *supposed_ph);
+
 /*_____________________________________________________________________*/
 
 /* Pixel utils */

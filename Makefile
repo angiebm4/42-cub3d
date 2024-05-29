@@ -26,7 +26,8 @@ PARSER =	init_map.c	\
 			parse.c		\
 			pixel.c		\
 			parse_print.c	\
-			parse_file.c
+			parse_file.c	\
+			line_utils.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
