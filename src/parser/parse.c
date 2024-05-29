@@ -7,14 +7,18 @@ static void	parse_error(int error, t_parsed_data *parsed)
 		printf("Invalid number of arguments!\n");
 	else if (error == ERROR_OPEN)
 		printf("Error opening the config file\n");
+	else if (error == ERROR_MALLOC)
+		perror("Error on malloc");
 	else
 		printf("Success(\\\\(·o·;)\n");
 
 	if (parsed)
+	{
 		parse_print(parsed);
+		destroy_parsed(parsed);
+	}
 
-
-	exit(1);
+	exit(ERROR_EXIT_VALUE);
 }
 
 static void	init_parser_data(t_parsed_data *parsed, char *filename)
@@ -50,9 +54,9 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 		parse_error(ERROR_INVALID_ARGS, NULL);
 
 	init_parser_data(parsed, argv[1]);
-	//parse_file(parsed);
+	parse_file(parsed);
 	
-	parse_print(parsed);
+	//parse_print(parsed);
 	exit(0);
 }
 
