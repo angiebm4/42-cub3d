@@ -21,6 +21,9 @@ SO ./textures/tile000.xpm
 WE ./textures/tile000.xpm
 EA ./textures/tile000.xpm
 
+; The next line can be commented
+DO ./textures/tile000.xpm
+
 # Floor color (RGB)
 F 220,100,0
 
