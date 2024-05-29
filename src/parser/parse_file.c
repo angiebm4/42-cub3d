@@ -1,44 +1,55 @@
 # include "../../include/cub3d.h"
 
+int check_placeholder(char *buffer)
+{
+	char	**spl;
+	int		placeholder;
+
+	/* Split the line on the space charcater */
+	spl = ft_split(buffer, ' ');
+
+	/* Check if there is a placeholder on the line */
+	placeholder = line_is_placeholder(spl[0]);
+	ft_free_split(spl);
+
+	/* If the line is not a placeholder, return false */
+	if (placeholder < 0)
+		return 0;
+	
+	/* TODO: Otherwise, save the placeholder data */
+	return 1;
+}
+
 void    parse_file(t_parsed_data *parsed)
 {
-    char    *buffer;
-    char    **spl;
-    int     placeholder;
+	char    *buffer;
 
-    buffer = get_next_line(parsed->fd);
-    while (buffer)
-    {
+	buffer = get_next_line(parsed->fd);
+	while (buffer)
+	{
 
-        /* Check conditions to skip the line */
-        if (
-            !line_is_empty(buffer, EMPTY_SET) &&
-            ft_strlen(buffer) != 1 &&
-            !line_is_comment(buffer, COMMENT_SET)
-        )
-        {
-            /* Split the line on the space charcater */
-            spl = ft_split(buffer, ' ');
+		/* Check conditions to skip the line */
+		if (
+			!line_is_empty(buffer, EMPTY_SET) &&
+			ft_strlen(buffer) != 1 &&
+			!line_is_comment(buffer, COMMENT_SET)
+		)
+		{
+			/* If the line is not a placeholder, exit the loop */
+			if (!check_placeholder(buffer))
+				break ;
+		}
 
-            /* Check if there is a placeholder on the line */
-            placeholder = line_is_placeholder(spl[0]);
+		/* Iterate on the map*/
+		free(buffer);
+		buffer = get_next_line(parsed->fd);
+	}
 
-            ft_free_split(spl);
+	/* At this point, the next lines should be the map data */
+	while (buffer) {
+		free(buffer);
+		buffer = get_next_line(parsed->fd);
+	}
 
-            if (placeholder < 0)
-                break ;
-        }
-
-        /* Iterate on the map*/
-        free(buffer);
-
-        buffer = get_next_line(parsed->fd);
-    }
-
-    while (buffer) {
-        free(buffer);
-        buffer = get_next_line(parsed->fd);
-    }
-
-    /* The information should be saved */
+	
 }
