@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+         #
+#    By: lpastor-@student.42madrid.com <lpastor-    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 11:55:51 by abarrio-          #+#    #+#              #
-#    Updated: 2024/05/24 23:50:48 by lpastor-         ###   ########.fr        #
+#    Updated: 2024/05/30 18:08:55 by lpastor-@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ REST_FUNC =		ft_atoi.c \
 				ft_itoa.c \
 				ft_atof.c	\
 				ft_mfree.c	\
-				ft_close.c
+				ft_close.c	\
+				ft_matrix_length.c
 
 PATH_PUT_FUNC=ft_lib_put
 PUT_FUNC =		ft_putchar_fd.c \

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_close.c                                         :+:      :+:    :+:   */
+/*   ft_matrix_length.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpastor-@student.42madrid.com <lpastor-    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 23:49:16 by lpastor-          #+#    #+#             */
-/*   Updated: 2024/05/30 18:09:26 by lpastor-@st      ###   ########.fr       */
+/*   Created: 2024/05/30 18:06:31 by lpastor-@st       #+#    #+#             */
+/*   Updated: 2024/05/30 18:08:22 by lpastor-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	ft_close(int *fd)
+size_t	ft_matrix_length(char **matrix)
 {
-	if (!fd || (*fd) < 0)
-		return ;
-	close(*fd);
-	*fd = -1;
+	size_t	index;
+
+	index = 0;
+	while (matrix[index])
+		index++;
+	return (index);
 }
