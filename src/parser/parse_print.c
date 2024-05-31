@@ -42,9 +42,9 @@ static void	check_pixel(t_pixel *pixel, char **check)
 		check[0] = PARSE_OK;
 
 	if(pixel_is_valid(pixel))
-		check[1] = PARSE_ERROR;
-	else
 		check[1] = PARSE_OK;
+	else
+		check[1] = PARSE_ERROR;
 }
 
 
@@ -58,11 +58,11 @@ static void	print_pixels(t_parsed_data *parsed)
 	printf("\t%s%s%s\n", C_CYAN, PIXEL_LINE_SPACING, CLEAR);
 
 	/* Floor pixel */
-	check_pixel(&parsed->floor, check);
+	check_pixel(&parsed->default_pixels[FLOOR_PIXEL], check);
 	printf("\t|  FLOOR  |   %s   |   %s   |\n", check[0], check[1]);
 	printf("\t%s\n", PIXEL_LINE_SPACING);
 
-	check_pixel(&parsed->ceiling, check);
+	check_pixel(&parsed->default_pixels[CEILING_PIXEL], check);
 	printf("\t| CEILING |   %s   |   %s   |\n", check[0], check[1]);
 	printf("\t%s\n", PIXEL_LINE_SPACING);
 }
