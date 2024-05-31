@@ -33,11 +33,17 @@
 # define EAST_TEXTURE   3
 # define DOOR_TEXTURE   4
 # define TEXTURES_COUNT 5
+
+# define FLOOR_PIXEL	0	/* 5 */
+# define CEILING_PIXEL	1	/* 6 */
+# define PIXELS_COUNT	2
+
 # define VIEWS_PLACEHOLDERS "NO.SO.WE.EA.DO.F.C"
 # define SEPARATOR_PLACEHOLDER '.'
 
 # define COMMENT_SET	"@#;//"
 # define EMPTY_SET		" \t"
+# define PIXEL_SEPARATOR	','
 
 # define CONFIG_EXTENSION	".cub"
 
@@ -53,8 +59,8 @@ typedef struct  s_pixel t_pixel;
 struct  s_pixel
 {
 	int red;	/* r */
-	int blue;	/* g */
-	int green;	/* b */
+	int green;	/* g */
+	int blue;	/* b */
 };
 
 struct   s_cube
@@ -83,8 +89,7 @@ typedef struct s_parser
 	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
 	int		textures_fds[TEXTURES_COUNT];	/* File descriptors of the textures */
 
-	t_pixel	floor;		/* Floor pixel color readed */
-	t_pixel	ceiling;	/* Ceiling pixel color readed */
+	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
 
 	char	**map;		/* Map readed */
 
@@ -95,6 +100,8 @@ void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
 void    parse_file(t_parsed_data *parsed);
+
+int		save_placeholder(t_parsed_data *parsed, char **buffer, int ph);
 
 int 	line_is_empty(char *line, char *empty_set);
 int 	line_is_comment(char *line, char *comment_set);

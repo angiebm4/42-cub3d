@@ -1,23 +1,30 @@
 # include "../../include/cub3d.h"
 
-int check_placeholder(char *buffer)
+/*void	save_map(t_parsed_data *parsed, char *buffer)
+{
+
+}*/
+
+int check_placeholder(t_parsed_data *parsed, char *buffer)
 {
 	char	**spl;
 	int		placeholder;
+	int		res;
 
 	/* Split the line on the space charcater */
 	spl = ft_split(buffer, ' ');
 
 	/* Check if there is a placeholder on the line */
 	placeholder = line_is_placeholder(spl[0]);
-	ft_free_split(spl);
 
-	/* If the line is not a placeholder, return false */
-	if (placeholder < 0)
-		return 0;
+	/* If the line is a placeholder, the information will be saved */
+	res = save_placeholder(parsed, spl, placeholder);
+
+	/* Free the splitted string created before */
+	ft_free_split(spl);
 	
-	/* TODO: Otherwise, save the placeholder data */
-	return 1;
+	/* Otherwise, save the placeholder data */
+	return res;
 }
 
 void    parse_file(t_parsed_data *parsed)
@@ -27,7 +34,7 @@ void    parse_file(t_parsed_data *parsed)
 	buffer = get_next_line(parsed->fd);
 	while (buffer)
 	{
-
+		
 		/* Check conditions to skip the line */
 		if (
 			!line_is_empty(buffer, EMPTY_SET) &&
@@ -36,7 +43,7 @@ void    parse_file(t_parsed_data *parsed)
 		)
 		{
 			/* If the line is not a placeholder, exit the loop */
-			if (!check_placeholder(buffer))
+			if (!check_placeholder(parsed, buffer))
 				break ;
 		}
 
