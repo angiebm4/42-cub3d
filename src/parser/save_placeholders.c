@@ -20,17 +20,23 @@ static void    save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 
 int	save_placeholder(t_parsed_data *parsed, char **buffer, int ph)
 {
+	char	*trimmed;
 
+	/* Check if the placeholder is valid or not */
 	if (ph < 0 || ft_matrix_length(buffer) != 2)
 		return 0;
 	
-	printf("==> {%d} [%s]\n", ph, buffer[0]);
+	/* TODO: check malloc error */
+	trimmed = ft_strtrim(buffer[1], EMPTY_SET);
 
 	/* Check if the placeholder is a texture or a pixel */
 	if (ph <  TEXTURES_COUNT)
-		parsed->textures_name[ph] = ft_strdup(buffer[1]);
+		parsed->textures_name[ph] = ft_strdup(trimmed);
 	else
-		save_pixel(parsed, buffer[1], ph);
+		save_pixel(parsed, trimmed, ph);
+	
+	/* Free the trimmed string memory */
+	free(trimmed);
 
 	return 1;
 }
