@@ -1,11 +1,22 @@
 # include "../../include/cub3d.h"
 
-/*void	save_map(t_parsed_data *parsed, char *buffer)
+static void	check_map(t_parsed_data *parsed, char *buffer)
 {
+	/* If there is no line, the file dont have a map */
+	if (!buffer)
+		return ;
 
-}*/
+	/* Otherwise, the rest of the map is the rest of the file */
+	parsed->map = save_map(parsed, buffer);
 
-int check_placeholder(t_parsed_data *parsed, char *buffer)
+	/* DEBUGGING: printing and deleting the map */
+	int index = -1;
+	while (parsed->map && parsed->map[++index])
+		printf("{%d} [%s]\n", index, parsed->map[index]);
+	ft_free_split(parsed->map);
+}
+
+static int check_placeholder(t_parsed_data *parsed, char *buffer)
 {
 	char	**spl;
 	int		placeholder;
@@ -29,12 +40,11 @@ int check_placeholder(t_parsed_data *parsed, char *buffer)
 
 void    parse_file(t_parsed_data *parsed)
 {
-	char    *buffer;
+	char	*buffer;
 
 	buffer = get_next_line(parsed->fd);
 	while (buffer)
-	{
-		
+	{	
 		/* Check conditions to skip the line */
 		if (
 			!line_is_empty(buffer, EMPTY_SET) &&
@@ -53,10 +63,5 @@ void    parse_file(t_parsed_data *parsed)
 	}
 
 	/* At this point, the next lines should be the map data */
-	while (buffer) {
-		free(buffer);
-		buffer = get_next_line(parsed->fd);
-	}
-
-	
+	check_map(parsed, buffer);
 }

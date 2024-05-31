@@ -96,13 +96,18 @@ typedef struct s_parser
 }				t_parsed_data;
 
 
+/* Principal parser struct functions */
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
+
+
+/* Function to save the config data */
 void    parse_file(t_parsed_data *parsed);
-
 int		save_placeholder(t_parsed_data *parsed, char **buffer, int ph);
+char	**save_map(t_parsed_data *parsed, char *buffer);
 
+/* Line utils */
 int 	line_is_empty(char *line, char *empty_set);
 int 	line_is_comment(char *line, char *comment_set);
 int 	line_is_placeholder(char *supposed_ph);

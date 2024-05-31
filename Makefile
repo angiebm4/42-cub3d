@@ -27,7 +27,8 @@ PARSER =	parse.c		\
 			parse_print.c	\
 			parse_file.c	\
 			line_utils.c	\
-			save_placeholders.c
+			save_placeholders.c	\
+			save_map.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
