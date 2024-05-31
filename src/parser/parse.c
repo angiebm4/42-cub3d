@@ -39,8 +39,9 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 		parsed->textures_fds[index] = -1;
 	
 	/* Init the pixels */
-	reset_pixel(&parsed->floor);
-	reset_pixel(&parsed->ceiling);
+	index = -1;
+	while (++index < PIXELS_COUNT)
+		reset_pixel(&parsed->default_pixels[index]);
 }
 
 // static int	valid_exten
@@ -56,7 +57,11 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
 	
-	//parse_print(parsed);
+	
+
+	/* FIXME: delete this lines after complete the parser */
+	parse_print(parsed);
+	destroy_parsed(parsed);
 	exit(0);
 }
 
@@ -80,6 +85,7 @@ void	destroy_parsed(t_parsed_data *parsed)
 	}
 
 	/* Reset the pixels */
-	reset_pixel(&parsed->floor);
-	reset_pixel(&parsed->ceiling);
+	index = -1;
+	while (++index < PIXELS_COUNT)
+		reset_pixel(&parsed->default_pixels[index]);
 }
