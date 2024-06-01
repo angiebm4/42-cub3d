@@ -50,14 +50,13 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 
 void	parse(int argc, char **argv, t_parsed_data *parsed)
 {
-	
-	if (argc != 2 || ft_strcmp(CONFIG_EXTENSION, &argv[1][ft_strlen(argv[1]) - 4]))
+	/* TODO: check the extension but be carefull with files like "ab"*/
+	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
 		parse_error(ERROR_INVALID_ARGS, NULL);
 
+	printf("end\n");
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
-	
-	
 
 	/* FIXME: delete this lines after complete the parser */
 	parse_print(parsed);
