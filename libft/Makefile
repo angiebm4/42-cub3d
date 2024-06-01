@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lpastor-@student.42madrid.com <lpastor-    +#+  +:+       +#+         #
+#    By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 11:55:51 by abarrio-          #+#    #+#              #
-#    Updated: 2024/05/30 18:08:55 by lpastor-@st      ###   ########.fr        #
+#    Updated: 2024/06/02 00:23:22 by lpastor-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ BASICS_FUNC =	ft_isalpha.c \
 				ft_isprint.c \
 				ft_bzero.c \
 				ft_toupper.c \
-				ft_tolower.c
+				ft_tolower.c \
+				ft_isnumber.c
 
 PATH_STR_FUNC=ft_lib_str
 STR_FUNC =		ft_strlen.c \

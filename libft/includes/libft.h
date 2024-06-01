@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor-@student.42madrid.com <lpastor-    +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:55:11 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/05/30 18:08:43 by lpastor-@st      ###   ########.fr       */
+/*   Updated: 2024/06/02 00:23:12 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_isprint(int c);
 void	ft_bzero(void *str, size_t n);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+int		ft_isnumber(char *str);
 
 // str
 int		ft_strlen(const char *str);
