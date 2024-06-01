@@ -21,9 +21,16 @@ static int check_placeholder(t_parsed_data *parsed, char *buffer)
 	char	**spl;
 	int		placeholder;
 	int		res;
+	char	*trimmed;
+
+	/* Delete the usefull characters on the left and right side */
+	/* TODO: malloc */
+	trimmed = ft_strtrim(buffer, EMPTY_SET);
 
 	/* Split the line on the space charcater */
-	spl = ft_split(buffer, ' ');
+	/* TODO: malloc */
+	spl = ft_split(trimmed, ' ');
+	free(trimmed);
 
 	/* Check if there is a placeholder on the line */
 	placeholder = line_is_placeholder(spl[0]);

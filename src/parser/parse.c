@@ -54,7 +54,6 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
 		parse_error(ERROR_INVALID_ARGS, NULL);
 
-	printf("end\n");
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
 

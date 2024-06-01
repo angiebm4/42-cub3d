@@ -42,15 +42,28 @@
 # define SEPARATOR_PLACEHOLDER '.'
 
 # define COMMENT_SET	"@#;//"
-# define EMPTY_SET		" \t"
+# define EMPTY_SET		" \t\n"
 # define PIXEL_SEPARATOR	','
 
 # define CONFIG_EXTENSION	".cub"
+# define TEXTURE_EXTENSION	".xpm"
 
 /* Default pixel value */
 # define PIXEL_DEFAULT	-1
 # define PIXEL_MIN		0
 # define PIXEL_MAX		255
+
+/* Minilibs key codes */
+# define ESC	65307
+# define W		119
+# define A		97
+# define S		115
+# define D		100
+
+# define UP		65362
+# define LEFT	65361
+# define DOWN	65364
+# define RIGHT	65363
 
 typedef struct  s_cube  t_cube;
 typedef struct  s_mlx   t_mlx;
@@ -92,7 +105,6 @@ typedef struct s_parser
 	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
 
 	char	**map;		/* Map readed */
-
 }				t_parsed_data;
 
 
@@ -101,6 +113,9 @@ void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
 
+
+/* Function to check an extension */
+int		check_extension(char *buffer, char *extension);
 
 /* Function to save the config data */
 void    parse_file(t_parsed_data *parsed);
