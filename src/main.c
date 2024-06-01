@@ -38,8 +38,15 @@ int main(int argc, char *argv[])
     t_parsed_data   parsed;
 
     parse(argc, argv, &parsed);
+
+    /* TODO:
+        t_cube          cube;
+        fill_data(cube, parsed)
+        destroy_parsed(&parsed);
+        start_simulation();
+    */
+
     destroy_parsed(&parsed);
 
-    
     return (0);
 }
