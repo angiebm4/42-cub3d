@@ -20,9 +20,8 @@ int  line_is_empty(char *line, char *empty_set)
 
 int  line_is_comment(char *line, char *comment_set)
 {
-    if (line == NULL)
+    if (!line)
         return 0;
-    
     return (ft_strchr(comment_set, line[0]) != NULL);
 }
 
