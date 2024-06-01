@@ -13,3 +13,6 @@ obj/
 
 # Libf lib
 libft.a
+
+# Own files to ignore (as files to write down loose things)
+*.ignoreme
