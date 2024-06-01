@@ -55,7 +55,6 @@ void    parse_file(t_parsed_data *parsed)
 		/* Check conditions to skip the line */
 		if (
 			!line_is_empty(buffer, EMPTY_SET) &&
-			ft_strlen(buffer) != 1 &&
 			!line_is_comment(buffer, COMMENT_SET)
 		)
 		{

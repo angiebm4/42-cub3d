@@ -5,6 +5,9 @@ int  line_is_empty(char *line, char *empty_set)
     int index;
 
     index = 0;
+    if (!line || !line[0])
+        return 1;
+
     while (line[index])
     {
         if (ft_strchr(empty_set, line[index]) == NULL)
