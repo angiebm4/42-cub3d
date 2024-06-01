@@ -53,10 +53,7 @@ void    parse_file(t_parsed_data *parsed)
 	while (buffer)
 	{	
 		/* Check conditions to skip the line */
-		if (
-			!line_is_empty(buffer, EMPTY_SET) &&
-			!line_is_comment(buffer, COMMENT_SET)
-		)
+		if (!line_can_omitted(buffer))
 		{
 			/* If the line is not a placeholder, exit the loop */
 			if (!check_placeholder(parsed, buffer))

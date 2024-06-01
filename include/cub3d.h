@@ -126,6 +126,7 @@ char	**save_map(t_parsed_data *parsed, char *buffer);
 int 	line_is_empty(char *line, char *empty_set);
 int 	line_is_comment(char *line, char *comment_set);
 int 	line_is_placeholder(char *supposed_ph);
+int		line_can_omitted(char *line);
 
 /*_____________________________________________________________________*/
 

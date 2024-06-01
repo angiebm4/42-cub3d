@@ -51,3 +51,11 @@ int  line_is_placeholder(char *supposed_ph)
     ft_free_split(spl);
     return (res);
 }
+
+int	line_can_omitted(char *line)
+{
+	return (
+		line_is_comment(line, COMMENT_SET) ||
+		line_is_empty(line, EMPTY_SET)
+	);
+}
