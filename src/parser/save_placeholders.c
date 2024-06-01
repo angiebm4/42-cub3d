@@ -15,7 +15,6 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 	index = ph - TEXTURES_COUNT;
     pixel_spl = ft_split(buffer, PIXEL_SEPARATOR);
 
-	/* FIXME: dont use the ft_atoi*/
     if(ft_matrix_length(pixel_spl) == 3)
     {
 		if (ft_isnumber(pixel_spl[0]))
