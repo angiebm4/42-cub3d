@@ -16,11 +16,14 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
     pixel_spl = ft_split(buffer, PIXEL_SEPARATOR);
 
 	/* FIXME: dont use the ft_atoi*/
-    if (ft_matrix_length(pixel_spl) == 3)
+    if(ft_matrix_length(pixel_spl) == 3)
     {
-        parsed->default_pixels[index].red = ft_atoi(pixel_spl[0]);
-		parsed->default_pixels[index].green = ft_atoi(pixel_spl[1]);
-		parsed->default_pixels[index].blue = ft_atoi(pixel_spl[2]);
+		if (ft_isnumber(pixel_spl[0]))
+        	parsed->default_pixels[index].red = ft_atoi(pixel_spl[0]);
+		if (ft_isnumber(pixel_spl[1]))
+			parsed->default_pixels[index].green = ft_atoi(pixel_spl[1]);
+		if (ft_isnumber(pixel_spl[2]))
+			parsed->default_pixels[index].blue = ft_atoi(pixel_spl[2]);
     }
     ft_free_split(pixel_spl);
 }
@@ -35,7 +38,7 @@ int	save_placeholder(t_parsed_data *parsed, char **buffer, int ph)
 	if (ph <  TEXTURES_COUNT)
 		save_texture(parsed, buffer[1], ph);
 	else
-		save_pixel(parsed, buffer[2], ph);
+		save_pixel(parsed, buffer[1], ph);
 
 	return 1;
 }
