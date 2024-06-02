@@ -56,6 +56,7 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
+	check_map(parsed);
 
 	/* FIXME: delete this lines after complete the parser */
 	parse_print(parsed);

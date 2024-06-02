@@ -24,7 +24,7 @@
 # define ERROR_EXIT_VALUE		EXIT_FAILURE
 
 /* VALID CHARACTERS */
-# define VALID_CHARS "01NSWED "
+# define VALID_MAP_CHARS "01NSWED "
 
 /* REXTURES */
 # define NORTH_TEXTURE  0
@@ -97,6 +97,7 @@ struct  s_mlx
 
 typedef struct s_parser
 {
+	char	*config_filename;
 	int		fd;	/* File descriptor of the config file */
 	
 	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
@@ -121,6 +122,10 @@ int		check_extension(char *buffer, char *extension);
 void    parse_file(t_parsed_data *parsed);
 int		save_placeholder(t_parsed_data *parsed, char **buffer, int ph);
 char	**save_map(t_parsed_data *parsed, char *buffer);
+
+/* Map check */
+void	check_map(t_parsed_data *parsed);
+int		flood_fill(char **map);
 
 /* Line utils */
 int 	line_is_empty(char *line, char *empty_set);
