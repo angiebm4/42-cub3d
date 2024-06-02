@@ -1,6 +1,6 @@
 # include "../../include/cub3d.h"
 
-static void	check_map(t_parsed_data *parsed, char *buffer)
+static void	add_map(t_parsed_data *parsed, char *buffer)
 {
 	/* If there is no line, the file dont have a map */
 	if (!buffer)
@@ -16,7 +16,7 @@ static void	check_map(t_parsed_data *parsed, char *buffer)
 	// ft_free_split(parsed->map);
 }
 
-static int check_placeholder(t_parsed_data *parsed, char *buffer)
+static int add_placeholder(t_parsed_data *parsed, char *buffer)
 {
 	char	**spl;
 	int		placeholder;
@@ -56,7 +56,7 @@ void    parse_file(t_parsed_data *parsed)
 		if (!line_can_omitted(buffer))
 		{
 			/* If the line is not a placeholder, exit the loop */
-			if (!check_placeholder(parsed, buffer))
+			if (!add_placeholder(parsed, buffer))
 				break ;
 		}
 
@@ -66,5 +66,5 @@ void    parse_file(t_parsed_data *parsed)
 	}
 
 	/* At this point, the next lines should be the map data */
-	check_map(parsed, buffer);
+	add_map(parsed, buffer);
 }
