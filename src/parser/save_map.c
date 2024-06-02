@@ -6,6 +6,7 @@ static char	*add_line(char *line, char *buffer)
 {
 	char *aux;
 
+	/* NOTE: this has to be checker :/ */
 	if (line_is_empty(line, EMPTY_SET))
 		line = SUBSTITUTE_LINE;
 	

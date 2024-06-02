@@ -10,10 +10,10 @@ static void	check_map(t_parsed_data *parsed, char *buffer)
 	parsed->map = save_map(parsed, buffer);
 
 	/* DEBUGGING: printing and deleting the map */
-	int index = -1;
-	while (parsed->map && parsed->map[++index])
-		printf("{%d} [%s]\n", index, parsed->map[index]);
-	ft_free_split(parsed->map);
+	// int index = -1;
+	// while (parsed->map && parsed->map[++index])
+	// 	printf("{%d} [%s]\n", index, parsed->map[index]);
+	// ft_free_split(parsed->map);
 }
 
 static int check_placeholder(t_parsed_data *parsed, char *buffer)
