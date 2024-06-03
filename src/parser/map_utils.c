@@ -51,7 +51,7 @@ int	search_map(char **map, char ch, int *x, int *y)
 	int	j;
 
 	i = -1;
-	if (!map || !x || !y)
+	if (!map)
 		return (0);
 	while (map[++i])
 	{
@@ -60,8 +60,10 @@ int	search_map(char **map, char ch, int *x, int *y)
 		{
 			if (map[i][j] == ch)
 			{
-				*y = i;
-				*x = j;
+				if (y)
+					*y = i;
+				if (x)
+					*x = j;
 				return (1);
 			}
 		}
