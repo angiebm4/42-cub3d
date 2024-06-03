@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: lpastor-@student.42madrid.com <lpastor-    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:55:11 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/06/02 00:23:12 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:11:36 by lpastor-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	*ft_free_split(char **memory);
 double	ft_atof(char *str);
 void	*ft_mfree(int count, ...);
 void	ft_close(int *fd);
-size_t	ft_matrix_length(char **matrix);
 
 // put
 void	ft_putchar_fd(char c, int fd);

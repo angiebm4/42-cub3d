@@ -15,7 +15,7 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 	index = ph - TEXTURES_COUNT;
     pixel_spl = ft_split(buffer, PIXEL_SEPARATOR);
 
-    if(ft_matrix_length(pixel_spl) == 3)
+    if(map_length(pixel_spl) == 3)
     {
 		if (ft_isnumber(pixel_spl[0]))
         	parsed->default_pixels[index].red = ft_atoi(pixel_spl[0]);
@@ -30,7 +30,7 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 int	save_placeholder(t_parsed_data *parsed, char **buffer, int ph)
 {
 	/* Check if the placeholder is valid or not */
-	if (ph < 0 || ft_matrix_length(buffer) != 2)
+	if (ph < 0 || map_length(buffer) != 2)
 		return 0;
 	
 	/* Check if the placeholder is a texture or a pixel */

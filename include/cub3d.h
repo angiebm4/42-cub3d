@@ -127,6 +127,12 @@ char	**save_map(t_parsed_data *parsed, char *buffer);
 void	check_map(t_parsed_data *parsed);
 int		flood_fill(char **map);
 
+/* Map utils */
+int		map_check_characters(char **map, char *set);
+char	**copy_map(char **matrix);
+int		search_map(char **map, char ch, int *x, int *y);
+size_t	map_length(char **matrix);
+
 /* Line utils */
 int 	line_is_empty(char *line, char *empty_set);
 int 	line_is_comment(char *line, char *comment_set);
