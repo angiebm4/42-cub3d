@@ -11,6 +11,10 @@ void	parse_error(int error, t_parsed_data *parsed)
 		perror("Error on malloc");
 	else if (error == ERROR_MAP)
 		printf("Error while checking the map :/\n");
+	else if (error == ERROR_TEXTURES)
+		printf("Error while trying to read a texture\n");
+	else if (error == ERROR_PIXELS)
+		printf("Error while analyzing pixels\n");
 	else
 		printf("Success(\\\\(·o·;)\n");
 
@@ -44,6 +48,8 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 
 /*#########################################################*/
 
+
+
 void	parse(int argc, char **argv, t_parsed_data *parsed)
 {
 	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
@@ -52,8 +58,7 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
 	check_map(parsed);
-
-	/* TODO: Check that all the info is valid */
+	check_graphic(parsed);
 
 	/* DEBUGGING: print the parse data */
 	// parse_print(parsed);

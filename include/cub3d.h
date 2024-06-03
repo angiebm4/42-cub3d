@@ -22,6 +22,8 @@
 # define ERROR_MLX_TEX_CREATE	5
 # define ERROR_MLX_INIT			6
 # define ERROR_MAP				7
+# define ERROR_TEXTURES			8
+# define ERROR_PIXELS			9
 # define ERROR_EXIT_VALUE		EXIT_FAILURE
 
 /* VALID CHARACTERS */
@@ -126,6 +128,9 @@ char	**save_map(t_parsed_data *parsed, char *buffer);
 /* Map check */
 void	check_map(t_parsed_data *parsed);
 int		flood_fill(char **map);
+
+/* Check the graphic part parsed */
+void	check_graphic(t_parsed_data *parsed);
 
 /* Map utils */
 int		map_check_characters(char **map, char *set);

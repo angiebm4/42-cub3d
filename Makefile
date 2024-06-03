@@ -32,7 +32,8 @@ PARSER =	parse.c		\
 			check_extension.c	\
 			check_map.c	\
 			flood_fill.c	\
-			map_utils.c
+			map_utils.c	\
+			check_graphic.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
