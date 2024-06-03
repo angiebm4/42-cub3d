@@ -8,7 +8,7 @@ int	map_check_characters(char **map, char *set)
 	i = -1;
 	while (map[++i])
 	{
-		j = 0;
+		j = -1;
 		while (map[i][++j])
 		{
 			if (!ft_strchr(set, map[i][j]))
