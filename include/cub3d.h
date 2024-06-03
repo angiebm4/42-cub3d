@@ -21,6 +21,7 @@
 # define ERROR_FILE_CONTENT		4
 # define ERROR_MLX_TEX_CREATE	5
 # define ERROR_MLX_INIT			6
+# define ERROR_MAP				7
 # define ERROR_EXIT_VALUE		EXIT_FAILURE
 
 /* VALID CHARACTERS */
@@ -88,9 +89,8 @@ struct  s_mlx
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 
-	void        *textures[TEXTURES_COUNT];	/* Textures */
-	t_pixel     floor;						/* Floor pixel color */
-	t_pixel     ceiling;					/* Ceiling pixel color */
+	void        *textures[TEXTURES_COUNT];		/* Textures */
+	t_pixel     default_pixels[TEXTURES_COUNT];	/* Default pixels*/
 };
 
 /*_____________________________________________________________________*/
@@ -101,7 +101,7 @@ typedef struct s_parser
 	int		fd;	/* File descriptor of the config file */
 	
 	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
-	int		textures_fds[TEXTURES_COUNT];	/* File descriptors of the textures */
+	void	*textures_fds[TEXTURES_COUNT];	/* File descriptors of the textures */
 
 	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
 
@@ -113,6 +113,7 @@ typedef struct s_parser
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
+void	parse_error(int error, t_parsed_data *parsed);
 
 
 /* Function to check an extension */
