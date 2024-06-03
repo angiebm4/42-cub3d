@@ -35,19 +35,18 @@ void    print_data(t_cube *cube)
 
 int main(int argc, char *argv[])
 {
-    t_cube  cube;
+    t_parsed_data   parsed;
 
-    if (argc != 2)
-        return(error(ERROR_INVALID_ARGS));
-    if (init_data(&cube, argv[1]) != 0)
-        return(1);
-    print_data(&cube);
-    /*void    *mlx;
-    void    *window;
+    parse(argc, argv, &parsed);
 
-    mlx = mlx_init();
-    window = mlx_new_window(mlx, 100, 100, "cub3d");
-    (void)window;
-    mlx_loop(mlx);*/
+    /* TODO:
+        t_cube          cube;
+        fill_data(cube, parsed)
+        destroy_parsed(&parsed);
+        start_simulation();
+    */
+
+    destroy_parsed(&parsed);
+
     return (0);
 }

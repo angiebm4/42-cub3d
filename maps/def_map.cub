@@ -1,10 +1,36 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                       ############################                            @
+@                       # Reglas de configuración: #                            @
+@                       ############################                            @
+@                                                                               @
+@  · Los comentarios son tratados como tal si el mensaje empieza por uno        @
+@    de los caracteres del siguiente set: ['@', '#', ';', '/']                  @
+@                                                                               @
+@  · Obligatoriamente han de estar los siguientes placeholders configurados:    @
+@    ['NO', 'SO', 'WE', 'EA', 'F', 'C'].                                        @
+@    Opcionalmente se pueden añadir los siguientes: ['DO']                      @
+@                                                                               @
+@  · Despues de los placeholders, ha de haber estrictamente                     @
+@    un espacio.                                                                @
+@                                                                               @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+# Views textures
 NO ./textures/tile000.xpm
 SO ./textures/tile000.xpm
 WE ./textures/tile000.xpm
 EA ./textures/tile000.xpm
 
-F 220,100,0 //floor
-C 225,30,0 // cielo
+; The next line can be commented
+DO ./textures/tile000.xpm
+
+# Floor color (RGB)
+F 220,100,0
+
+# Ceiling color (RGB)
+C 225,30,0
+
+# Mapa
 
         1111111111111111111111111
         1000000000110000000000001

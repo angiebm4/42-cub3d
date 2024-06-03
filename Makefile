@@ -8,7 +8,7 @@ CLEAR	=	\033[0m
 #####################################################
 NAME =		cub3D
 CC = 		gcc
-CFLAGS =	-Wall -Werror -Wextra -Imlx
+CFLAGS =	-Wall -Werror -Wextra -Imlx -g3
 #####################################################
 LIB =	libft/libft.a
 MLX =	mlx/libmlx.a
@@ -22,7 +22,17 @@ VPATH = src:src/parser
 
 SRC =		main.c
 
-PARSER =	init_map.c
+PARSER =	parse.c		\
+			pixel.c		\
+			parse_print.c	\
+			parse_file.c	\
+			line_utils.c	\
+			save_placeholders.c	\
+			save_map.c		\
+			check_extension.c	\
+			check_map.c	\
+			flood_fill.c	\
+			map_utils.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
@@ -66,10 +76,12 @@ re: fclean all
 
 ###############################################################################
 
+TRY_MAP=maps/def_map.cub
+
 r: run
 run: all
-	@./$(NAME) def_map.cub
+	@./$(NAME) $(TRY_MAP)
 
 v: valgrind
 valgrind: all
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) def_map.cub
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) $(TRY_MAP)
