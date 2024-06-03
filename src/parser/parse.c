@@ -1,14 +1,16 @@
 #include "../../include/cub3d.h"
 
-static void	parse_error(int error, t_parsed_data *parsed)
+void	parse_error(int error, t_parsed_data *parsed)
 {
-	printf("[ Error ] ");
+	printf("%s[ Error ]%s ", C_RED, CLEAR);
 	if (error == ERROR_INVALID_ARGS)
 		printf("Invalid number of arguments!\n");
 	else if (error == ERROR_OPEN)
 		printf("Error opening the config file\n");
 	else if (error == ERROR_MALLOC)
 		perror("Error on malloc");
+	else if (error == ERROR_MAP)
+		printf("Error while checking the map :/\n");
 	else
 		printf("Success(\\\\(·o·;)\n");
 
@@ -45,8 +47,6 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 		reset_pixel(&parsed->default_pixels[index]);
 }
 
-// static int	valid_exten
-
 /*#########################################################*/
 
 void	parse(int argc, char **argv, t_parsed_data *parsed)
@@ -58,9 +58,11 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 	parse_file(parsed);
 	check_map(parsed);
 
-	/* FIXME: delete this lines after complete the parser */
-	parse_print(parsed);
-	destroy_parsed(parsed);
+	/* TODO: Check that all the info is valid */
+
+	/* DEBUGGING: print the parse data */
+	// parse_print(parsed);
+
 	exit(0);
 }
 
