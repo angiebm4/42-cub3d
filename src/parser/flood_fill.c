@@ -66,10 +66,9 @@ int	flood_fill(char **map)
 		result = rec_floof_fill(x, y, cpy);
 
 	/* DEBUGGING: print cpy map */
-	int index = -1;
-	while (cpy[++index])
-		printf("=> [%s]\n", cpy[index]);
-	printf("\t## {%d} ##\n", result);
+	// int index = -1;
+	// while (cpy[++index])
+	// 	printf("=> [%s]\n", cpy[index]);
 	ft_free_split(cpy);
 
 	/* Return the final state of the filling action */
