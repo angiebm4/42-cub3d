@@ -36,11 +36,6 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 	if (parsed->fd < 0)
 		parse_error(ERROR_OPEN, NULL);
 
-	/* Init the strings and the fds */
-	index = -1;
-	while (++index < TEXTURES_COUNT)
-		parsed->textures_fds[index] = -1;
-	
 	/* Init the pixels */
 	index = -1;
 	while (++index < PIXELS_COUNT)
@@ -62,8 +57,6 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 
 	/* DEBUGGING: print the parse data */
 	// parse_print(parsed);
-
-	exit(0);
 }
 
 void	destroy_parsed(t_parsed_data *parsed)
@@ -79,7 +72,6 @@ void	destroy_parsed(t_parsed_data *parsed)
 		/* Delete the files names and their fds */
 		if (parsed->textures_name[index])
 			free(parsed->textures_name[index]);
-		ft_close(&(parsed->textures_fds[index]));
 	}
 
 	/* Delete the map */

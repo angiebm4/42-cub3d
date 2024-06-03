@@ -2,7 +2,7 @@
 
 # define PARSE_OK       C_GREENFOSFI"  OK "CLEAR
 # define PARSE_ERROR    C_RED"ERROR"CLEAR
-# define TEXTURE_LINE_SPACING   "·------·-----------·-----------·"
+# define TEXTURE_LINE_SPACING   "·------·-----------·"
 # define PIXEL_LINE_SPACING		"·---------·-----------·-----------·"
 
 /* ################################################################################################## */
@@ -19,14 +19,13 @@ static void print_textures(t_parsed_data *parsed)
 
 	printf("· Textures summary:\n");
 	printf("\t%s%s%s\n", C_CYAN, TEXTURE_LINE_SPACING, CLEAR);
-	printf("\t%s|  PH  |  APPEARS  |  CORRECT  |%s\n", C_CYAN, CLEAR);
+	printf("\t%s|  PH  |  APPEARS  |%s\n", C_CYAN, CLEAR);
 	printf("\t%s%s%s\n", C_CYAN, TEXTURE_LINE_SPACING, CLEAR);
 
 	while (++index < TEXTURES_COUNT)
 	{
-		printf("\t|  %s  |   %s   |   %s   |\n", phs[index],
-										parsed->textures_name[index] == NULL ? PARSE_ERROR : PARSE_OK,
-										parsed->textures_fds[index] < 0 ? PARSE_ERROR : PARSE_OK);
+		printf("\t|  %s  |   %s   |\n", phs[index],
+										parsed->textures_name[index] == NULL ? PARSE_ERROR : PARSE_OK);
 		printf("\t%s\n", TEXTURE_LINE_SPACING);
 	}
 	ft_free_split(phs);

@@ -101,7 +101,6 @@ typedef struct s_parser
 	int		fd;	/* File descriptor of the config file */
 	
 	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
-	void	*textures_fds[TEXTURES_COUNT];	/* File descriptors of the textures */
 
 	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
 
