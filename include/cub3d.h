@@ -92,7 +92,7 @@ struct  s_mlx
 	void    *win;		/* Window reference*/
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
-	t_pixel     default_pixels[TEXTURES_COUNT];	/* Default pixels*/
+	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
 
 /*_____________________________________________________________________*/
