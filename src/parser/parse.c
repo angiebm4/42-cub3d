@@ -2,7 +2,7 @@
 
 void	parse_error(int error, t_parsed_data *parsed)
 {
-	printf("%s[ Error ]%s ", C_RED, CLEAR);
+	printf("%s[ Error ]%s ", RED, CLEAR);
 	if (error == ERROR_INVALID_ARGS)
 		printf("Invalid number of arguments!\n");
 	else if (error == ERROR_OPEN)
