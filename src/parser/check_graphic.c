@@ -10,6 +10,9 @@ static void	check_texture(t_parsed_data *parsed)
 	result = 0;
 	while (++i < TEXTURES_COUNT)
 	{
+		if (i == DOOR_TEXTURE && parsed->textures_name[i] == NULL)
+			continue ;
+
 		if (!parsed->textures_name[i] && i != DOOR_TEXTURE)
 		{
 			result = 1;
