@@ -1,0 +1,30 @@
+OK
+	[X] Mapa con buena extension
+	[X] Mapa todo junto, sin espacios
+	[X] Mapa con espacios/lineas vacias
+	[X] Mapa con comentarios
+	[ ] Mapa con todas las texturas
+	
+	[ ] Mapa sin textura de puerta pero sin puerta en el mapa
+	[ ] Mapa con textura de puerta con puerta
+	[ ] Mapa con textura de puerta sin puerta
+
+	[ ] Mapa con los dos pixeles validos
+
+	[ ] Lineas vacias en el mapa pero que no se pueda salir (varias sala separadas por lineas vacias o espacios/tabulaciones (EMPTY_SET))
+
+KO
+
+	[ ] Abierto por uno o varios lugares
+	[ ] Mapa sin ningun textura
+	[ ] Mapa sin alguna textura importante
+	[ ] Mapa sin textura de puerta con puerta
+	
+	[ ] Mapa sin pixeles
+	[ ] Mapa sin algun pixel
+	[ ] Mapa sin algun pixel valido
+
+	[ ] Lineas en medio del mapa que corten el mapa a la mitad (flood fill deberia fallar)
+
+-> 1007 en pixel (2º de F)
+
