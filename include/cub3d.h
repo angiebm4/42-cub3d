@@ -13,6 +13,9 @@
 # define WINDOW_HEIGTH 500
 # define WINDOW_WEIGTH 500
 
+/* PROGARM NAME */
+# define PROGRAM_NAME	"Cub3d"
+
 /* ERROR DEFINE */
 # define ERROR_SUCCESS			0
 # define ERROR_INVALID_ARGS		1
@@ -66,6 +69,8 @@
 # define DOWN	65364
 # define RIGHT	65363
 
+# define ON_DESTROY	17
+
 typedef struct  s_cube  t_cube;
 typedef struct  s_mlx   t_mlx;
 typedef struct  s_pixel t_pixel;
@@ -90,7 +95,7 @@ struct  s_mlx
 	void    *win;		/* Window reference*/
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
-	t_pixel     default_pixels[TEXTURES_COUNT];	/* Default pixels*/
+	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
 
 /*_____________________________________________________________________*/
@@ -150,10 +155,7 @@ void	pixel_copy(t_pixel *dest, t_pixel *src);
 /* FIXME: DEBBUGING */
 void    print_data(t_cube *cube);
 
-/* ERROR */
-int     error(int msg);
-
-/* PARSER */
-int    init_data(t_cube *cube, char *fd);
+/* INIT GRAFIC */
+void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
 
 #endif

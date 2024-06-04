@@ -1,7 +1,7 @@
 # include "../../include/cub3d.h"
 
-# define PARSE_OK       C_GREENFOSFI"  OK "CLEAR
-# define PARSE_ERROR    C_RED"ERROR"CLEAR
+# define PARSE_OK       GREENFOSFI"  OK "CLEAR
+# define PARSE_ERROR    RED"ERROR"CLEAR
 # define TEXTURE_LINE_SPACING   "·------·-----------·"
 # define PIXEL_LINE_SPACING		"·---------·-----------·-----------·"
 
@@ -18,9 +18,9 @@ static void print_textures(t_parsed_data *parsed)
 		return ;
 
 	printf("· Textures summary:\n");
-	printf("\t%s%s%s\n", C_CYAN, TEXTURE_LINE_SPACING, CLEAR);
-	printf("\t%s|  PH  |  APPEARS  |%s\n", C_CYAN, CLEAR);
-	printf("\t%s%s%s\n", C_CYAN, TEXTURE_LINE_SPACING, CLEAR);
+	printf("\t%s%s%s\n", CYAN, TEXTURE_LINE_SPACING, CLEAR);
+	printf("\t%s|  PH  |  APPEARS  |%s\n", CYAN, CLEAR);
+	printf("\t%s%s%s\n", CYAN, TEXTURE_LINE_SPACING, CLEAR);
 
 	while (++index < TEXTURES_COUNT)
 	{
@@ -52,9 +52,9 @@ static void	print_pixels(t_parsed_data *parsed)
 	char	*check[2];
 
 	printf("· Pixels summary:\n");
-	printf("\t%s%s%s\n", C_CYAN, PIXEL_LINE_SPACING, CLEAR);
-	printf("\t%s|  PIXEL  |  APPEARS  |  CORRECT  |%s\n", C_CYAN, CLEAR);
-	printf("\t%s%s%s\n", C_CYAN, PIXEL_LINE_SPACING, CLEAR);
+	printf("\t%s%s%s\n", CYAN, PIXEL_LINE_SPACING, CLEAR);
+	printf("\t%s|  PIXEL  |  APPEARS  |  CORRECT  |%s\n", CYAN, CLEAR);
+	printf("\t%s%s%s\n", CYAN, PIXEL_LINE_SPACING, CLEAR);
 
 	/* Floor pixel */
 	check_pixel(&parsed->default_pixels[FLOOR_PIXEL], check);
