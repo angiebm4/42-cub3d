@@ -12,6 +12,8 @@ void	check_map(t_parsed_data *parsed)
 	int	count;
 
 	count = 0;
+	if (!parsed->map)
+		parse_error(ERROR_MAP, parsed, 1);
 
 	/* Check that aren't strange characters */
 	count += map_check_characters(parsed->map, VALID_MAP_CHARS);
