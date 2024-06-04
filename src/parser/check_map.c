@@ -17,7 +17,7 @@ void	check_map(t_parsed_data *parsed)
 	count += map_check_characters(parsed->map, VALID_MAP_CHARS);
 
 	/* Check the flood fill: 1 in case if errro; 0 otherwise */
-	count += flood_fill(parsed->map);
+	count += flood_fill(parsed->map, parsed);
 
 	/* Check door texture if there is any door */
 	count += check_door(parsed);
@@ -27,5 +27,5 @@ void	check_map(t_parsed_data *parsed)
 
 	/* Check the reuslts of the map checkers */
 	if (count != 0)
-		parse_error(ERROR_MAP, parsed);
+		parse_error(ERROR_MAP, parsed, 1);
 }

@@ -114,7 +114,7 @@ typedef struct s_parser
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
 void	parse_print(t_parsed_data *parsed);
-void	parse_error(int error, t_parsed_data *parsed);
+void	parse_error(int error, t_parsed_data *parsed, int print);
 
 
 /* Function to check an extension */
@@ -127,7 +127,7 @@ char	**save_map(t_parsed_data *parsed, char *buffer);
 
 /* Map check */
 void	check_map(t_parsed_data *parsed);
-int		flood_fill(char **map);
+int		flood_fill(char **map, t_parsed_data *parsed);
 
 /* Check the graphic part parsed */
 void	check_graphic(t_parsed_data *parsed);
@@ -141,7 +141,7 @@ size_t	map_length(char **matrix);
 /* Line utils */
 int 	line_is_empty(char *line, char *empty_set);
 int 	line_is_comment(char *line, char *comment_set);
-int 	line_is_placeholder(char *supposed_ph);
+int 	line_is_placeholder(char *supposed_ph, t_parsed_data *parsed);
 int		line_can_omitted(char *line);
 
 /*_____________________________________________________________________*/
@@ -152,7 +152,7 @@ int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
 
-/* FIXME: DEBBUGING */
+/* DEBUGGING: DEBBUGING */
 void    print_data(t_cube *cube);
 
 /* ERROR */

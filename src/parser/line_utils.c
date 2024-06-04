@@ -25,16 +25,15 @@ int  line_is_comment(char *line, char *comment_set)
     return (ft_strchr(comment_set, line[0]) != NULL);
 }
 
-int  line_is_placeholder(char *supposed_ph)
+int  line_is_placeholder(char *supposed_ph, t_parsed_data *parsed)
 {
     char    **spl;
     int     index;
     int     res;
 
-    /* TODO: malloc error, what do? */
     spl = ft_split(VIEWS_PLACEHOLDERS, SEPARATOR_PLACEHOLDER);
     if (!spl)
-        return (-1);
+        parse_error(ERROR_MALLOC, parsed, 0);
 
     index = 0;
     res = -1;

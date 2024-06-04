@@ -24,7 +24,7 @@ static void	check_texture(t_parsed_data *parsed)
 		ft_close(&fd);
 	}
 	if (result)
-		parse_error(ERROR_TEXTURES, parsed);	
+		parse_error(ERROR_TEXTURES, parsed, 1);	
 }
 
 static void	check_pixels(t_parsed_data *parsed)
@@ -44,7 +44,7 @@ static void	check_pixels(t_parsed_data *parsed)
 	}
 
 	if (result)
-		parse_error(ERROR_PIXELS, parsed);
+		parse_error(ERROR_PIXELS, parsed, 1);
 }
 
 void	check_graphic(t_parsed_data *parsed)

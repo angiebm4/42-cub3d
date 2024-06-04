@@ -11,9 +11,10 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 	char	**pixel_spl;
 	int		index;
 
-    /* TODO: check malloc error */
 	index = ph - TEXTURES_COUNT;
     pixel_spl = ft_split(buffer, PIXEL_SEPARATOR);
+	if (!pixel_spl)
+		parse_error(ERROR_MALLOC, parsed, 0);
 
     if(map_length(pixel_spl) == 3)
     {
