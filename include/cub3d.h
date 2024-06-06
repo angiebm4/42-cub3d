@@ -29,6 +29,7 @@
 
 /* VALID CHARACTERS */
 # define VALID_MAP_CHARS "01NSWED "
+# define PJ_CHARS "NSWE"
 
 /* REXTURES */
 # define NORTH_TEXTURE  0
@@ -74,6 +75,8 @@
 typedef struct  s_cube  t_cube;
 typedef struct  s_mlx   t_mlx;
 typedef struct  s_pixel t_pixel;
+typedef struct  s_player t_player;
+typedef struct  s_image t_image;
 
 struct  s_pixel
 {
@@ -87,15 +90,33 @@ struct   s_cube
 	char    **map;		/* Map data*/
 
 	t_mlx   *grafic;	/* Grafic data */
+	t_player	*pj;
 };
 
 struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
+	t_image	*image;
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
+};
+
+struct	s_player
+{
+	double	x;
+	double	y;
+	float	orientation;
+};
+
+struct	s_image
+{
+	void		*img;
+	char		*pix_addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
 };
 
 /*_____________________________________________________________________*/
@@ -157,5 +178,13 @@ void    print_data(t_cube *cube);
 
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
+void    save_player_info(t_cube *cube);
+
+/* HOOKS */
+void    hooking(t_cube *cube);
+int end_program(t_cube *cube);
+
+/* MINI MAP */
+void    mini_map(t_cube *cube);
 
 #endif
