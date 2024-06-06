@@ -1,8 +1,8 @@
 # textures
-NO textures/test.xpm
-SO textures/test.xpm
-WE textures/test.xpm
-EA textures/test.xpm
+NO textures/brick1.xpm
+SO textures/brick1.xpm
+WE textures/brick1.xpm
+EA textures/brick1.xpm
 
 # Pixels
 F 220,100,0

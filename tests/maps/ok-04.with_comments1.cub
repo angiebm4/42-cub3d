@@ -1,16 +1,20 @@
 @#;/
+@
+#
+;
+/
 
 @ North texture
-NO textures/test.xpm
+NO textures/brick1.xpm
 
 # South texture
-SO textures/test.xpm
+SO textures/brick1.xpm
 
 ; West texture
-WE textures/test.xpm
+WE textures/brick1.xpm
 
 / East texture
-EA textures/test.xpm
+EA textures/brick1.xpm
 
 #/ Floor pixel color
 F 220,100,0
