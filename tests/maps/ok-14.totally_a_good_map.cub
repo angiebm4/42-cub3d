@@ -1,0 +1,40 @@
+# Map created by psegura- team
+
+C 155,96,4
+F 200,200,150
+
+NO textures/brick1.xpm
+SO textures/brick1.xpm
+WE textures/brick1.xpm
+EA textures/brick1.xpm
+
+      
+
+
+          
+
+
+               1
+1
+1
+                      111
+1
+1
+1
+1
+1     1     1        1           1              1   1
+  1
+    1
+      1          1                                                                                111111
+1                                                                                                1000011  
+1                                                                                                1011001
+1                                                                                                100N101
+1                                                                                                 100001
+      1                                                                                           1111111
+                 111                 111                 111                 111                 111
+                1001                1001                1001                1001                1001
+                 111                 111                 111                 111                 111
+                                                1
+                 1                                  1
+
+

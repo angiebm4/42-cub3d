@@ -1,6 +1,6 @@
 #include "../../include/cub3d.h"
 
-void	parse_error(int error, t_parsed_data *parsed)
+void	parse_error(int error, t_parsed_data *parsed, int print)
 {
 	printf("%s[ Error ]%s ", RED, CLEAR);
 	if (error == ERROR_INVALID_ARGS)
@@ -11,14 +11,18 @@ void	parse_error(int error, t_parsed_data *parsed)
 		perror("Error on malloc");
 	else if (error == ERROR_MAP)
 		printf("Error while checking the map :/\n");
+	else if (error == ERROR_TEXTURES)
+		printf("Error while trying to read a texture\n");
+	else if (error == ERROR_PIXELS)
+		printf("Error while analyzing pixels\n");
 	else
 		printf("Success(\\\\(·o·;)\n");
 
-	if (parsed)
-	{
+	if (parsed && print)
 		parse_print(parsed);
+
+	if (parsed)
 		destroy_parsed(parsed);
-	}
 
 	exit(ERROR_EXIT_VALUE);
 }
@@ -34,7 +38,7 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 	parsed->config_filename = filename;
 	parsed->fd = open(filename, O_RDONLY);
 	if (parsed->fd < 0)
-		parse_error(ERROR_OPEN, NULL);
+		parse_error(ERROR_OPEN, NULL, 0);
 
 	/* Init the pixels */
 	index = -1;
@@ -44,16 +48,17 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 
 /*#########################################################*/
 
+
+
 void	parse(int argc, char **argv, t_parsed_data *parsed)
 {
 	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
-		parse_error(ERROR_INVALID_ARGS, NULL);
+		parse_error(ERROR_INVALID_ARGS, NULL, 0);
 
 	init_parser_data(parsed, argv[1]);
 	parse_file(parsed);
 	check_map(parsed);
-
-	/* TODO: Check that all the info is valid */
+	check_graphic(parsed);
 
 	/* DEBUGGING: print the parse data */
 	// parse_print(parsed);

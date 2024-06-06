@@ -24,16 +24,18 @@ static int add_placeholder(t_parsed_data *parsed, char *buffer)
 	char	*trimmed;
 
 	/* Delete the usefull characters on the left and right side */
-	/* TODO: malloc */
 	trimmed = ft_strtrim(buffer, EMPTY_SET);
+	if (!trimmed)
+		parse_error(ERROR_MALLOC, parsed, 0);
 
 	/* Split the line on the space charcater */
-	/* TODO: malloc */
 	spl = ft_split(trimmed, ' ');
+	if (!spl)
+		parse_error(ERROR_MALLOC, parsed, 0);
 	free(trimmed);
 
 	/* Check if there is a placeholder on the line */
-	placeholder = line_is_placeholder(spl[0]);
+	placeholder = line_is_placeholder(spl[0], parsed);
 
 	/* If the line is a placeholder, the information will be saved */
 	res = save_placeholder(parsed, spl, placeholder);

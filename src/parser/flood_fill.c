@@ -51,15 +51,16 @@ int	rec_floof_fill(int x, int y, char **map)
 	return (count != 0);
 }
 
-int	flood_fill(char **map)
+int	flood_fill(char **map, t_parsed_data *parsed)
 {
 	char	**cpy;
 	int		x;
 	int		y;
 	int		result;
 
-	/* TODO: check mallco error */
 	cpy = copy_map(map);
+	if (!cpy)
+		parse_error(ERROR_MALLOC, parsed, 0);
 
 	result = 0;
 	while (!result && search_map(cpy, '0', &x, &y))

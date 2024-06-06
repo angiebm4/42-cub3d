@@ -2,11 +2,11 @@
 
 # define SUBSTITUTE_LINE	" \n"
 
-static char	*add_line(char *line, char *buffer)
+static char	*add_line(char *line, char *buffer, t_parsed_data *parsed)
 {
 	char *aux;
 
-	/* NOTE: this has to be checker :/ */
+	/* NOTE: this has to be check with maps :/ */
 	if (line_is_empty(line, EMPTY_SET))
 		line = SUBSTITUTE_LINE;
 	
@@ -14,8 +14,9 @@ static char	*add_line(char *line, char *buffer)
 	aux = buffer;
 	if (!line_is_comment(line, COMMENT_SET))
 	{
-		/* TODO: strjoin malloc */
 		aux = ft_strjoin(buffer, line);
+		if (!aux)
+			parse_error(ERROR_MALLOC, parsed, 0);
 		free(buffer);
 	}
 	return aux;
@@ -32,15 +33,16 @@ char	**save_map(t_parsed_data *parsed, char *line)
 	while (line)
 	{
 		/* Function to add the line to the buffer, returning the new buffer */
-		buffer = add_line(line, buffer);
+		buffer = add_line(line, buffer, parsed);
 
 		/* Iteration */
 		free(line);
 		line = get_next_line(parsed->fd);
 	}
 
-	/* TODO: malloc */
 	map = ft_split(buffer, '\n');
+	if (!map)
+		parse_error(ERROR_MALLOC, parsed, 0);
 	free(buffer);
 	return map;
 }
