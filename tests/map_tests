@@ -11,7 +11,7 @@ OK
 
 	[ ] Mapa con los dos pixeles validos
 
-	[ ] Lineas vacias en el mapa pero que no se pueda salir (varias sala separadas por lineas vacias o espacios/tabulaciones (EMPTY_SET))
+	[ ] Lineas vacias en el mapa pero que no se pueda salir (varias sala separadas por lineas vacias o espacios/tabulaciones (EMPTY_SET)) --> Islas/salas
 
 KO
 

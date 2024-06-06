@@ -15,4 +15,7 @@ obj/
 libft.a
 
 # Own files to ignore (as files to write down loose things)
-*.ignoreme
+*ignoreme*
+
+# Map tests
+*.res
