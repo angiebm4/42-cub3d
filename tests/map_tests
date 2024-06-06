@@ -1,17 +1,21 @@
 OK
-	[X] Mapa con buena extension
-	[X] Mapa todo junto, sin espacios
-	[X] Mapa con espacios/lineas vacias
-	[X] Mapa con comentarios
-	[ ] Mapa con todas las texturas
+	[X] 01-Mapa con buena extension
+	[X] 02-Mapa todo junto, sin espacios
+	[X] 03-Mapa con espacios/lineas vacias
+	[X] 04-Mapa con comentarios
+	[X] 05-Mapa con todas las texturas distintas
+	[X] 06-Mapa con texturas de gran tamaño (muy grandes, por lo menos que no pete)
 	
-	[ ] Mapa sin textura de puerta pero sin puerta en el mapa
-	[ ] Mapa con textura de puerta con puerta
-	[ ] Mapa con textura de puerta sin puerta
+	[X] 07-Mapa sin textura de puerta pero sin puerta en el mapa
+	[X] 08-Mapa con textura de puerta con puerta
+	[X] 09-Mapa con textura de puerta sin puerta
 
-	[ ] Mapa con los dos pixeles validos
+	[X] 10-Mapa con los menores pixeles
+	[X] 11-Mapa con los mayores pixeles
+	[X] 12-Mapa en los que los pixeles tienen ceros a la izquierda =D
 
-	[ ] Lineas vacias en el mapa pero que no se pueda salir (varias sala separadas por lineas vacias o espacios/tabulaciones (EMPTY_SET)) --> Islas/salas
+	[ ] 13-Lineas vacias en el mapa pero que no se pueda salir (varias sala separadas por lineas vacias o espacios/tabulaciones (EMPTY_SET)) --> Islas/salas
+	[ ] Totally a good map -> psegura-
 
 KO
 
