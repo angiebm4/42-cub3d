@@ -28,6 +28,7 @@
 
 /* VALID CHARACTERS */
 # define VALID_MAP_CHARS "01NSWED "
+# define PJ_CHARS "NSWE"
 
 /* REXTURES */
 # define NORTH_TEXTURE  0
@@ -42,6 +43,7 @@
 # define PIXELS_COUNT	2
 
 # define VIEWS_PLACEHOLDERS "NO.SO.WE.EA.DO.F.C"
+# define PLAYER_
 # define SEPARATOR_PLACEHOLDER '.'
 
 # define COMMENT_SET	"@#;//"
