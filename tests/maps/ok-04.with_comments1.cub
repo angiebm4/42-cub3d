@@ -1,16 +1,16 @@
 @#;/
 
 @ North texture
-NO ./path_to_the_north_texture
+NO textures/test.xpm
 
 # South texture
-SO ./path_to_the_south_texture
+SO textures/test.xpm
 
 ; West texture
-WE ./path_to_the_west_texture
+WE textures/test.xpm
 
 / East texture
-EA ./path_to_the_east_texture
+EA textures/test.xpm
 
 #/ Floor pixel color
 F 220,100,0
