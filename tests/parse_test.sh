@@ -77,6 +77,19 @@ print_error()
 	echo -e "${C_RED}[ ERROR ]${C_RESET} $1"
 }
 
+# NOTE: Function to print the use of the programm, receiving on $1 the way 
+#		the script is executed
+print_help()
+{
+	echo -e "Usage: ${C_YELLOW}$1 ${C_CYAN}[OPTION]${C_RESET}"
+	echo -e "\nOptional arguments:"
+	echo -e "\t${C_YELLOW}clean${C_RESET}\t\tThe files created on the execution of the script are deleted"
+	echo -e "\t${C_YELLOW}help${C_RESET}\t\tThis prompt is displayed"
+
+	echo -e "\nIf there is an argument other than those mentioned above, the argument will be treated"
+	echo -e "as the name of a file to be checked by this script, and only this will be analyzed."
+}
+
 ##############################################################################
 #                             EXECUTION FUNTIONS                             #
 ##############################################################################
@@ -177,11 +190,17 @@ execute_all_maps()
 #				· 'clean': the result files of the execution are deleted
 main()
 {
+	# If the first arg is "help", print a help prompt
+	if [ "$1" -gt 1 ] || [[ "$2" == "help" ]]; then
+		print_help $0
+		exit 0
+	fi
+
 	# Deletes the previous results
 	clean
 
 	# If the first arguments is "clean", the execution ends
-	if [[ "$1" == "clean" ]]; then
+	if [[ "$2" == "clean" ]]; then
 		exit 0
 	fi
 
@@ -201,8 +220,8 @@ main()
 		print_error "Valgrind dont installed!"
 	fi
 
-	if [ $# -eq 1 ] && [[ $1 != "clean" ]];then
-		execute_one_map $1	
+	if [ $1 -eq 1 ];then
+		execute_one_map $2
 	else
 		execute_all_maps
 	fi
@@ -220,4 +239,4 @@ main()
 }
 
 # Entry point
-main $1
+main $# $1
