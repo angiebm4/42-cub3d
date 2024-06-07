@@ -1,3 +1,5 @@
+# File with multiple errors on the pixels
+
 NO textures/brick1.xpm
 SO textures/brick1.xpm
 WE textures/brick1.xpm

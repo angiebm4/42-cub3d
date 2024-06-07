@@ -1,3 +1,5 @@
+# Map with a empty line on the map, which leads to the map being open
+
 NO textures/brick1.xpm
 SO textures/brick1.xpm
 WE textures/brick1.xpm

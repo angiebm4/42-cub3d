@@ -1,4 +1,4 @@
-# Mapa sin textura de puerta con puerta en el mapa
+# File without the door texture when the door appears on the map
 
 NO textures/brick1.xpm
 SO textures/brick1.xpm
