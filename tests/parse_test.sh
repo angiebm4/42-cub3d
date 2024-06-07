@@ -30,7 +30,7 @@ print_execution()
 	local res=0
 
 	# Print the line with the final check and the map that is being testing
-	if [ "$EXECUTION_RESULT_NORMAL" -eq 1 ]; then
+	if [ "$EXECUTION_RESULT_NORMAL" -eq 1 ] && [ "$EXECUTION_RESULT_LEAKS" -ne "$VALGRIND_ERROR" ]; then
 		echo -e "${C_GREEN}[   OK   ]${C_RESET} $EXECUTION_MAP"
 	else
 		echo -e "${C_RED}[ FAILED ]${C_RESET} $EXECUTION_MAP"
@@ -53,10 +53,7 @@ print_execution()
 	else
 		echo -e "${C_RED}FAILED${C_RESET}"
 	fi
-
-
 	echo
-
 }
 
 # $1: map filename
