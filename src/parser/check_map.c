@@ -2,17 +2,21 @@
 
 int	check_door(t_parsed_data *parsed)
 {
+	/* Seach the door character on the map */
 	if (!search_map(parsed->map, 'D', NULL, NULL))
 		return (0);
-	return parsed->textures_name[DOOR_TEXTURE] == NULL;
+
+	/* If the door character was on the map, check if a texture has been saved */
+	return (parsed->textures_name[DOOR_TEXTURE] == NULL);
 }
 
 int	check_player(char **map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	size_t	count;
 
+	/* Iterate the map */
 	i = 0;
 	count = 0;
 	while (map[i])
@@ -20,12 +24,15 @@ int	check_player(char **map)
 		j = 0;
 		while (map[i][j])
 		{
+			/* Check if the currect character is one of the player set */
 			if (ft_strchr(PJ_CHARS, map[i][j]))
 				count++;
 			j++;
 		}
 		i++;
 	}
+
+	/* Return the number of player characters found on the map */
 	return (count != 1);
 }
 
@@ -34,6 +41,8 @@ void	check_map(t_parsed_data *parsed)
 	int	count;
 
 	count = 0;
+
+	/* Check if a map has been saved on the file reading*/
 	if (!parsed->map)
 		parse_error(ERROR_MAP, parsed, 1);
 
@@ -49,10 +58,7 @@ void	check_map(t_parsed_data *parsed)
 	/* Check door texture if there is any door */
 	count += check_door(parsed);
 
-	/* DEBUGGING: print error count */
-	// printf("=> {%d}\n", count);
-
-	/* Check the reuslts of the map checkers */
+	/* Check the results of the map checkers */
 	if (count != 0)
 		parse_error(ERROR_MAP, parsed, 1);
 }

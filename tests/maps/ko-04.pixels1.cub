@@ -1,16 +1,10 @@
-# File with many empty lines
+# Map without any pixels information
 
 NO textures/brick1.xpm
-
 SO textures/brick1.xpm
-
 WE textures/brick1.xpm
-
 EA textures/brick1.xpm
-
-F 220,100,0
-
-C 225,30,0
+DO textures/brick1.xpm
 
 111
 1N1

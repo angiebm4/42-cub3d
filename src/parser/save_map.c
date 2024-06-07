@@ -1,15 +1,15 @@
 #include "../../include/cub3d.h"
 
-# define SUBSTITUTE_LINE	" \n"
+#define SUBSTITUTE_LINE	" \n"
 
 static char	*add_line(char *line, char *buffer, t_parsed_data *parsed)
 {
-	char *aux;
+	char	*aux;
 
 	/* NOTE: this has to be check with maps :/ */
 	if (line_is_empty(line, EMPTY_SET))
 		line = SUBSTITUTE_LINE;
-	
+
 	/* If the line is a comment, we dont add it to the map */
 	aux = buffer;
 	if (!line_is_comment(line, COMMENT_SET))
@@ -19,7 +19,7 @@ static char	*add_line(char *line, char *buffer, t_parsed_data *parsed)
 			parse_error(ERROR_MALLOC, parsed, 0);
 		free(buffer);
 	}
-	return aux;
+	return (aux);
 }
 
 char	**save_map(t_parsed_data *parsed, char *line)
@@ -40,9 +40,10 @@ char	**save_map(t_parsed_data *parsed, char *line)
 		line = get_next_line(parsed->fd);
 	}
 
+	/* Divide the buffer by the '\n' character, so the map can be saved on a matrix */
 	map = ft_split(buffer, '\n');
 	if (!map)
 		parse_error(ERROR_MALLOC, parsed, 0);
 	free(buffer);
-	return map;
+	return (map);
 }

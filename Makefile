@@ -22,18 +22,19 @@ VPATH = src:src/parser
 
 SRC =		main.c
 
-PARSER =	parse.c		\
-			pixel.c		\
-			parse_print.c	\
-			parse_file.c	\
-			line_utils.c	\
+PARSER =	parse.c				\
+			pixel.c				\
+			parse_print.c		\
+			parse_file.c		\
+			line_utils.c		\
 			save_placeholders.c	\
-			save_map.c		\
+			save_map.c			\
 			check_extension.c	\
-			check_map.c	\
-			flood_fill.c	\
-			map_utils.c	\
-			check_graphic.c
+			check_map.c			\
+			flood_fill.c		\
+			map_utils.c			\
+			check_graphic.c		\
+			clean_map.c
 
 GRAFIC =	mlx_init.c
 

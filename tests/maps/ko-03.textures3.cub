@@ -1,17 +1,12 @@
-# File with many empty lines
+# File without the door texture when the door appears on the map
 
 NO textures/brick1.xpm
-
 SO textures/brick1.xpm
-
 WE textures/brick1.xpm
-
 EA textures/brick1.xpm
-
 F 220,100,0
-
 C 225,30,0
 
-111
-1N1
-111
+1111
+1ND1
+1111

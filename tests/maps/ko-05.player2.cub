@@ -1,17 +1,13 @@
-# File with many empty lines
+# Map with multiple players
 
 NO textures/brick1.xpm
-
 SO textures/brick1.xpm
-
 WE textures/brick1.xpm
-
 EA textures/brick1.xpm
-
+DO textures/brick1.xpm
 F 220,100,0
-
 C 225,30,0
 
-111
-1N1
-111
+1111
+1NS1
+1111

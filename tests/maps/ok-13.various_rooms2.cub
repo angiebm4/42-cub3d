@@ -1,0 +1,27 @@
+# Map with many rooms
+
+NO textures/brick1.xpm
+SO textures/brick1.xpm
+WE textures/brick1.xpm
+EA textures/brick1.xpm
+DO textures/brick1.xpm
+F 220,100,0
+C 225,30,0
+
+            11111
+          111000111
+        1110011100111
+        11111   11111
+
+  1111       111       1111
+ 11001       101       10011
+110011    111101111    110011
+10001     1000W0001     10001
+110011    111101111    110011
+ 11001       101       10011
+  1111       111       1111
+
+        11111   11111
+        1110011100111
+          111000111
+             111

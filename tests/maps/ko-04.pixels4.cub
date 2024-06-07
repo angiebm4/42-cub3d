@@ -1,16 +1,12 @@
-# File with many empty lines
+# File with multiple errors on the pixels
 
 NO textures/brick1.xpm
-
 SO textures/brick1.xpm
-
 WE textures/brick1.xpm
-
 EA textures/brick1.xpm
-
+DO textures/brick1.xpm
 F 220,100,0
-
-C 225,30,0
+C 225,30,0,98
 
 111
 1N1

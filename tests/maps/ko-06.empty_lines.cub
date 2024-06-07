@@ -1,11 +1,16 @@
-# File with all the information together
+# Map with a empty line on the map, which leads to the map being open
+
 NO textures/brick1.xpm
 SO textures/brick1.xpm
 WE textures/brick1.xpm
 EA textures/brick1.xpm
+DO textures/brick1.xpm
 F 220,100,0
 C 225,30,0
+
         1111111111111111111111111
         1001000000000000000000001
-1111111110110000011100000000E0001
+111111111011000001110000000000001
+
+100000000011000001110111111111111
 111111111111111111111111111111111

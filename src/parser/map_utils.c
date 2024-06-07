@@ -5,27 +5,29 @@ int	map_check_characters(char **map, char *set)
 	size_t	i;
 	size_t	j;
 
+	/* Iterate on the map */
 	i = -1;
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
 		{
+			/* If the character is not part of the possible characters set, error */
 			if (!ft_strchr(set, map[i][j]))
-				return 1;
+				return (1);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 char	**copy_map(char **matrix)
 {
-	char **cpy;
-	int	index;
+	char	**cpy;
+	int		index;
 
 	index = 0;
 	if (!matrix)
-		return NULL;
+		return (NULL);
 	cpy = malloc((map_length(matrix) + 1) * sizeof(char *));
 	if (!cpy)
 		return (NULL);
@@ -53,11 +55,14 @@ int	search_map(char **map, char ch, int *x, int *y)
 	i = -1;
 	if (!map)
 		return (0);
+
+	/* Iterate on the map */
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
 		{
+			/* If the curernt character is the searched character, save the coordenates */
 			if (map[i][j] == ch)
 			{
 				if (y)
@@ -80,4 +85,3 @@ size_t	map_length(char **matrix)
 		index++;
 	return (index);
 }
-
