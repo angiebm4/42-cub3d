@@ -130,6 +130,7 @@ char	**save_map(t_parsed_data *parsed, char *buffer);
 /* Map check */
 void	check_map(t_parsed_data *parsed);
 int		flood_fill(char **map, t_parsed_data *parsed);
+void	clean_map(char **map);
 
 /* Check the graphic part parsed */
 void	check_graphic(t_parsed_data *parsed);

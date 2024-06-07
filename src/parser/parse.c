@@ -64,6 +64,9 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 
 	/* Check if the map is correct */
 	check_map(parsed);
+
+	/* Clean a bit the map, deleting the final empty lines */
+	clean_map(parsed->map);
 }
 
 void	destroy_parsed(t_parsed_data *parsed)
