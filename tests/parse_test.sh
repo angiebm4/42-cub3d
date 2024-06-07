@@ -19,10 +19,8 @@ TEST_PASS=0	# Counter of passed tests
 TEST_FAIL=0	# Counter of failed tests
 ##############################################################################
 
-
-##############################################################################
-#                              PRINT FUNCTIONS                               #
-##############################################################################
+PASSED_TESTS=0
+TOTAL_TESTS=0
 
 EXECUTION_MAP=
 EXECUTION_CMD_NORMAL=
@@ -30,7 +28,14 @@ EXECUTION_RESULT_NORMAL=
 EXECUTION_RESULT_ANALYSIS=
 
 EXECUTION_CMD_VALGRIND=
-EXECUTION_RESULT_LEAKS=		# 1 Okay, 0 Error
+EXECUTION_RESULT_LEAKS=
+
+
+##############################################################################
+#                              PRINT FUNCTIONS                               #
+##############################################################################
+
+
 
 # NOTE: Function to print the result of the execution, saved on the above variables
 print_execution()
@@ -110,8 +115,12 @@ check_execution()
 #			$3: Result obtained
 check_result()
 {
+	# Increment the number of tests done
+	((TOTAL_TESTS++))
+
 	if [[ "$2" -eq "$3" ]]; then
 		EXECUTION_RESULT_ANALYSIS=1
+		((PASSED_TESTS++))
 	else
 		EXECUTION_RESULT_ANALYSIS=0
 	fi
@@ -198,9 +207,16 @@ main()
 		execute_all_maps
 	fi
 
+	# Print the final result
+	local msg="Result: $PASSED_TESTS / $TOTAL_TESTS"
+	local length=${#msg}
+	local border=$(printf '%*s' $((length + 4)) | tr ' ' '#')
+
+	echo -e "\t\t\t\t\t${C_CYAN}$border${C_RESET}"
+	echo -e "\t\t\t\t\t${C_CYAN}# ${C_YELLOW}$msg ${C_CYAN}#${C_RESET}"
+	echo -e "\t\t\t\t\t${C_CYAN}$border${C_RESET}"
 
 	exit 0
-	# echo "Result: $TEST_PASS / $($TEST_PASS + $TEST_FAIL)"
 }
 
 # Entry point
