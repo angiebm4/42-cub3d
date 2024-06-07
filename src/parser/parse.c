@@ -30,7 +30,7 @@ void	parse_error(int error, t_parsed_data *parsed, int print)
 static void	init_parser_data(t_parsed_data *parsed, char *filename)
 {
 	size_t	index;
-	
+
 	/* Clean the struct data */
 	ft_bzero(parsed, sizeof(*parsed));
 
@@ -48,26 +48,28 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 
 /*#########################################################*/
 
-
-
 void	parse(int argc, char **argv, t_parsed_data *parsed)
 {
 	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
 		parse_error(ERROR_INVALID_ARGS, NULL, 0);
 
+	/* Init the struct */
 	init_parser_data(parsed, argv[1]);
+
+	/* Get all the information from the file */
 	parse_file(parsed);
-	check_map(parsed);
+
+	/* Check if the textures and pixels are okay */
 	check_graphic(parsed);
 
-	/* DEBUGGING: print the parse data */
-	// parse_print(parsed);
+	/* Check if the map is correct */
+	check_map(parsed);
 }
 
 void	destroy_parsed(t_parsed_data *parsed)
 {
 	size_t	index;
-	
+
 	/* Close the config file fd */
 	ft_close(&(parsed->fd));
 

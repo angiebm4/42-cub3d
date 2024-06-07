@@ -1,4 +1,4 @@
-# include "../../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 static void	add_map(t_parsed_data *parsed, char *buffer)
 {
@@ -8,15 +8,9 @@ static void	add_map(t_parsed_data *parsed, char *buffer)
 
 	/* Otherwise, the rest of the map is the rest of the file */
 	parsed->map = save_map(parsed, buffer);
-
-	/* DEBUGGING: printing and deleting the map */
-	// int index = -1;
-	// while (parsed->map && parsed->map[++index])
-	// 	printf("{%d} [%s]\n", index, parsed->map[index]);
-	// ft_free_split(parsed->map);
 }
 
-static int add_placeholder(t_parsed_data *parsed, char *buffer)
+static int	add_placeholder(t_parsed_data *parsed, char *buffer)
 {
 	char	**spl;
 	int		placeholder;
@@ -42,15 +36,16 @@ static int add_placeholder(t_parsed_data *parsed, char *buffer)
 
 	/* Free the splitted string created before */
 	ft_free_split(spl);
-	
+
 	/* Otherwise, save the placeholder data */
-	return res;
+	return (res);
 }
 
-void    parse_file(t_parsed_data *parsed)
+void	parse_file(t_parsed_data *parsed)
 {
 	char	*buffer;
 
+	/* Read the file until a non placeholder is found, or the file ends */
 	buffer = get_next_line(parsed->fd);
 	while (buffer)
 	{	
