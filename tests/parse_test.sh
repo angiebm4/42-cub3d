@@ -8,6 +8,7 @@ C_CYAN='\e[1;36m'
 C_RESET='\e[0m'
 ##############################################################################
 EXECUTABLE="../cub3D"			# Cube3D executable
+VALGRIND_PATH=$(whereis valgrind | awk '{print $2}')
 VALGRIND_ERROR=42
 VALGRIND="/usr/bin/valgrind --leak-check=full --error-exitcode=$VALGRIND_ERROR --log-file=/dev/null"	# Valgrind executable
 ##############################################################################
@@ -18,91 +19,153 @@ TEST_PASS=0	# Counter of passed tests
 TEST_FAIL=0	# Counter of failed tests
 ##############################################################################
 
+
+##############################################################################
+#                              PRINT FUNCTIONS                               #
+##############################################################################
+
 EXECUTION_MAP=
-EXECUTION_CMD_NORMAL=	
-EXECUTION_RESULT_NORMAL=	# 1 Okay, 0 Error
+EXECUTION_CMD_NORMAL=
+EXECUTION_RESULT_NORMAL=
+EXECUTION_RESULT_ANALYSIS=
 
 EXECUTION_CMD_VALGRIND=
 EXECUTION_RESULT_LEAKS=		# 1 Okay, 0 Error
 
+# NOTE: Function to print the result of the execution, saved on the above variables
 print_execution()
 {
-	local res=0
-
 	# Print the line with the final check and the map that is being testing
-	if [ "$EXECUTION_RESULT_NORMAL" -eq 1 ] && [ "$EXECUTION_RESULT_LEAKS" -ne "$VALGRIND_ERROR" ]; then
-		echo -e "${C_GREEN}[   OK   ]${C_RESET} $EXECUTION_MAP"
+	if [ "$EXECUTION_RESULT_ANALYSIS" -eq 1 ] && [ "$EXECUTION_RESULT_LEAKS" -ne "$VALGRIND_ERROR" ]; then
+		echo -ne "${C_GREEN}[   OK   ]${C_RESET}"
 	else
-		echo -e "${C_RED}[ FAILED ]${C_RESET} $EXECUTION_MAP"
+		echo -ne "${C_RED}[ FAILED ]${C_RESET}"
 	fi
+	echo -e " ${C_YELLOW}$EXECUTION_MAP${C_RESET}"
 
-	# NOTE: Info about the normal execution
+	# Info about the normal execution
 	echo -e "\t· Normal execution: $EXECUTION_CMD_NORMAL"
 	echo -en "\t· Result: "
-	if [ "$EXECUTION_RESULT_NORMAL" -eq 1 ]; then
-		echo -e "${C_GREEN}OK${C_RESET}"
+	if [ "$EXECUTION_RESULT_ANALYSIS" -eq 1 ]; then
+		echo -ne "${C_GREEN}OK${C_RESET}"
 	else
-		echo -e "${C_RED}FAILED${C_RESET}"
+		echo -ne "${C_RED}FAILED${C_RESET}"
 	fi
+	echo -e "\t\t(${C_CYAN}${EXECUTION_RESULT_NORMAL}${C_RESET})"
 
-	# NOTE: Info about the valgrind execution
+	# Info about the valgrind execution
 	echo -e "\t· Valgrind execution: $EXECUTION_CMD_VALGRIND"
 	echo -en "\t· Leaks/errors: "
 	if [ "$EXECUTION_RESULT_LEAKS" -ne "$VALGRIND_ERROR" ]; then
-		echo -e "${C_GREEN}OK${C_RESET}"
+		echo -ne "${C_GREEN}OK${C_RESET}"
 	else
-		echo -e "${C_RED}FAILED${C_RESET}"
+		echo -ne "${C_RED}FAILED${C_RESET}"
 	fi
-	echo
+	echo -e "\t(${C_CYAN}${EXECUTION_RESULT_LEAKS}${C_RESET})"
+
+	echo -e "\n"
 }
 
-# $1: map filename
+# NOTE: Function that print an error, passed on $1
+print_error()
+{
+	echo -e "${C_RED}[ ERROR ]${C_RESET} $1"
+}
+
+##############################################################################
+#                             EXECUTION FUNTIONS                             #
+##############################################################################
+
+# NOTE: Function to execute the program with a map, passed on the first argument ($1)
 check_execution()
 {
+	local filename=${1##*/}
+
 	# Set the map that is going to be tested
 	EXECUTION_MAP=$1
 
 	# Execute the programm, and save the line code, saving the result
-	EXECUTION_CMD_NORMAL="$EXECUTABLE $MAPS_FOLDER/$1 > "$MAPS_FOLDER/$1.$RESULT_EXTENSION""
-	$EXECUTABLE $MAPS_FOLDER/$1 > "$MAPS_FOLDER/$1.$RESULT_EXTENSION"
+	EXECUTION_CMD_NORMAL="$EXECUTABLE $1 > "$1.$RESULT_EXTENSION""
+	$EXECUTABLE $1 > "$1.$RESULT_EXTENSION"
 	EXECUTION_RESULT_NORMAL=$?
 
 	# Execute with valgrind to check the leaks
-	EXECUTION_CMD_VALGRIND="$VALGRIND $EXECUTABLE $MAPS_FOLDER/$1 > /dev/null"
-	$VALGRIND $EXECUTABLE $MAPS_FOLDER/$1 > /dev/null
+	EXECUTION_CMD_VALGRIND="$VALGRIND $EXECUTABLE $1 > /dev/null"
+	$VALGRIND $EXECUTABLE $1 > /dev/null
 	EXECUTION_RESULT_LEAKS=$?
 
-	if [[ $1 == "ok"* ]]; then
+	if [[ "$filename" == "ok"* ]]; then
 		check_result $1 0 $EXECUTION_RESULT_NORMAL
 	fi
 
-	if [[ $1 == "ko"* ]]; then
+	if [[ "$filename" == "ko"* ]]; then
 		check_result $1 1 $EXECUTION_RESULT_NORMAL
 	fi
 }
 
-# $1: name of the map
-# $2: Expected result
-# $3: Result obtained
+# NOTE: Function to check if the execution was successfull or not.
+#	    Params:
+#			$1: name of the map
+#			$2: Expected result
+#			$3: Result obtained
 check_result()
 {
 	if [[ "$2" -eq "$3" ]]; then
-		EXECUTION_RESULT_NORMAL=1
+		EXECUTION_RESULT_ANALYSIS=1
 	else
-		EXECUTION_RESULT_NORMAL=0
+		EXECUTION_RESULT_ANALYSIS=0
 	fi
 }
-##############################################################################
 
-# Remove the results of the previous executions
+# NOTE: Remove the results of the previous executions
 clean()
 {
 	rm -rf "$MAPS_FOLDER"/*".$RESULT_EXTENSION"
 }
 
+##############################################################################
+#                               MAIN FUNCTIONS                               #
+##############################################################################
+
+# NOTE: Function to execute just one map
+execute_one_map()
+{
+	local filename=${1##*/}
+
+	if [[ "$filename" != "ok"* ]] && [[ "$filename" != "ko"* ]]; then
+		echo -e "The file ${C_YELLOW}must${C_RESET} start with 'ok' or 'ko':"
+		echo -e "\t· If the file starts with ${C_GREEN}'ok'${C_RESET}, the execution should be correct"
+		echo -e "\t· If the file starts with ${C_RED}'ko'${C_RESET}, the execution should be wrong"
+		exit 1
+	fi
+
+	if [ ! -f $1 ]; then
+		print_error "The file don't exist!"
+		exit 1
+	fi
+
+	check_execution $1
+	print_execution
+}
+
+# NOTE: Function to execute all the files saved on the folder $MAPS_FOLDER
+execute_all_maps()
+{
+	# List the maps of the folder and iterate on it
+	maps=($(ls "$MAPS_FOLDER" | grep -E '^(ok|ko)-'))
+	for current_map in "${maps[@]}"; do
+		check_execution "$MAPS_FOLDER/$current_map"
+		print_execution
+	done
+}
+
 # $1 (optional):
 #	· "clean":	deletes the .$(RESULT_EXTENSION) files
 #	· other:	normal compilation
+# NOTE: Main function.Check s that the  env is okay and execute the program, depending of the script arguments:
+#		Params:
+#			$1 (optional): If there is no  one of the follow key words, the param is the path of a file, so the script will be checker; otherwise:
+#				· 'clean': the result files of the execution are deleted
 main()
 {
 	# Deletes the previous results
@@ -115,27 +178,28 @@ main()
 
 	# If the folder don't exist, exit
 	if [ ! -d "$MAPS_FOLDER" ]; then
-		echo "The map folder don't exist!"
+		print_error "The map folder don't exist!"
 		exit 1
 	fi
 
 	# Check if the executable exists
 	if [ ! -f "$EXECUTABLE" ]; then
-		echo "Executable don't exists!"
+		print_error "Executable don't exists!"
 		exit 1
 	fi
 
-	if [ ! -f /usr/bin/valgrind ]; then
-		echo "Valgrind dont installed!"
+	if [ ! -f "$VALGRIND_PATH" ]; then
+		print_error "Valgrind dont installed!"
 	fi
 
-	# List the maps of the folder and iterate on it
-	maps=($(ls "$MAPS_FOLDER" | grep -E '^(ok|ko)-'))
-	for current_map in "${maps[@]}"; do
-		check_execution $current_map
-		print_execution
-	done
+	if [ $# -eq 1 ] && [[ $1 != "clean" ]];then
+		execute_one_map $1	
+	else
+		execute_all_maps
+	fi
 
+
+	exit 0
 	# echo "Result: $TEST_PASS / $($TEST_PASS + $TEST_FAIL)"
 }
 
