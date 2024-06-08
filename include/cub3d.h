@@ -88,12 +88,19 @@ struct  s_pixel
 	int blue;	/* b */
 };
 
+struct	s_player
+{
+	double	x;
+	double	y;
+	float	orientation;
+};
+
 struct   s_cube
 {
 	char    **map;		/* Map data*/
 
 	t_mlx   *grafic;	/* Grafic data */
-	t_player	*pj;
+	t_player	pj;
 };
 
 struct  s_mlx
@@ -106,21 +113,6 @@ struct  s_mlx
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
 
-struct	s_player
-{
-	double	x;
-	double	y;
-	float	orientation;
-};
-
-struct	s_image
-{
-	void		*img;
-	char		*pix_addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-};
 
 /*_____________________________________________________________________*/
 
@@ -180,16 +172,12 @@ int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
 
-/* DEBUGGING: DEBBUGING */
-void    print_data(t_cube *cube);
-
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
-void    save_player_info(t_cube *cube);
 
 /* HOOKS */
 void    hooking(t_cube *cube);
-int end_program(t_cube *cube);
+int		end_program(t_cube *cube);
 
 /* MINI MAP */
 void    mini_map(t_cube *cube);

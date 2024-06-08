@@ -47,30 +47,12 @@ void    init_map(t_cube *cube, t_parsed_data *parsed)
     cube->map[i] = NULL;
 }
 
-static void	create_image(t_cube *cube)
-{
-	cube->grafic->image->img = mlx_new_image(cube->grafic->mlx, WINDOW_WEIGTH, WINDOW_HEIGTH);
-	if (cube->grafic->image->img == NULL)
-		exit(1); /* TODO: malloc error*/
-	cube->grafic->image->pix_addr = mlx_get_data_addr(cube->grafic->image->img,
-			&cube->grafic->image->bpp,
-			&cube->grafic->image->line_len,
-			&cube->grafic->image->endian);
-}
 
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 {
-    (void)parsed;
+
     cube->grafic = ft_calloc(1, sizeof(t_mlx));
     if (cube->grafic == NULL)
-        exit(1); /* TODO: malloc error*/
-
-    cube->grafic->image = ft_calloc(1, sizeof(t_image));
-    if (cube->grafic->image == NULL)
-        exit(1); /* TODO: malloc error*/
-
-    cube->pj = ft_calloc(1, sizeof(t_mlx));
-    if (cube->pj == NULL)
         exit(1); /* TODO: malloc error*/
 
     cube->grafic->mlx = mlx_init();
@@ -83,9 +65,8 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_HEIGTH, WINDOW_WEIGTH, PROGRAM_NAME);
     if (cube->grafic->win == NULL)
         exit(1); /* TODO: error win create*/
-        
-    create_image(cube);
-    save_player_info(cube);
 
+    ft_bzero(&cube->pj, sizeof(t_player));
+    
     destroy_parsed(parsed);
 }
