@@ -24,14 +24,17 @@ int main(int argc, char *argv[])
 
     ft_bzero(&cube, sizeof(t_cube));
     cube_mlx_init(&cube, &parsed);
+    mini_map(&cube);
+    /* DEBUGGING: */
+    printf("uwu_2\n");
 
     /* TODO: 
         fill_data(cube, parsed)
         destroy_parsed(&parsed);
         start_simulation();
     */
-
-    destroy_parsed(&parsed);
+    hooking(&cube);
+    mlx_loop(cube.grafic->mlx);
 
     return (0);
 }
