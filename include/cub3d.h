@@ -10,8 +10,17 @@
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 500
-# define WINDOW_WEIGTH 500
+# define WINDOW_HEIGTH 200
+# define WINDOW_WEIGTH 320
+
+/* RAYCAST MEASURES */
+# define WALL_HEIGTH 64
+# define PJ_HEIGTH 32
+# define PJ_FOV 60 /* field of view */
+
+/* MINI MAP */
+# define INCREMENT_VALUE_Y 10
+# define INCREMENT_VALUE_X 10
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -113,6 +122,14 @@ struct  s_mlx
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
 
+struct	s_image
+{
+	void		*img;
+	char		*pix_addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+};
 
 /*_____________________________________________________________________*/
 
@@ -181,5 +198,9 @@ int		end_program(t_cube *cube);
 
 /* MINI MAP */
 void    mini_map(t_cube *cube);
+
+
+/* DEBUGGING PREUBAS*/
+void    draw_walls(t_cube *cube);
 
 #endif

@@ -9,12 +9,41 @@ int end_program(t_cube *cube)
     exit(1);
 }
 
+void    move_pj(int keycode, t_cube *cube)
+{
+    if (keycode == W || keycode == UP)
+    {
+        /*TODO: check if pj can move*/
+        cube->pj.y -= 2;
+        mini_map(cube);
+    }
+    else if (keycode == A || keycode == LEFT)
+    {
+        /*TODO: check if pj can move*/
+        cube->pj.x -= 2;
+        mini_map(cube);
+    }
+    else if (keycode == S || keycode == DOWN)
+    {
+        /*TODO: check if pj can move*/
+        cube->pj.y += 2;
+        mini_map(cube);
+    }
+    else if (keycode == D || keycode == RIGHT)
+    {
+        /*TODO: check if pj can move*/
+        cube->pj.x += 2;
+        mini_map(cube);
+    }
+}
+
 int key_hooks(int keycode, t_cube *cube)
 {
     /* DEBUGGING: */
     printf("tecla %d\n", keycode);
     if (keycode == ESC)
         end_program(cube);
+    move_pj(keycode, cube);
     return(1);
 }
 

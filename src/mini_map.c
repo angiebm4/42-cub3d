@@ -1,5 +1,34 @@
 #include "../include/cub3d.h"
 
+
+static void	my_pixel_put(t_image *img, double x, double y, int color)
+{
+	int	offset;
+
+	offset = (img->line_len * y) + (x * (img->bpp / 8));
+	*((unsigned int *)(offset + img->pix_addr)) = color;
+}
+
+void    draw_player(t_cube *cube)
+{
+    int i;
+    int j;
+    int color;
+
+    color = H_MAGENTA;
+    i = 0;
+    while (i < INCREMENT_VALUE_X / 3)
+    {
+        j = 0;
+        while (j < INCREMENT_VALUE_Y / 3)
+        {
+            my_pixel_put(cube->grafic->image, INCREMENT_VALUE_X + cube->pj.x + i, INCREMENT_VALUE_Y + cube->pj.y + j, color);
+            j++;
+        }
+        i++;
+    }
+}
+
 void    print_ch(t_cube *cube, char ch, int x, int y)
 {
     int color;
@@ -12,18 +41,14 @@ void    print_ch(t_cube *cube, char ch, int x, int y)
     else if (ch == 'D')
         color = H_BG_ORANGE;
 
-
-    mlx_pixel_put(cube->grafic->mlx, cube->grafic->win, x, y, color);
+    my_pixel_put(cube->grafic->image, (double)x, (double)y, color);
 }
 
 void    mini_map(t_cube *cube)
 {
 
-    const int INCREMENT_VALUE_Y = 10;
-    const int INCREMENT_VALUE_X = 10;
-
-    const int START_POINT_X = 50;
-    const int START_POINT_Y = 50;
+    const int START_POINT_X = 0;
+    const int START_POINT_Y = 0;
 
     int iterable[2]; // [x, y]
 
@@ -48,7 +73,6 @@ void    mini_map(t_cube *cube)
                 iterable[0] = -1;
                 while (++iterable[0] < INCREMENT_VALUE_X)
                 {
-                    // mlx_pixel_put(cube->grafic->mlx, cube->grafic->win, start_x + iterable[0], start_y + iterable[1], H_BG_GREENFOSFI);
                     print_ch(cube, cube->map[i][j], start_x + iterable[0], start_y + iterable[1]);
                 }
             }
@@ -59,4 +83,7 @@ void    mini_map(t_cube *cube)
         start_x = START_POINT_X;
     }
 
+    draw_player(cube);
+    mlx_put_image_to_window(cube->grafic->mlx,
+        cube->grafic->win, cube->grafic->image->img, 0, 0);
 }
