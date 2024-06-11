@@ -1,76 +1,59 @@
 #include "../include/cub3d.h"
 
-double  distance_pj_wall(t_cube *cube, double p_x, double angle)
+void    get_vertical_intersection(t_cube *cube, t_ray   *ray)
 {
-    double  distance;
-    double  real_distance;
 
-    distance = fabs(cube->pj.x - p_x) / cos(angle);
-    real_distance = distance * cos(angle);
-    printf("real distance --> %fl\n", real_distance);
-    return(real_distance);
 }
 
-void    print_wall(t_cube *cube, double distance, int win_pos, int color)
+double    get_horizontal_intersection(t_cube *cube, t_ray   *ray)
 {
-    int i;
+    double  x_increment;
+    double  y_increment;
+    double  distance; /* TODO: get distance */
 
-    i = 0;
-    while(i < distance)
+    while ()
     {
-        mlx_pixel_put(cube->grafic->mlx, cube->grafic->win, win_pos, CENTER_y - i, color);
-        i++;
+        /* TODO: hay que tener en cuenta hacia donde mira el pj */
+        /* down and right, down and left, or up and left */
+        /* Calcular los puntos de interseccion rayo cuadrado hasta encontrar un 1 */
+        ray->hor_y = (cube->pj.unit_y / CUBE_HEIGTH) * CUBE_HEIGTH;
+        ray->hor_x = cube->pj.unit_x + (ray->hor_y - cube->pj.unit_y) / tan(ray->angle);
+        y_increment = CUBE_HEIGTH;
+        x_increment = CUBE_HEIGTH / tan(ray->angle);
+
+    }
+    /* TODO: sacar la distancia del pj hasta la primera pared */
+    return (distance);
+}
+void    raycasting(t_cube *cube)
+{
+    t_ray   ray;
+    double  dis_hor;
+    double  dis_ver;
+
+
+    /* angulo del primer rayo */
+    ray.angle = cube->pj.orientation - (cube->pj.fov_rd / 2);
+    /* DEBUGGING: */
+    printf("while end %lf\n", cube->pj.orientation + (cube->pj.fov_rd / 2));
+    /* DEBUGGING: */
+    while (ray.angle < cube->pj.orientation + (cube->pj.fov_rd / 2))
+    {
+        /* TODO: get the horizontal intersection */
+        dis_hor = get_horizontal_intersection(cube, &ray);
+        /* TODO: get the vertical interception */
+        /* TODO calculate the distance */
+        /* TODO: take the closet distance */
+        /* TODO: ver si es mas cercano el lado horizontal o vertical para imprimir columna de pixeles*/
+
+        /* Iterar por todos los angulos dentro del FOV del pj*/
+        ray.angle = fmod(ray.angle + (cube->pj.fov_rd / WINDOW_WIDTH), 2 * M_PI);
+        /* DEBUGGING: printf("ray.angle ---> %lf\n", ray.angle);*/
     }
 }
 
-void    draw_horizontal_walls(t_cube *cube)
+void    render(t_cube *cube)
 {
-    int i;
-    double auxp_x;
-    double auxp_y;
-    double angle;
-    double Xa;
-    double Ya;
-
-    /* TODO: funcion de sumar angulos de 0 a 360 */
-    angle = cube->pj.orientation - (PJ_FOV / 2);
-    printf("angle --- %lf\n", angle);
-    i = 0;
-    while (i < WINDOW_WEIGTH)
-    {
-        
-        Xa = CUBE_HEIGTH / tan(angle);
-        printf("xa --- %lf\n", Xa);
-        if (angle < 360 && angle > 180)
-        {
-            auxp_y = floor(cube->pj.unit_y / 64) * (64) + 64;
-            Ya = CUBE_HEIGTH;
-        }
-        else
-        {
-            auxp_y = floor(cube->pj.unit_y / 64) * (64) - 1;
-            Ya = -CUBE_HEIGTH;
-        }
-        auxp_x = cube->pj.unit_x + (cube->pj.unit_y - auxp_y) / tan(angle);
-        auxp_y = floor(auxp_y / 64);
-        printf("%saux Y ---> %lf%s\n",RED, auxp_y, CLEAR);
-        auxp_x = floor(auxp_x / 64);
-        printf("%saux x ---> %lf%s\n",RED, auxp_x, CLEAR);
-        while (cube->map[(int)auxp_y][(int)auxp_x] == '0')
-        {
-            auxp_x = (auxp_x + Xa) / CUBE_HEIGTH;
-            auxp_y = (auxp_y + Ya) / CUBE_HEIGTH;
-        }
-        print_wall(cube ,distance_pj_wall(cube, auxp_x, angle), i, H_MAGENTA);
-        /* TODO: funcion de sumar angulos de 0 a 360 */
-        angle += (double)ANGLE_BETW_RAYS;
-        printf("<<< %lf >>>\n", angle);
-        i++;
-    }
-}
-
-void    draw_walls(t_cube *cube)
-{
-    draw_horizontal_walls(cube);
-    // draw_vertical_walls(cube);
+    mini_map(cube);
+    raycasting(cube);
 }

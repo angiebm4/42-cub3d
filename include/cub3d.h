@@ -6,12 +6,13 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
 # define WINDOW_HEIGTH 200
-# define WINDOW_WEIGTH 320
+# define WINDOW_WIDTH 320
 
 /* RAYCAST MEASURES */
 # define CUBE_HEIGTH 64
@@ -27,8 +28,6 @@
 /* POR LO QUE 160 / TAN(30º) = 277 ES LA DISTANCIA */
 # define DIS_PJ_PROJEC_PLANE	(WINDOW_WEIGTH / 2) / tan(PJ_FOV / 2)
 
-/* Angle between subsequent rays = 60/320 degrees*/
-# define ANGLE_BETW_RAYS	PJ_FOV / WINDOW_WEIGTH
 
 /* MINI MAP */
 # define INCREMENT_VALUE_Y 10
@@ -96,11 +95,13 @@
 
 # define ON_DESTROY	17
 
-typedef struct  s_cube  t_cube;
-typedef struct  s_mlx   t_mlx;
-typedef struct  s_pixel t_pixel;
-typedef struct  s_player t_player;
-typedef struct  s_image t_image;
+typedef struct  s_cube		t_cube;
+typedef struct  s_mlx		t_mlx;
+typedef struct  s_pixel		t_pixel;
+typedef struct  s_player	t_player;
+typedef struct  s_image		t_image;
+typedef struct	s_ray		t_ray;
+
 
 struct  s_pixel
 {
@@ -115,6 +116,7 @@ struct	s_player
 	double	y;
 	double	unit_x;
 	double	unit_y;
+	double	fov_rd;
 	double	orientation;
 };
 
@@ -134,6 +136,15 @@ struct  s_mlx
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
+};
+
+struct	s_ray
+{
+	double	ver_x;
+	double	ver_y;
+	double	hor_x;
+	double	hor_y;
+	double	angle;
 };
 
 struct	s_image
@@ -215,6 +226,6 @@ void    mini_map(t_cube *cube);
 
 
 /* DEBUGGING PREUBAS*/
-void    draw_walls(t_cube *cube);
+void    render(t_cube *cube);
 
 #endif

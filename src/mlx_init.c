@@ -30,7 +30,7 @@ void    init_textures(t_cube *cube, t_parsed_data *parsed)
 
 static void	create_image(t_cube *cube)
 {
-	cube->grafic->image->img = mlx_new_image(cube->grafic->mlx, WINDOW_WEIGTH, WINDOW_HEIGTH);
+	cube->grafic->image->img = mlx_new_image(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH);
 	if (cube->grafic->image->img == NULL)
 		exit(1); /* TODO: malloc error*/
 	cube->grafic->image->pix_addr = mlx_get_data_addr(cube->grafic->image->img,
@@ -38,6 +38,8 @@ static void	create_image(t_cube *cube)
 			&cube->grafic->image->line_len,
 			&cube->grafic->image->endian);
 }
+
+
 
 void    save_player_info(t_cube *cube)
 {
@@ -52,18 +54,19 @@ void    save_player_info(t_cube *cube)
     {
         if (search_map(cube->map, PJ_CHARS[i], &aux_x, &aux_y) == 1)
         {
-            cube->pj.x = (double)aux_x;/* TODO: nose como mierdas printear el pj en el minimapa */
+            cube->pj.x = (double)aux_x; /* TODO: nose como mierdas printear el pj en el minimapa */
             cube->pj.y = (double)aux_y;
             cube->pj.unit_x = cube->pj.x * CUBE_HEIGTH + 32;
             cube->pj.unit_y = cube->pj.y * CUBE_HEIGTH + 32;
             if (i == NORTH_TEXTURE)
-                cube->pj.orientation = 90;
+                cube->pj.orientation = (90 * M_PI) / 180;
             else if (i == SOUTH_TEXTURE)
-                cube->pj.orientation = 270;
+                cube->pj.orientation = (270 * M_PI) / 180;
             else if (i == WEST_TEXTURE)
-                cube->pj.orientation = 180;
+                cube->pj.orientation = (180 * M_PI) / 180;
             else if (i == EAST_TEXTURE)
                 cube->pj.orientation = 0;
+            cube->pj.fov_rd = (PJ_FOV * M_PI) / 180;
             /* DEBUGGING: */
             printf("%s----- PJ COORDINATES -----\n", MAGENTA);
             printf("X - %lf\n", cube->pj.x);
@@ -71,6 +74,7 @@ void    save_player_info(t_cube *cube)
             printf("U_X - %lf\n", cube->pj.unit_x);
             printf("U_Y - %lf\n", cube->pj.unit_y);
             printf("pj orientation - %f\n", cube->pj.orientation);
+            printf("pj fov radians - %lf\n", cube->pj.fov_rd);
             printf("----- PJ COORDINATES -----%s\n", CLEAR);
             /* DEBUGGING: */
             break ;
@@ -117,7 +121,7 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     init_map(cube, parsed);
     init_textures(cube, parsed);
 
-    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WEIGTH, WINDOW_HEIGTH, PROGRAM_NAME);
+    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
     if (cube->grafic->win == NULL)
         exit(1); /* TODO: error win create*/
 

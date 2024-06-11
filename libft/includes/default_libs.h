@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_libs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: angela <angela@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:25:31 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/01/22 11:19:29 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:32:11 by angela           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <fcntl.h>
 # include <limits.h>
-# include <math.h>
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdint.h>
@@ -23,5 +22,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define _USE_MATH_DEFINES
+# include <math.h>
 
 #endif

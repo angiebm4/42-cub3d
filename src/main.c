@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
 
     ft_bzero(&cube, sizeof(t_cube));
     cube_mlx_init(&cube, &parsed);
-    mini_map(&cube);
-    draw_walls(&cube);
+    render(&cube);
+
     /* TODO: 
         fill_data(cube, parsed)
         destroy_parsed(&parsed);
