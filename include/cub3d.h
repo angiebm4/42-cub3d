@@ -14,9 +14,21 @@
 # define WINDOW_WEIGTH 320
 
 /* RAYCAST MEASURES */
-# define WALL_HEIGTH 64
+# define CUBE_HEIGTH 64
 # define PJ_HEIGTH 32
 # define PJ_FOV 60 /* field of view */
+
+/* COORDENADAS DEL CENTRO DE LA PANTALLA */
+# define CENTER_X WINDOW_WEIGTH / 2
+# define CENTER_y WINDOW_HEIGTH / 2
+
+/* DISTANCIA DESDE EL PJ A EL PLANO (PANTALLA) */
+/* SI 320 ES EL ANCHO 160 ES LA MITAD DEL PLANO */
+/* POR LO QUE 160 / TAN(30º) = 277 ES LA DISTANCIA */
+# define DIS_PJ_PROJEC_PLANE	(WINDOW_WEIGTH / 2) / tan(PJ_FOV / 2)
+
+/* Angle between subsequent rays = 60/320 degrees*/
+# define ANGLE_BETW_RAYS	PJ_FOV / WINDOW_WEIGTH
 
 /* MINI MAP */
 # define INCREMENT_VALUE_Y 10
@@ -101,7 +113,9 @@ struct	s_player
 {
 	double	x;
 	double	y;
-	float	orientation;
+	double	unit_x;
+	double	unit_y;
+	double	orientation;
 };
 
 struct   s_cube

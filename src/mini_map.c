@@ -22,7 +22,8 @@ void    draw_player(t_cube *cube)
         j = 0;
         while (j < INCREMENT_VALUE_Y / 3)
         {
-            my_pixel_put(cube->grafic->image, INCREMENT_VALUE_X + cube->pj.x + i, INCREMENT_VALUE_Y + cube->pj.y + j, color);
+            my_pixel_put(cube->grafic->image, (INCREMENT_VALUE_X *
+            cube->pj.x) + i, (INCREMENT_VALUE_Y * cube->pj.y) + j, color);
             j++;
         }
         i++;

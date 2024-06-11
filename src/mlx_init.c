@@ -30,7 +30,7 @@ void    init_textures(t_cube *cube, t_parsed_data *parsed)
 
 static void	create_image(t_cube *cube)
 {
-	cube->grafic->image->img = mlx_new_image(cube->grafic->mlx, 50, 50);
+	cube->grafic->image->img = mlx_new_image(cube->grafic->mlx, WINDOW_WEIGTH, WINDOW_HEIGTH);
 	if (cube->grafic->image->img == NULL)
 		exit(1); /* TODO: malloc error*/
 	cube->grafic->image->pix_addr = mlx_get_data_addr(cube->grafic->image->img,
@@ -52,12 +52,10 @@ void    save_player_info(t_cube *cube)
     {
         if (search_map(cube->map, PJ_CHARS[i], &aux_x, &aux_y) == 1)
         {
-            cube->pj.x = (double)aux_x;
+            cube->pj.x = (double)aux_x;/* TODO: nose como mierdas printear el pj en el minimapa */
             cube->pj.y = (double)aux_y;
-            /* DEBBUGING: */
-            printf("%lf\n", cube->pj.x);
-            printf("%lf\n", cube->pj.y);
-            /* DEBBUGUNG: */
+            cube->pj.unit_x = cube->pj.x * CUBE_HEIGTH + 32;
+            cube->pj.unit_y = cube->pj.y * CUBE_HEIGTH + 32;
             if (i == NORTH_TEXTURE)
                 cube->pj.orientation = 90;
             else if (i == SOUTH_TEXTURE)
@@ -66,6 +64,15 @@ void    save_player_info(t_cube *cube)
                 cube->pj.orientation = 180;
             else if (i == EAST_TEXTURE)
                 cube->pj.orientation = 0;
+            /* DEBUGGING: */
+            printf("%s----- PJ COORDINATES -----\n", MAGENTA);
+            printf("X - %lf\n", cube->pj.x);
+            printf("Y - %lf\n", cube->pj.y);
+            printf("U_X - %lf\n", cube->pj.unit_x);
+            printf("U_Y - %lf\n", cube->pj.unit_y);
+            printf("pj orientation - %f\n", cube->pj.orientation);
+            printf("----- PJ COORDINATES -----%s\n", CLEAR);
+            /* DEBUGGING: */
             break ;
         }
         i++;

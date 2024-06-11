@@ -176,6 +176,7 @@ void    draw_vertical_walls(t_cube *cube)
 
 void    draw_walls(t_cube *cube)
 {
-    draw_horizontal_walls(cube);
-    draw_vertical_walls(cube);
+    (void)cube;
+    //draw_horizontal_walls(cube);
+    // draw_vertical_walls(cube);
 }
