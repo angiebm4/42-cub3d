@@ -11,18 +11,22 @@ double    get_horizontal_intersection(t_cube *cube, t_ray   *ray)
     double  y_increment;
     double  distance; /* TODO: get distance */
 
-    while ()
+    y_increment = CUBE_HEIGTH;
+    x_increment = CUBE_HEIGTH / tan(ray->angle);
+    ray->hor_y = (cube->pj.unit_y / CUBE_HEIGTH) * CUBE_HEIGTH;
+    ray->hor_x = cube->pj.unit_x + (ray->hor_y - cube->pj.unit_y) / tan(ray->angle);
+    floor(ray->hor_x / CUBE_HEIGTH);
+    floor(ray->hor_y / CUBE_HEIGTH);
+    while (cube->map[(int)floor(ray->hor_x / CUBE_HEIGTH)][(int)floor(ray->hor_y / CUBE_HEIGTH)] == 0)
     {
         /* TODO: hay que tener en cuenta hacia donde mira el pj */
         /* down and right, down and left, or up and left */
         /* Calcular los puntos de interseccion rayo cuadrado hasta encontrar un 1 */
-        ray->hor_y = (cube->pj.unit_y / CUBE_HEIGTH) * CUBE_HEIGTH;
-        ray->hor_x = cube->pj.unit_x + (ray->hor_y - cube->pj.unit_y) / tan(ray->angle);
-        y_increment = CUBE_HEIGTH;
-        x_increment = CUBE_HEIGTH / tan(ray->angle);
-
+        ray->hor_x += (ray->hor_x + x_increment) / CUBE_HEIGTH;
+        ray->hor_y += (ray->hor_y + y_increment) / CUBE_HEIGTH;
     }
     /* TODO: sacar la distancia del pj hasta la primera pared */
+    distance = 
     return (distance);
 }
 void    raycasting(t_cube *cube)
