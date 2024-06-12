@@ -14,40 +14,38 @@ void    move_pj(int keycode, t_cube *cube)
     if (keycode == W || keycode == UP)
     {
         /*TODO: check if pj can move*/
-        cube->pj.y += INCREMENT_VALUE_X / CUBE_HEIGTH;
-        cube->pj.unit_y += 1;
-        mini_map(cube);
+        
+        cube->pj.unit_y -= MOVEMENT_PLAYER;
     }
     else if (keycode == A || keycode == LEFT)
     {
         /*TODO: check if pj can move*/
-        cube->pj.x += INCREMENT_VALUE_X / CUBE_HEIGTH;
-        cube->pj.unit_x += 1;
-        mini_map(cube);
+        cube->pj.unit_x -= MOVEMENT_PLAYER;
     }
     else if (keycode == S || keycode == DOWN)
     {
         /*TODO: check if pj can move*/
-        cube->pj.y -= INCREMENT_VALUE_X / CUBE_HEIGTH;
-        cube->pj.unit_y -= 1;
-        mini_map(cube);
+        cube->pj.unit_y += MOVEMENT_PLAYER;
     }
     else if (keycode == D || keycode == RIGHT)
     {
         /*TODO: check if pj can move*/
-        cube->pj.x -= INCREMENT_VALUE_X / CUBE_HEIGTH;
-        cube->pj.unit_x -= 1;
-        mini_map(cube);
+        cube->pj.unit_x += MOVEMENT_PLAYER;
     }
 }
 
 int key_hooks(int keycode, t_cube *cube)
 {
     /* DEBUGGING: */
+    mlx_clear_window(cube->grafic->mlx, cube->grafic->win);
     printf("tecla %d\n", keycode);
     if (keycode == ESC)
         end_program(cube);
-    // move_pj(keycode, cube);
+    move_pj(keycode, cube);
+    cube->pj.x = (int)(floor(cube->pj.unit_x)) / CUBE_HEIGTH;
+    cube->pj.y = (int)(floor(cube->pj.unit_y)) / CUBE_HEIGTH;
+    render(cube);
+    printf("{%lf - %lf} <=> {%d - %d}\n", cube->pj.unit_x, cube->pj.unit_y, cube->pj.x, cube->pj.y);
     return(1);
 }
 

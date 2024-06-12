@@ -32,6 +32,7 @@
 /* MINI MAP */
 # define INCREMENT_VALUE_Y 10
 # define INCREMENT_VALUE_X 10
+# define MOVEMENT_PLAYER 32
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -112,8 +113,8 @@ struct  s_pixel
 
 struct	s_player
 {
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 	double	unit_x;
 	double	unit_y;
 	double	fov_rd;
@@ -133,6 +134,7 @@ struct  s_mlx
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 	t_image	*image;
+	t_image	*image_map;
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
@@ -227,5 +229,7 @@ void    mini_map(t_cube *cube);
 
 /* DEBUGGING PREUBAS*/
 void    render(t_cube *cube);
+void	my_pixel_put(t_image *img, double x, double y, int color);
+
 
 #endif

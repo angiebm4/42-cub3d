@@ -39,6 +39,16 @@ static void	create_image(t_cube *cube)
 			&cube->grafic->image->endian);
 }
 
+static void	create_image_map(t_cube *cube)
+{
+	cube->grafic->image_map->img = mlx_new_image(cube->grafic->mlx, 100, 100);
+	if (cube->grafic->image_map->img == NULL)
+		exit(1); /* TODO: malloc error*/
+	cube->grafic->image_map->pix_addr = mlx_get_data_addr(cube->grafic->image_map->img,
+			&cube->grafic->image_map->bpp,
+			&cube->grafic->image_map->line_len,
+			&cube->grafic->image_map->endian);
+}
 
 
 void    save_player_info(t_cube *cube)
@@ -69,8 +79,8 @@ void    save_player_info(t_cube *cube)
             cube->pj.fov_rd = (PJ_FOV * M_PI) / 180;
             /* DEBUGGING: */
             printf("%s----- PJ COORDINATES -----\n", MAGENTA);
-            printf("X - %lf\n", cube->pj.x);
-            printf("Y - %lf\n", cube->pj.y);
+            printf("X - %d\n", cube->pj.x);
+            printf("Y - %d\n", cube->pj.y);
             printf("U_X - %lf\n", cube->pj.unit_x);
             printf("U_Y - %lf\n", cube->pj.unit_y);
             printf("pj orientation - %f\n", cube->pj.orientation);
@@ -117,6 +127,10 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     cube->grafic->image = ft_calloc(1, sizeof(t_image));
     if (cube->grafic->image == NULL)
         exit(1); /* TODO: malloc error*/
+    
+    cube->grafic->image_map = ft_calloc(1, sizeof(t_image));
+    if (cube->grafic->image_map == NULL)
+        exit(1); /* TODO: malloc error*/
 
     init_map(cube, parsed);
     init_textures(cube, parsed);
@@ -128,5 +142,6 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     ft_bzero(&cube->pj, sizeof(t_player));
     save_player_info(cube);
     create_image(cube);
+    create_image_map(cube);
     destroy_parsed(parsed);
 }

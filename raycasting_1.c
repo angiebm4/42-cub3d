@@ -36,7 +36,7 @@ void    draw_horizontal_walls(t_cube *cube)
     angle = cube->pj.orientation - (PJ_FOV / 2);
     printf("angle --- %lf\n", angle);
     i = 0;
-    while (i < WINDOW_WEIGTH)
+    while (i < WINDOW_WIDTH)
     {
         
         Xa = CUBE_HEIGTH / tan(angle);
@@ -63,7 +63,7 @@ void    draw_horizontal_walls(t_cube *cube)
         }
         print_wall(cube ,distance_pj_wall(cube, auxp_x, angle), i, H_MAGENTA);
         /* TODO: funcion de sumar angulos de 0 a 360 */
-        angle += (double)ANGLE_BETW_RAYS;
+        angle += 60 / 320;
         printf("<<< %lf >>>\n", angle);
         i++;
     }
