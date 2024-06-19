@@ -10,8 +10,12 @@
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 500
-# define WINDOW_WEIGTH 500
+# define WINDOW_HEIGTH 640
+# define WINDOW_WIDTH 480
+# define CUBE_SIZE	64
+
+# define GRADE_RADIAN(x) ((x) * M_PI / 180.0)
+# define RADIAN_GRADE(x) ((x) * 180.0 / M_PI)
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -90,9 +94,13 @@ struct  s_pixel
 
 struct	s_player
 {
-	double	x;
-	double	y;
-	float	orientation;
+	/* Player position */
+	long	posX;
+	long	posY;
+
+	/* View directions */
+	int		dirX;
+	int		dirY;
 };
 
 struct   s_cube
@@ -181,5 +189,8 @@ int		end_program(t_cube *cube);
 
 /* MINI MAP */
 void    mini_map(t_cube *cube);
+
+/* Raytracing */
+void	render(t_cube *cube);
 
 #endif

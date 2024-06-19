@@ -6,13 +6,13 @@ int end_program(t_cube *cube)
         mlx_destroy_window(cube->grafic->mlx, cube->grafic->win);
     if (cube->map)
         ft_free_split(cube->map);
-    exit(1);
+    exit(0);
 }
 
 int key_hooks(int keycode, t_cube *cube)
 {
     /* DEBUGGING: */
-    printf("tecla %d\n", keycode);
+    render(cube);
     if (keycode == ESC)
         end_program(cube);
     return(1);

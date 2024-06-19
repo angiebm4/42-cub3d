@@ -47,6 +47,39 @@ void    init_map(t_cube *cube, t_parsed_data *parsed)
     cube->map[i] = NULL;
 }
 
+static void    init_player(t_cube *cube, t_parsed_data *parsed)
+{
+    int x, y;
+    int index;
+
+    x = y = -1;
+    index = -1;
+    while (PJ_CHARS[++index] && x != -1 && y != -1)
+        search_map(parsed->map, PJ_CHARS[index], &x, &y);
+
+    cube->pj.posX = x;
+    cube->pj.posX = y;
+
+    /* TODO: Change the orientation depending of the player char */
+    cube->pj.dirX = -1;
+    cube->pj.dirX = 0;
+
+    /*switch (cube->map[y][x])
+    {
+        case 'N':
+            cube->pj.orientation = 90;
+            break ;
+        case 'S':
+            cube->pj.orientation = 270;
+            break ;
+        case 'E':
+            cube->pj.orientation = 0;
+            break ;
+        default: //case 'W':
+            cube->pj.orientation = 180;
+            break ;
+    }*/
+}
 
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 {
@@ -62,11 +95,12 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     init_map(cube, parsed);
     init_textures(cube, parsed);
 
-    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_HEIGTH, WINDOW_WEIGTH, PROGRAM_NAME);
+    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_HEIGTH, WINDOW_WIDTH, PROGRAM_NAME);
     if (cube->grafic->win == NULL)
         exit(1); /* TODO: error win create*/
 
     ft_bzero(&cube->pj, sizeof(t_player));
-    
+    init_player(cube, parsed);
+
     destroy_parsed(parsed);
 }
