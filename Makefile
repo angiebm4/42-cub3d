@@ -84,7 +84,7 @@ re: fclean all
 
 ###############################################################################
 
-TRY_MAP=maps/def_map.cub
+TRY_MAP=maps/small_map.cub
 
 r: run
 run: all
