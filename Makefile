@@ -93,3 +93,8 @@ run: all
 v: valgrind
 valgrind: all
 	@valgrind --track-origins=yes ./$(NAME) $(TRY_MAP)
+
+raycaster:
+	gcc -Wall -Wextra -Werror -o raycaster raycaster.c -Lmlx/ -lmlx -lm -lX11 -lXext
+
+.PHONY : raycaster

@@ -59,10 +59,14 @@ static void    init_player(t_cube *cube, t_parsed_data *parsed)
 
     cube->pj.posX = x;
     cube->pj.posY = y;
+    cube->map[y][x] = '0';
 
     /* TODO: Change the orientation depending of the player char */
-    cube->pj.dirX = -1;
-    cube->pj.dirY = 0;
+    cube->pj.dirX = -1.0;
+    cube->pj.dirY = 0.0;
+
+    cube->pj.planeX = 0.0;
+    cube->pj.planeY = 0.66;
 
     /*switch (cube->map[y][x])
     {
@@ -95,9 +99,14 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     init_map(cube, parsed);
     init_textures(cube, parsed);
 
-    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_HEIGTH, WINDOW_WIDTH, PROGRAM_NAME);
+    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
     if (cube->grafic->win == NULL)
         exit(1); /* TODO: error win create*/
+
+    /* Init the image information */
+    /* TODO: Check errors on init */
+    cube->grafic->img = mlx_new_image(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH);
+    cube->grafic->data_addr = mlx_get_data_addr(cube->grafic->img, &cube->grafic->bpp, &cube->grafic->size_line, &cube->grafic->endian);
 
     ft_bzero(&cube->pj, sizeof(t_player));
     init_player(cube, parsed);

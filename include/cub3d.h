@@ -10,8 +10,8 @@
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 640
-# define WINDOW_WIDTH 480
+# define WINDOW_HEIGTH 480
+# define WINDOW_WIDTH 640
 # define CUBE_SIZE	64
 
 # define GRADE_RADIAN(x) ((x) * M_PI / 180.0)
@@ -92,15 +92,20 @@ struct  s_pixel
 	int blue;	/* b */
 };
 
+/* TODO: Change the player coordenates to double */
 struct	s_player
 {
 	/* Player position */
-	long	posX;
-	long	posY;
+	double	posX;
+	double	posY;
 
 	/* View directions */
-	int		dirX;
-	int		dirY;
+	double	dirX;
+	double	dirY;
+
+	/* Camera plane */
+	double	planeX;
+	double	planeY;
 };
 
 struct   s_cube
@@ -115,7 +120,12 @@ struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
-	t_image	*image;
+	
+	void	*img;
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
