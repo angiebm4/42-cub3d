@@ -36,9 +36,10 @@ PARSER =	parse.c				\
 			check_graphic.c		\
 			clean_map.c
 
-GRAFIC =	mlx_init.c \
-			mini_map.c \
-			hooks.c
+GRAFIC =	mlx_init.c	\
+			mini_map.c	\
+			hooks.c		\
+			render.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
@@ -83,7 +84,7 @@ re: fclean all
 
 ###############################################################################
 
-TRY_MAP=maps/def_map.cub
+TRY_MAP=maps/small_map.cub
 
 r: run
 run: all
@@ -91,4 +92,9 @@ run: all
 
 v: valgrind
 valgrind: all
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) $(TRY_MAP)
+	@valgrind --track-origins=yes ./$(NAME) $(TRY_MAP)
+
+raycaster:
+	gcc -Wall -Wextra -Werror -o raycaster raycaster.c -Lmlx/ -lmlx -lm -lX11 -lXext
+
+.PHONY : raycaster

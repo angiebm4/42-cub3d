@@ -10,8 +10,12 @@
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 500
-# define WINDOW_WEIGTH 500
+# define WINDOW_HEIGTH 480
+# define WINDOW_WIDTH 640
+# define CUBE_SIZE	64
+
+# define GRADE_RADIAN(x) ((x) * M_PI / 180.0)
+# define RADIAN_GRADE(x) ((x) * 180.0 / M_PI)
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -88,11 +92,20 @@ struct  s_pixel
 	int blue;	/* b */
 };
 
+/* TODO: Change the player coordenates to double */
 struct	s_player
 {
-	double	x;
-	double	y;
-	float	orientation;
+	/* Player position */
+	double	posX;
+	double	posY;
+
+	/* View directions */
+	double	dirX;
+	double	dirY;
+
+	/* Camera plane */
+	double	planeX;
+	double	planeY;
 };
 
 struct   s_cube
@@ -107,7 +120,12 @@ struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
-	t_image	*image;
+	
+	void	*img;
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
@@ -181,5 +199,8 @@ int		end_program(t_cube *cube);
 
 /* MINI MAP */
 void    mini_map(t_cube *cube);
+
+/* Raytracing */
+void	render(t_cube *cube);
 
 #endif

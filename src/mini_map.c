@@ -6,9 +6,9 @@ void    print_ch(t_cube *cube, char ch, int x, int y)
     
     color = H_BG_BLACK;
     if (ch == '1')
-        color = H_BG_RED;
+        color = H_BG_CYAN;
     else if (ch == '0')
-        color = H_BG_GREENFOSFI;
+        color = H_BG_WHITE;
     else if (ch == 'D')
         color = H_BG_ORANGE;
 
