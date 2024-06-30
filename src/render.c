@@ -18,8 +18,6 @@ void	draw_pixel(int x, int y, int color, t_cube *cube) {
 
 void render(t_cube *cube)
 {
-	// cube->pj.posX = 22.0;
-	// cube->pj.posY = 12.0;
 	for (int x = 0; x < WINDOW_WIDTH; x++)
 	{
 		/* NOTE: Rays data */
@@ -83,15 +81,13 @@ void render(t_cube *cube)
 		int drawEnd = lineHeight / 2 + WINDOW_HEIGTH / 2;
 		if (drawEnd >= WINDOW_HEIGTH) drawEnd = WINDOW_HEIGTH - 1;
 
-        int color = 0xFFFF00;
+        int color = 0xFFFF00;	/* Yellow */
 
-        if(side == 1) color = color / 2;
+        if(side == 1) color = color / 2;	/* Green */
 
 		printf("%d - %d\n", drawStart, drawEnd);
-        for(int y = drawStart; y <= drawEnd; y++) {
-			printf("[ PRINT ] Doing!\n");
+        for(int y = drawStart; y <= drawEnd; y++)
             draw_pixel(x, y, color, cube);
-        }
 	}
 	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, cube->grafic->img, 0, 0);
 	mlx_do_sync(cube->grafic->mlx); /* It is used to be faster */
