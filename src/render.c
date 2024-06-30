@@ -8,23 +8,33 @@ void	draw_pixel(int x, int y, int color, t_cube *cube) {
     }
 }
 
+/* NOTE: Steps:
+	· Get the fov and the rays data
+	· Check the distances increment (x and y)
+	· Get the wall distance
+	· Check where the rays collision, adn check the side of the cube 
+	· Get the first pixel position where print and the pixels
+*/
+
 void render(t_cube *cube)
 {
-	cube->pj.posX = 22.0;
-	cube->pj.posY = 12.0;
+	// cube->pj.posX = 22.0;
+	// cube->pj.posY = 12.0;
 	for (int x = 0; x < WINDOW_WIDTH; x++)
 	{
+		/* NOTE: Rays data */
 		double cameraX = 2 * x / (double)WINDOW_WIDTH - 1;
 		double rayDirX = cube->pj.dirX + cube->pj.planeX * cameraX;
 		double rayDirY = cube->pj.dirY + cube->pj.planeY * cameraX;
 
+		/* NOTE: Calculations */
 		int mapX = (int)cube->pj.posX;
 		int mapY = (int)cube->pj.posY;
 
 		double sideDistX, sideDistY;
 
-		double deltaDistX = fabs(1 / rayDirX); //(rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY); //(rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
 
 		double perpWallDist;
 
@@ -67,6 +77,7 @@ void render(t_cube *cube)
 
 		int lineHeight = (int)(WINDOW_HEIGTH / perpWallDist);
 		
+		/* NOTE: Printing functions */
 		int drawStart = -lineHeight / 2 + WINDOW_HEIGTH / 2;
 		if (drawStart < 0) drawStart = 0;
 		int drawEnd = lineHeight / 2 + WINDOW_HEIGTH / 2;
