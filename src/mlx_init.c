@@ -57,16 +57,16 @@ static void    init_player(t_cube *cube, t_parsed_data *parsed)
     while (PJ_CHARS[++index] && x == -1 && y == -1)
         search_map(parsed->map, PJ_CHARS[index], &x, &y);
 
-    cube->pj.posX = x;
-    cube->pj.posY = y;
+    cube->pj.posX = x + 0.5;
+    cube->pj.posY = y + 0.5;
     cube->map[y][x] = '0';
 
     /* TODO: Change the orientation depending of the player char */
-    cube->pj.dirX = -1.0;
-    cube->pj.dirY = 0.0;
+    cube->pj.dirX = 0.0;
+    cube->pj.dirY = -1.0;
 
-    cube->pj.planeX = 0.0;
-    cube->pj.planeY = 0.66;
+    cube->pj.planeX = 0.66;
+    cube->pj.planeY = 0.0;
 
     /*switch (cube->map[y][x])
     {

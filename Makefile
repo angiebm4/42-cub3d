@@ -39,7 +39,9 @@ PARSER =	parse.c				\
 GRAFIC =	mlx_init.c	\
 			mini_map.c	\
 			hooks.c		\
-			render.c
+			render.c	\
+			raycasting_calcs.c	\
+			raycasting_print.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \

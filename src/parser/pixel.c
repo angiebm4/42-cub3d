@@ -36,3 +36,13 @@ void	pixel_copy(t_pixel *dest, t_pixel *src)
 	dest->green = src->green;
 	dest->blue = src->blue;
 }
+
+int	pixel_conversor(t_pixel *pixel)
+{
+	unsigned char	rgb[3];
+
+	rgb[0] = pixel->red;
+	rgb[1] = pixel->green;
+	rgb[2] = pixel->blue;
+	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
+}

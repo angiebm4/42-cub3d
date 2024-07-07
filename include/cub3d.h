@@ -84,6 +84,7 @@ typedef struct  s_mlx   t_mlx;
 typedef struct  s_pixel t_pixel;
 typedef struct  s_player t_player;
 typedef struct  s_image t_image;
+typedef struct	s_raycasting t_raycasting;
 
 struct  s_pixel
 {
@@ -92,7 +93,6 @@ struct  s_pixel
 	int blue;	/* b */
 };
 
-/* TODO: Change the player coordenates to double */
 struct	s_player
 {
 	/* Player position */
@@ -116,6 +116,29 @@ struct   s_cube
 	t_player	pj;
 };
 
+struct	s_raycasting
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+
+	int		mapX;
+	int		mapY;
+
+	double	deltaDistX;
+	double	deltaDistY;
+
+	double	sideDistX;
+	double	sideDistY;
+
+	double	perpWallDist;
+
+	int 	stepX;
+	int 	stepY;
+
+	int		side;
+};
+
 struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
@@ -126,6 +149,9 @@ struct  s_mlx
 	int		bpp;
 	int		size_line;
 	int		endian;
+
+	t_raycasting	raycasting;
+
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
@@ -189,6 +215,7 @@ void	reset_pixel(t_pixel *pixel);
 int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
+int	pixel_conversor(t_pixel *pixel);
 
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
@@ -200,7 +227,11 @@ int		end_program(t_cube *cube);
 /* MINI MAP */
 void    mini_map(t_cube *cube);
 
-/* Raytracing */
+/* Raycasting */
 void	render(t_cube *cube);
+void	raycasting_calcs(int x, t_cube *cube);
+void	raycasting_print_pixels(t_cube *cube);
+void	raycasting_print_textures(int x, t_cube *cube);
+
 
 #endif
