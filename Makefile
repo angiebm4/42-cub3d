@@ -18,35 +18,39 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/parser
+VPATH = src:src/parser:src/utils:src/raycaster
 
 SRC =		main.c
 
 PARSER =	parse.c				\
-			pixel.c				\
 			parse_print.c		\
 			parse_file.c		\
-			line_utils.c		\
 			save_placeholders.c	\
 			save_map.c			\
 			check_extension.c	\
 			check_map.c			\
 			flood_fill.c		\
-			map_utils.c			\
 			check_graphic.c		\
 			clean_map.c
 
 GRAFIC =	mlx_init.c	\
 			mini_map.c	\
-			hooks.c		\
-			render.c	\
+			hooks.c
+			
+RENDER =	render.c			\
 			raycasting_calcs.c	\
 			raycasting_print.c
+
+UTILS =		line_utils.c	\
+			map_utils.c		\
+			pixel_utils.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(PARSER:%.c=$(OBJ_DIR)%.o) \
-		$(GRAFIC:%.c=$(OBJ_DIR)%.o)
+		$(GRAFIC:%.c=$(OBJ_DIR)%.o)	\
+		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
+		$(UTILS:%.c=$(OBJ_DIR)%.o)
 
 #####################################################
 
@@ -97,6 +101,6 @@ valgrind: all
 	@valgrind --track-origins=yes ./$(NAME) $(TRY_MAP)
 
 raycaster:
-	gcc -Wall -Wextra -Werror -o raycaster raycaster.c -Lmlx/ -lmlx -lm -lX11 -lXext
+	@gcc -Wall -Wextra -Werror -o raycaster raycaster.c -Lmlx/ -lmlx -lm -lX11 -lXext
 
 .PHONY : raycaster

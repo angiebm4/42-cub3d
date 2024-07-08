@@ -19,3 +19,6 @@ libft.a
 
 # Map tests
 *.res
+
+# Beta executable
+/raycaster
