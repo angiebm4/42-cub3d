@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 /* TODO: Get the texture pixel color instead of a default color */
 static int	ray_select_color(t_cube *cube)
@@ -23,13 +23,20 @@ static void	ray_draw_pixel(int x, int y, int color, t_cube *cube)
 
 void	raycasting_print_pixels(t_cube *cube)
 {
-	for (int x = 0; x < WINDOW_WIDTH; x++) {
-        for (int y = 0; y < WINDOW_HEIGTH / 2; y++) {
-            ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[FLOOR_PIXEL]), cube);
-        }
-        for (int y = WINDOW_HEIGTH / 2; y < WINDOW_HEIGTH; y++) {
+	int	x;
+	int	y;
+
+	x = -1;
+	while (++x < WINDOW_WIDTH)
+	{
+		y = -1;
+        while (++y < WINDOW_HEIGTH / 2)
             ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[CEILING_PIXEL]), cube);
-        }
+        while (y < WINDOW_HEIGTH)
+		{
+            ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[FLOOR_PIXEL]), cube);
+			y++;
+		}
     }
 }
 

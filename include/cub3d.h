@@ -14,8 +14,9 @@
 # define WINDOW_WIDTH 640
 # define CUBE_SIZE	64
 
-# define GRADE_RADIAN(x) ((x) * M_PI / 180.0)
-# define RADIAN_GRADE(x) ((x) * 180.0 / M_PI)
+/* Player moves */
+# define MOVE_SPEED		0.1
+# define ROTATION_SPEED	0.03
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -228,10 +229,13 @@ int		end_program(t_cube *cube);
 void    mini_map(t_cube *cube);
 
 /* Raycasting */
-void	render(t_cube *cube);
+int		render(t_cube *cube);
 void	raycasting_calcs(int x, t_cube *cube);
 void	raycasting_print_pixels(t_cube *cube);
 void	raycasting_print_textures(int x, t_cube *cube);
+
+/* Player moves */
+void	moves(int keycode, t_cube *cube);
 
 
 #endif

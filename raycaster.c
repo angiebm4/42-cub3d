@@ -10,7 +10,7 @@
 #define screenHeight 480
 
 #define moveSpeed 0.05
-#define rotSpeed 0.03
+#define rotSpeed 0.08
 
 #define INITIAL_DIRECTION 'N' // Cambia esta macro a 'N', 'S', 'E', 'W' según la dirección deseada
 
@@ -39,7 +39,7 @@ int worldMap[mapHeight][mapWidth] = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -194,6 +194,7 @@ int key_press(int keycode, void *param) {
         if (worldMap[(int)player.posX][(int)(player.posY - player.dirY * moveSpeed)] == 0) player.posY -= player.dirY * moveSpeed;
     }
     if (keycode == 100) { // A key
+        printf("Aqui\n");
         double oldDirX = player.dirX;
         player.dirX = player.dirX * cos(rotSpeed) - player.dirY * sin(rotSpeed);
         player.dirY = oldDirX * sin(rotSpeed) + player.dirY * cos(rotSpeed);

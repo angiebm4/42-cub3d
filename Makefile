@@ -18,7 +18,7 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/parser:src/utils:src/raycaster
+VPATH = src:src/parser:src/utils:src/raycaster:src/moves
 
 SRC =		main.c
 
@@ -35,7 +35,8 @@ PARSER =	parse.c				\
 
 GRAFIC =	mlx_init.c	\
 			mini_map.c	\
-			hooks.c
+			hooks.c		\
+			moves.c
 			
 RENDER =	render.c			\
 			raycasting_calcs.c	\

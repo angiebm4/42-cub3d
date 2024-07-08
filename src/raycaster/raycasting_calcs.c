@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 static void	ray_initial_data(int x, t_cube *cube)
 {
@@ -58,7 +58,8 @@ static void	ray_hits(t_cube *cube)
 	hit = 0;
 
 	/* Loop until the ray hit with a block different of a '0' ('1' or 'D')*/
-	while (hit == 0) {
+	while (hit == 0)
+	{
 		if (ray->sideDistX < ray->sideDistY) {
 			ray->sideDistX += ray->deltaDistX;
 			ray->mapX += ray->stepX;
