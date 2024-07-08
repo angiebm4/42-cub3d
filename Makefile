@@ -35,12 +35,14 @@ PARSER =	parse.c				\
 
 GRAFIC =	mlx_init.c	\
 			mini_map.c	\
-			hooks.c		\
-			moves.c
+			hooks.c
+			
 			
 RENDER =	render.c			\
 			raycasting_calcs.c	\
 			raycasting_print.c
+
+MOVES =		moves.c
 
 UTILS =		line_utils.c	\
 			map_utils.c		\
@@ -51,6 +53,7 @@ OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(PARSER:%.c=$(OBJ_DIR)%.o) \
 		$(GRAFIC:%.c=$(OBJ_DIR)%.o)	\
 		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
+		$(MOVES:%.c=$(OBJ_DIR)%.o)	\
 		$(UTILS:%.c=$(OBJ_DIR)%.o)
 
 #####################################################

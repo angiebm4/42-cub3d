@@ -2,24 +2,29 @@
 
 static void	change_position(int keycode, t_cube *cube)
 {
+	double		pos[2];
 	t_player	*player = &cube->pj;
 
 	if (keycode == W || keycode == UP)
 	{
-		// if (cube->map[(int)(player->posX + player->dirX * MOVE_SPEED)][(int)player->posY] == '0')
-			player->posX += player->dirX * MOVE_SPEED;
+		pos[0] = player->posX + player->dirX * MOVE_SPEED;
+        pos[1] = player->posY + player->dirY * MOVE_SPEED;
 
-		// if (cube->map[(int)player->posX][(int)(player->posY + player->dirY * MOVE_SPEED)] == '0')
-			player->posY += player->dirY * MOVE_SPEED;
+		if (cube->map[(int)player->posY][(int)(pos[0] + player->dirX * SEPARATOR)] == '0')
+            player->posX = pos[0];
+        if (cube->map[(int)(pos[1] + player->dirY * SEPARATOR)][(int)player->posX] == '0')
+            player->posY = pos[1];
 	}
 
 	if (keycode == S || keycode == DOWN)
 	{
-		// if (cube->map[(int)(player->posX - player->dirX * MOVE_SPEED)][(int)player->posY] == '0')
-			player->posX -= player->dirX * MOVE_SPEED;
+		pos[0] = player->posX - player->dirX * MOVE_SPEED;
+        pos[1] = player->posY - player->dirY * MOVE_SPEED;
 
-		// if (cube->map[(int)player->posX][(int)(player->posY - player->dirY * MOVE_SPEED)] == '0')
-			player->posY -= player->dirY * MOVE_SPEED;
+		if (cube->map[(int)player->posY][(int)(pos[0] - player->dirX * SEPARATOR)] == '0')
+            player->posX = pos[0];
+        if (cube->map[(int)(pos[1] - player->dirY * SEPARATOR)][(int)player->posX] == '0')
+            player->posY = pos[1];
 	}	
 }
 

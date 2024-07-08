@@ -17,6 +17,7 @@
 /* Player moves */
 # define MOVE_SPEED		0.1
 # define ROTATION_SPEED	0.03
+# define SEPARATOR		0.1
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
