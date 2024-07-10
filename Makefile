@@ -9,6 +9,7 @@ CLEAR	=	\033[0m
 NAME =		cub3D
 CC = 		gcc
 CFLAGS =	-Wall -Werror -Wextra -Imlx -g3
+DEBUG_MODE	= -DDEBUG=0
 #####################################################
 LIB =	libft/libft.a
 MLX =	mlx/libmlx.a
@@ -76,7 +77,12 @@ $(NAME): $(OBJ)
 $(OBJ_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(BLUE)[ SRC ] Compiling $<$(CLEAR)"
-	@$(CC) $(CFLAGS) -D DEBUG=1 -c $< -o $@
+	@$(CC) $(CFLAGS) $(DEBUG_MODE) -c $< -o $@
+
+#####################################################
+
+debug: DEBUG_MODE = -DDEBUG=1
+debug: re
 
 #####################################################
 
