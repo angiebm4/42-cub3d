@@ -13,8 +13,6 @@ int render(t_cube *cube)
 {
 	int	x;
 
-	ft_bzero(&cube->grafic->raycasting, sizeof(t_raycasting));
-
 	/* Set the floor and ceiling colors */
 	raycasting_print_pixels(cube);
 

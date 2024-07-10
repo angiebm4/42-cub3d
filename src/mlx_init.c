@@ -96,6 +96,8 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     if (cube->grafic->mlx == NULL)
         exit(1); /* TODO: error  create mlx*/
 
+    cube->grafic->mouse_vision = 1;
+
     init_map(cube, parsed);
     init_textures(cube, parsed);
 
@@ -110,6 +112,9 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 
     ft_bzero(&cube->pj, sizeof(t_player));
     init_player(cube, parsed);
+
+    ft_bzero(&cube->grafic->raycasting, sizeof(t_raycasting));
+    cube->grafic->raycasting.lastX = -1;
 
     destroy_parsed(parsed);
 }

@@ -42,7 +42,11 @@ RENDER =	render.c			\
 			raycasting_calcs.c	\
 			raycasting_print.c
 
-MOVES =		moves.c
+MOVES =		moves.c	\
+			mouse_move.c	\
+			rotate_player.c	\
+			move_player.c	\
+			mouse_display.c
 
 UTILS =		line_utils.c	\
 			map_utils.c		\

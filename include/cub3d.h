@@ -10,14 +10,15 @@
 # include "../mlx/mlx.h"
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 480
-# define WINDOW_WIDTH 640
+# define WINDOW_HEIGTH 960
+# define WINDOW_WIDTH 1280
 # define CUBE_SIZE	64
 
 /* Player moves */
-# define MOVE_SPEED		0.1
-# define ROTATION_SPEED	0.03
-# define SEPARATOR		0.1
+# define MOVE_SPEED				0.1
+# define ROTATION_SPEED			0.06
+# define MOUSE_ROTATION_SPEED	0.01
+# define SEPARATOR				0.1
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -79,7 +80,11 @@
 # define DOWN	65364
 # define RIGHT	65363
 
-# define ON_DESTROY	17
+# define M 		109
+
+# define ON_KEYDOWN		2
+# define ON_MOUSEMOVE	6
+# define ON_DESTROY		17
 
 typedef struct  s_cube  t_cube;
 typedef struct  s_mlx   t_mlx;
@@ -139,6 +144,8 @@ struct	s_raycasting
 	int 	stepY;
 
 	int		side;
+
+	int		lastX;		/* Mouse move */
 };
 
 struct  s_mlx
@@ -146,6 +153,8 @@ struct  s_mlx
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 	
+	int		mouse_vision;
+
 	void	*img;
 	char	*data_addr;
 	int		bpp;
@@ -237,6 +246,10 @@ void	raycasting_print_textures(int x, t_cube *cube);
 
 /* Player moves */
 void	moves(int keycode, t_cube *cube);
+void	move_player(int inc, t_cube *cube);
+void	rotate_player(double angle, t_player *player);
+int		mouse_move(int x, int y, t_cube *cube);
+void	mouse_display(t_cube *cube);
 
 
 #endif
