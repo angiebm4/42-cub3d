@@ -9,6 +9,10 @@
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
 /* WINDOW MEASURES */
 # define WINDOW_HEIGTH 960
 # define WINDOW_WIDTH 1280

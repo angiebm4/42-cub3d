@@ -6,6 +6,12 @@ int main(int argc, char *argv[])
     t_parsed_data   parsed;
     parse(argc, argv, &parsed);
 
+    if (DEBUG)
+    {
+        destroy_parsed(&parsed);
+        return (0);
+    }
+
     /* Fill the main struct and run the program */
     t_cube  cube;
     ft_bzero(&cube, sizeof(t_cube));

@@ -76,7 +76,7 @@ $(NAME): $(OBJ)
 $(OBJ_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(BLUE)[ SRC ] Compiling $<$(CLEAR)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -D DEBUG=1 -c $< -o $@
 
 #####################################################
 
@@ -95,6 +95,10 @@ fclean: clean
 
 re: fclean all
 .PHONY: clean fclean re all run
+
+###############################################################################
+
+# debug: re
 
 ###############################################################################
 
