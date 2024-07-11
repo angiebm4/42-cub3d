@@ -2,12 +2,18 @@
 
 int main(int argc, char *argv[])
 {
+    /* Parse the file data */
     t_parsed_data   parsed;
-
     parse(argc, argv, &parsed);
 
-    t_cube  cube;
+    if (DEBUG)
+    {
+        destroy_parsed(&parsed);
+        return (0);
+    }
 
+    /* Fill the main struct and run the program */
+    t_cube  cube;
     ft_bzero(&cube, sizeof(t_cube));
     cube_mlx_init(&cube, &parsed);
     // mini_map(&cube);
@@ -17,7 +23,6 @@ int main(int argc, char *argv[])
         destroy_parsed(&parsed);
         start_simulation();
     */
-   
     hooking(&cube);
     mlx_loop(cube.grafic->mlx);
 

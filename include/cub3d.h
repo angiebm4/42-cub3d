@@ -9,13 +9,20 @@
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 480
-# define WINDOW_WIDTH 640
+# define WINDOW_HEIGTH 960
+# define WINDOW_WIDTH 1280
 # define CUBE_SIZE	64
 
-# define GRADE_RADIAN(x) ((x) * M_PI / 180.0)
-# define RADIAN_GRADE(x) ((x) * 180.0 / M_PI)
+/* Player moves */
+# define MOVE_SPEED				0.1
+# define ROTATION_SPEED			0.06
+# define MOUSE_ROTATION_SPEED	0.01
+# define SEPARATOR				0.1
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
@@ -77,13 +84,23 @@
 # define DOWN	65364
 # define RIGHT	65363
 
-# define ON_DESTROY	17
+# define M 		109
+# define N 		110
 
-typedef struct  s_cube  t_cube;
-typedef struct  s_mlx   t_mlx;
-typedef struct  s_pixel t_pixel;
-typedef struct  s_player t_player;
-typedef struct  s_image t_image;
+# define ON_KEYDOWN		2
+# define ON_MOUSEMOVE	6
+# define ON_DESTROY		17
+
+# define MOUSE_VISIBILITY_KEY	M
+# define MOUSE_FIX_KEY			N
+
+typedef struct s_cube  		t_cube;
+typedef struct s_mlx   		t_mlx;
+typedef struct s_pixel 		t_pixel;
+typedef struct s_player 	t_player;
+typedef struct s_image 		t_image;
+typedef struct s_raycasting	t_raycasting;
+typedef struct s_mouse 		t_mouse;
 
 struct  s_pixel
 {
@@ -92,7 +109,13 @@ struct  s_pixel
 	int blue;	/* b */
 };
 
-/* TODO: Change the player coordenates to double */
+struct	s_mouse
+{
+	int		mouse_vision;
+	int		lastX;
+	int		fixed;
+};
+
 struct	s_player
 {
 	/* Player position */
@@ -116,16 +139,44 @@ struct   s_cube
 	t_player	pj;
 };
 
+struct	s_raycasting
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+
+	int		mapX;
+	int		mapY;
+
+	double	deltaDistX;
+	double	deltaDistY;
+
+	double	sideDistX;
+	double	sideDistY;
+
+	double	perpWallDist;
+
+	int 	stepX;
+	int 	stepY;
+
+	int		side;
+};
+
 struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 	
+	t_mouse	mouse;
+
 	void	*img;
 	char	*data_addr;
 	int		bpp;
 	int		size_line;
 	int		endian;
+
+	t_raycasting	raycasting;
+
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
@@ -189,6 +240,7 @@ void	reset_pixel(t_pixel *pixel);
 int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
+int	pixel_conversor(t_pixel *pixel);
 
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
@@ -200,7 +252,22 @@ int		end_program(t_cube *cube);
 /* MINI MAP */
 void    mini_map(t_cube *cube);
 
-/* Raytracing */
-void	render(t_cube *cube);
+/* Raycasting */
+int		render(t_cube *cube);
+void	raycasting_calcs(int x, t_cube *cube);
+void	raycasting_print_pixels(t_cube *cube);
+void	raycasting_print_textures(int x, t_cube *cube);
+
+/* Player moves */
+void	moves(int keycode, t_cube *cube);
+void	move_player(int inc, t_cube *cube);
+void	rotate_player(double angle, t_player *player);
+
+/* Mouse actions */
+void	mouse_controller(int keycode, t_cube *cube);
+int		mouse_move(int x, int y, t_cube *cube);
+void	mouse_display(t_cube *cube);
+void	mouse_fix(t_mouse *mouse);
+
 
 #endif
