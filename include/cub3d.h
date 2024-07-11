@@ -85,23 +85,35 @@
 # define RIGHT	65363
 
 # define M 		109
+# define N 		110
 
 # define ON_KEYDOWN		2
 # define ON_MOUSEMOVE	6
 # define ON_DESTROY		17
 
-typedef struct  s_cube  t_cube;
-typedef struct  s_mlx   t_mlx;
-typedef struct  s_pixel t_pixel;
-typedef struct  s_player t_player;
-typedef struct  s_image t_image;
-typedef struct	s_raycasting t_raycasting;
+# define MOUSE_VISIBILITY_KEY	M
+# define MOUSE_FIX_KEY			N
+
+typedef struct s_cube  		t_cube;
+typedef struct s_mlx   		t_mlx;
+typedef struct s_pixel 		t_pixel;
+typedef struct s_player 	t_player;
+typedef struct s_image 		t_image;
+typedef struct s_raycasting	t_raycasting;
+typedef struct s_mouse 		t_mouse;
 
 struct  s_pixel
 {
 	int red;	/* r */
 	int green;	/* g */
 	int blue;	/* b */
+};
+
+struct	s_mouse
+{
+	int		mouse_vision;
+	int		lastX;
+	int		fixed;
 };
 
 struct	s_player
@@ -148,8 +160,6 @@ struct	s_raycasting
 	int 	stepY;
 
 	int		side;
-
-	int		lastX;		/* Mouse move */
 };
 
 struct  s_mlx
@@ -157,7 +167,7 @@ struct  s_mlx
 	void    *mlx;		/* Screen reference */
 	void    *win;		/* Window reference*/
 	
-	int		mouse_vision;
+	t_mouse	mouse;
 
 	void	*img;
 	char	*data_addr;
@@ -252,8 +262,12 @@ void	raycasting_print_textures(int x, t_cube *cube);
 void	moves(int keycode, t_cube *cube);
 void	move_player(int inc, t_cube *cube);
 void	rotate_player(double angle, t_player *player);
+
+/* Mouse actions */
+void	mouse_controller(int keycode, t_cube *cube);
 int		mouse_move(int x, int y, t_cube *cube);
 void	mouse_display(t_cube *cube);
+void	mouse_fix(t_mouse *mouse);
 
 
 #endif

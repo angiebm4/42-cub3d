@@ -13,10 +13,8 @@ int key_hooks(int keycode, t_cube *cube)
 {
     if (keycode == ESC)
         end_program(cube);
-    else if (keycode == M)
-        mouse_display(cube);
-    else
-        moves(keycode, cube);
+    mouse_controller(keycode, cube);
+    moves(keycode, cube);
     return(0);
 }
 
