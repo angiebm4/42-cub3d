@@ -52,44 +52,6 @@ void    init_map(t_cube *cube, t_parsed_data *parsed)
     cube->map[i] = NULL;
 }
 
-static void    init_player(t_cube *cube, t_parsed_data *parsed)
-{
-    int x, y;
-    int index;
-
-    x = y = -1;
-    index = -1;
-    while (PJ_CHARS[++index] && x == -1 && y == -1)
-        search_map(parsed->map, PJ_CHARS[index], &x, &y);
-
-    cube->pj.posX = x + 0.5;
-    cube->pj.posY = y + 0.5;
-    cube->map[y][x] = '0';
-
-    /* TODO: Change the orientation depending of the player char */
-    cube->pj.dirX = 0.0;
-    cube->pj.dirY = -1.0;
-
-    cube->pj.planeX = 0.66;
-    cube->pj.planeY = 0.0;
-
-    /*switch (cube->map[y][x])
-    {
-        case 'N':
-            cube->pj.orientation = 90;
-            break ;
-        case 'S':
-            cube->pj.orientation = 270;
-            break ;
-        case 'E':
-            cube->pj.orientation = 0;
-            break ;
-        default: //case 'W':
-            cube->pj.orientation = 180;
-            break ;
-    }*/
-}
-
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 {
 
@@ -121,7 +83,7 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     ft_bzero(&cube->grafic->mouse, sizeof(t_mouse));
     cube->grafic->mouse.lastX = -1;
     cube->grafic->mouse.mouse_vision = 1;
-    cube->grafic->mouse.fixed = 1;
+    cube->grafic->mouse.fixed = 0;
 
     destroy_parsed(parsed);
 }

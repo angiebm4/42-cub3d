@@ -36,7 +36,8 @@ PARSER =	parse.c				\
 
 GRAFIC =	mlx_init.c	\
 			mini_map.c	\
-			hooks.c
+			hooks.c		\
+			init_player.c
 			
 			
 RENDER =	render.c			\

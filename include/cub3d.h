@@ -245,6 +245,9 @@ int	pixel_conversor(t_pixel *pixel);
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
 
+/* Init player */
+void    init_player(t_cube *cube, t_parsed_data *parsed);
+
 /* HOOKS */
 void    hooking(t_cube *cube);
 int		end_program(t_cube *cube);
