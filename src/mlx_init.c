@@ -9,6 +9,11 @@ void    init_textures(t_cube *cube, t_parsed_data *parsed)
     i = 0;
     while (i < TEXTURES_COUNT)
     {
+        if (i == DOOR_TEXTURE && cube->grafic->textures[i] == NULL)
+        {
+            i++;
+            continue ;
+        }
         cube->grafic->textures[i] = 
             mlx_xpm_file_to_image(cube->grafic->mlx, parsed->textures_name[i],
             &img_width, &img_height);
