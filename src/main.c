@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     t_cube  cube;
     ft_bzero(&cube, sizeof(t_cube));
     cube_mlx_init(&cube, &parsed);
-    // mini_map(&cube);
 
     /* TODO: 
         fill_data(cube, parsed)

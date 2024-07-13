@@ -15,7 +15,7 @@ static void	ray_draw_pixel(int x, int y, int color, t_cube *cube)
 {
     char	*pixel;
 	
-	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGTH) {
+	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT) {
         pixel = cube->grafic->data_addr + (y * cube->grafic->size_line + x * (cube->grafic->bpp / 8));
         *(unsigned int*)pixel = color;
     }
@@ -30,9 +30,9 @@ void	raycasting_print_pixels(t_cube *cube)
 	while (++x < WINDOW_WIDTH)
 	{
 		y = -1;
-        while (++y < WINDOW_HEIGTH / 2)
+        while (++y < WINDOW_HEIGHT / 2)
             ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[CEILING_PIXEL]), cube);
-        while (y < WINDOW_HEIGTH)
+        while (y < WINDOW_HEIGHT)
 		{
             ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[FLOOR_PIXEL]), cube);
 			y++;
@@ -49,17 +49,17 @@ void	raycasting_print_textures(int x, t_cube *cube)
 	t_raycasting	*ray = &cube->grafic->raycasting;
 
 	/* Calculate the height of the line */
-	lineHeight = (int)(WINDOW_HEIGTH / ray->perpWallDist);
+	lineHeight = (int)(WINDOW_HEIGHT / ray->perpWallDist);
 
 	/* Initial point of the line */
-	startPoint = -lineHeight / 2 + WINDOW_HEIGTH / 2;
+	startPoint = -lineHeight / 2 + WINDOW_HEIGHT / 2;
 	if (startPoint < 0)
 		startPoint = 0;
 
 	/* End point of the printed line */
-	endPoint = lineHeight / 2 + WINDOW_HEIGTH / 2;
-	if (endPoint >= WINDOW_HEIGTH)
-		endPoint = WINDOW_HEIGTH - 1;
+	endPoint = lineHeight / 2 + WINDOW_HEIGHT / 2;
+	if (endPoint >= WINDOW_HEIGHT)
+		endPoint = WINDOW_HEIGHT - 1;
 
 	/* TODO: select the texture */
 	color = ray_select_color(cube);

@@ -22,6 +22,7 @@ int render(t_cube *cube)
 
 	/* Put the colored image on the window */
 	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, cube->grafic->img, 0, 0);
+	mini_map(cube);
 	mlx_do_sync(cube->grafic->mlx); /* It is used to be faster */
 
 	return (0);

@@ -33,6 +33,27 @@ void    init_textures(t_cube *cube, t_parsed_data *parsed)
     }
 }
 
+void    get_map_measures(t_cube *cube)
+{
+    int w;
+    int h;
+
+    h = 0;
+    while (cube->map[h])
+    {
+        w = 0;
+        while(cube->map[h][w])
+        {
+            if (w > cube->map_w)
+                cube->map_w = w;
+            w++;
+        }
+        if (h > cube->map_h)
+                cube->map_h = h;
+        h++;
+    }
+}
+
 void    init_map(t_cube *cube, t_parsed_data *parsed)
 {
     int i;
@@ -50,6 +71,7 @@ void    init_map(t_cube *cube, t_parsed_data *parsed)
         i++;
     }
     cube->map[i] = NULL;
+    get_map_measures(cube);
 }
 
 static void    init_player(t_cube *cube, t_parsed_data *parsed)
@@ -90,9 +112,21 @@ static void    init_player(t_cube *cube, t_parsed_data *parsed)
     }*/
 }
 
+static void	create_image_map(t_cube *cube)
+{
+	cube->grafic->mini_map->img = mlx_new_image(cube->grafic->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	if (cube->grafic->mini_map->img == NULL)
+		exit(1); /* TODO: malloc error*/
+	cube->grafic->mini_map->pix_addr = mlx_get_data_addr(cube->grafic->mini_map->img,
+			&cube->grafic->mini_map->bpp,
+			&cube->grafic->mini_map->line_len,
+			&cube->grafic->mini_map->endian);
+}
+
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 {
-
+    cube->map_h = 0;
+    cube->map_w = 0;
     cube->grafic = ft_calloc(1, sizeof(t_mlx));
     if (cube->grafic == NULL)
         exit(1); /* TODO: malloc error*/
@@ -104,14 +138,19 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     init_map(cube, parsed);
     init_textures(cube, parsed);
 
-    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
+    cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, PROGRAM_NAME);
     if (cube->grafic->win == NULL)
         exit(1); /* TODO: error win create*/
 
     /* Init the image information */
     /* TODO: Check errors on init */
-    cube->grafic->img = mlx_new_image(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH);
+    cube->grafic->img = mlx_new_image(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
     cube->grafic->data_addr = mlx_get_data_addr(cube->grafic->img, &cube->grafic->bpp, &cube->grafic->size_line, &cube->grafic->endian);
+
+    cube->grafic->mini_map = ft_calloc(1, sizeof(t_image));
+    if (cube->grafic->mini_map == NULL)
+        exit(1); /* TODO: malloc error*/
+    create_image_map(cube);
 
     ft_bzero(&cube->pj, sizeof(t_player));
     init_player(cube, parsed);

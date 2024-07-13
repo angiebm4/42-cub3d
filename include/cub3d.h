@@ -14,9 +14,16 @@
 # endif
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 960
+# define WINDOW_HEIGHT 960
 # define WINDOW_WIDTH 1280
 # define CUBE_SIZE	64
+
+/* MINI MAP MEASURES */
+# define MINIMAP_HEIGHT WINDOW_HEIGHT / 5
+# define MINIMAP_WIDTH WINDOW_WIDTH / 5
+
+# define INCREMENT_VALUE_Y 10
+# define INCREMENT_VALUE_X 10
 
 /* Player moves */
 # define MOVE_SPEED				0.1
@@ -44,7 +51,7 @@
 # define VALID_MAP_CHARS "01NSWED "
 # define PJ_CHARS "NSWE"
 
-/* REXTURES */
+/* TEXTURES */
 # define NORTH_TEXTURE  0
 # define SOUTH_TEXTURE  1
 # define WEST_TEXTURE   2
@@ -134,6 +141,8 @@ struct	s_player
 struct   s_cube
 {
 	char    **map;		/* Map data*/
+	int		map_h;
+	int		map_w;
 
 	t_mlx   *grafic;	/* Grafic data */
 	t_player	pj;
@@ -162,6 +171,15 @@ struct	s_raycasting
 	int		side;
 };
 
+struct	s_image
+{
+	void	*img;
+	char	*pix_addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+};
+
 struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
@@ -175,12 +193,15 @@ struct  s_mlx
 	int		size_line;
 	int		endian;
 
+	t_image	*mini_map;
+
 	t_raycasting	raycasting;
 
 
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
+
 
 
 /*_____________________________________________________________________*/
