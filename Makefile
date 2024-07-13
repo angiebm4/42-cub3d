@@ -28,6 +28,7 @@ PARSER =	parse.c				\
 			parse_file.c		\
 			save_placeholders.c	\
 			save_map.c			\
+			save_doors.c		\
 			check_extension.c	\
 			check_map.c			\
 			flood_fill.c		\

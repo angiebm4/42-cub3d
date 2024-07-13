@@ -101,6 +101,7 @@ typedef struct s_player 	t_player;
 typedef struct s_image 		t_image;
 typedef struct s_raycasting	t_raycasting;
 typedef struct s_mouse 		t_mouse;
+typedef struct s_door		t_door;
 
 struct  s_pixel
 {
@@ -162,6 +163,13 @@ struct	s_raycasting
 	int		side;
 };
 
+struct	s_door
+{
+	int	x;
+	int	y;
+	int	open;
+};
+
 struct  s_mlx
 {
 	void    *mlx;		/* Screen reference */
@@ -177,7 +185,6 @@ struct  s_mlx
 
 	t_raycasting	raycasting;
 
-
 	void        *textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
@@ -188,13 +195,14 @@ struct  s_mlx
 typedef struct s_parser
 {
 	char	*config_filename;
-	int		fd;	/* File descriptor of the config file */
+	int		fd;								/* File descriptor of the config file */
 	
 	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
-
 	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
 
-	char	**map;		/* Map readed */
+	t_list	*doors;
+
+	char	**map;							/* Map readed */
 }				t_parsed_data;
 
 
@@ -212,6 +220,7 @@ int		check_extension(char *buffer, char *extension);
 void    parse_file(t_parsed_data *parsed);
 int		save_placeholder(t_parsed_data *parsed, char **buffer, int ph);
 char	**save_map(t_parsed_data *parsed, char *buffer);
+void	save_doors(t_parsed_data *parsed);
 
 /* Map check */
 void	check_map(t_parsed_data *parsed);

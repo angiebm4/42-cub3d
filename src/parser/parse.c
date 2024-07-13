@@ -87,6 +87,9 @@ void	destroy_parsed(t_parsed_data *parsed)
 	/* Delete the map */
 	if (parsed->map)
 		ft_free_split(parsed->map);
+	
+	/* Delete the doors linked list */
+	ft_lstclear(&parsed->doors, free);
 
 	/* Set the defaults values */
 	init_parser_data(parsed, parsed->config_filename);

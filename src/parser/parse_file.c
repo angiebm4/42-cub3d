@@ -64,4 +64,7 @@ void	parse_file(t_parsed_data *parsed)
 
 	/* At this point, the next lines should be the map data */
 	add_map(parsed, buffer);
+
+	/* Save the doors info */
+	save_doors(parsed);
 }

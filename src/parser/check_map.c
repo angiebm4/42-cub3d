@@ -3,7 +3,7 @@
 int	check_door(t_parsed_data *parsed)
 {
 	/* Seach the door character on the map */
-	if (!search_map(parsed->map, 'D', NULL, NULL))
+	if (!parsed->doors)
 		return (0);
 
 	/* If the door character was on the map, check if a texture has been saved */
