@@ -52,6 +52,32 @@ void    init_map(t_cube *cube, t_parsed_data *parsed)
     cube->map[i] = NULL;
 }
 
+void    init_doors(t_cube *cube, t_parsed_data *parsed)
+{
+    t_list  *it;
+    t_list  *node;
+    t_door  *door;
+
+    it = parsed->doors;
+    while (it)
+    {
+        door = ft_calloc(1, sizeof(t_door));
+        if (!door)
+            exit(1);    /* TODO: Check malloc */
+
+        door->x = ((t_door*)it->content)->x;
+        door->y = ((t_door*)it->content)->y;
+        door->open = ((t_door*)it->content)->open;
+        
+        node = ft_lstnew(door);
+        if (!node)
+            exit(1);    /* TODO: Check malloc */
+
+        ft_lstadd_back(&cube->doors, node);
+        it = it->next;
+    }
+}
+
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 {
 
@@ -65,6 +91,8 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 
     init_map(cube, parsed);
     init_textures(cube, parsed);
+    init_doors(cube, parsed);
+
 
     cube->grafic->win = mlx_new_window(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
     if (cube->grafic->win == NULL)

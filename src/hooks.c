@@ -11,10 +11,12 @@ int end_program(t_cube *cube)
 
 int key_hooks(int keycode, t_cube *cube)
 {
+    printf("==> %d\n", keycode);
     if (keycode == ESC)
         end_program(cube);
     mouse_controller(keycode, cube);
     moves(keycode, cube);
+    interactions(keycode, cube);
     return(0);
 }
 

@@ -60,7 +60,7 @@
 # define PLAYER_
 # define SEPARATOR_PLACEHOLDER '.'
 
-# define COMMENT_SET	"@#;//"
+# define COMMENT_SET	"@#;/"
 # define EMPTY_SET		" \t\n"
 # define PIXEL_SEPARATOR	','
 
@@ -84,6 +84,7 @@
 # define DOWN	65364
 # define RIGHT	65363
 
+# define I		105
 # define M 		109
 # define N 		110
 
@@ -138,6 +139,7 @@ struct   s_cube
 
 	t_mlx   *grafic;	/* Grafic data */
 	t_player	pj;
+	t_list		*doors;	/* Doors */
 };
 
 struct	s_raycasting
@@ -281,5 +283,6 @@ int		mouse_move(int x, int y, t_cube *cube);
 void	mouse_display(t_cube *cube);
 void	mouse_fix(t_mouse *mouse);
 
+void	interactions(int keycode, t_cube *cube);
 
 #endif

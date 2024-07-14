@@ -106,7 +106,6 @@ fclean: clean
 
 
 re: fclean all
-.PHONY: clean fclean re all run
 
 ###############################################################################
 
@@ -124,7 +123,8 @@ v: valgrind
 valgrind: all
 	@valgrind --track-origins=yes ./$(NAME) $(TRY_MAP)
 
-raycaster:
-	@gcc -Wall -Wextra -Werror -o raycaster raycaster.c -Lmlx/ -lmlx -lm -lX11 -lXext
+t: test
+test: debug
+	@cd tests; bash parse_test.sh
 
-.PHONY : raycaster
+.PHONY : clean fclean re all run raycaster
