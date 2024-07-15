@@ -28,7 +28,6 @@ void	door_interaction(t_cube *cube)
 	{
 		door = it->content;
 		points_diff = points_distance(x_player, y_player, door->x, door->y);
-		printf("=> %lf\n", points_diff);
 		if (points_diff <= INTERACTION_DISTANCE && points_diff > 1.3)
 			change_state(door->x, door->y, cube);
 		it = it->next;
