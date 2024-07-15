@@ -19,7 +19,7 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/parser:src/utils:src/raycaster:src/moves:src/mouse
+VPATH = src:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions
 
 SRC =		main.c
 
@@ -54,6 +54,9 @@ MOUSE =		mouse_controller.c	\
 			mouse_display.c	\
 			mouse_fix.c
 
+INTERACTIONS =		interactions.c	\
+					door_interaction.c
+
 UTILS =		line_utils.c	\
 			map_utils.c		\
 			pixel_utils.c
@@ -65,7 +68,8 @@ OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
 		$(MOVES:%.c=$(OBJ_DIR)%.o)	\
 		$(UTILS:%.c=$(OBJ_DIR)%.o)	\
-		$(MOUSE:%.c=$(OBJ_DIR)%.o)
+		$(MOUSE:%.c=$(OBJ_DIR)%.o)	\
+		$(INTERACTIONS:%.c=$(OBJ_DIR)%.o)
 
 #####################################################
 

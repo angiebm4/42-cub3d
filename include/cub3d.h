@@ -24,6 +24,9 @@
 # define MOUSE_ROTATION_SPEED	0.01
 # define SEPARATOR				0.1
 
+/* Distance to make an iteraction, like open a door */
+# define INTERACTION_DISTANCE	1
+
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"
 
@@ -283,6 +286,7 @@ int		mouse_move(int x, int y, t_cube *cube);
 void	mouse_display(t_cube *cube);
 void	mouse_fix(t_mouse *mouse);
 
-void	interactions(int keycode, t_cube *cube);
+void	interactions_manage(int keycode, t_cube *cube);
+void	door_interaction(t_cube *cube);
 
 #endif
