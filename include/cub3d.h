@@ -87,6 +87,7 @@
 # define DOWN	65364
 # define RIGHT	65363
 
+# define SPACE	32
 # define I		105
 # define M 		109
 # define N 		110

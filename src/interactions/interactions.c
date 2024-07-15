@@ -2,6 +2,6 @@
 
 void	interactions_manage(int keycode, t_cube *cube)
 {
-	if (keycode == I)
+	if (keycode == I || keycode == SPACE)
 		door_interaction(cube);
 }
