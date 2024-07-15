@@ -25,7 +25,7 @@
 # define SEPARATOR				0.1
 
 /* Distance to make an iteraction, like open a door */
-# define INTERACTION_DISTANCE	1
+# define INTERACTION_DISTANCE	2.2
 
 /* PROGARM NAME */
 # define PROGRAM_NAME	"Cub3d"

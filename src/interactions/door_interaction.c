@@ -1,8 +1,8 @@
 #include "../../include/cub3d.h"
 
-static int	points_distance(int x1, int y1, int x2, int y2)
+static double	points_distance(double x1, double y1, double x2, double y2)
 {
-	return ((int)sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
 static void	change_state(int x, int y, t_cube *cube)
@@ -15,23 +15,22 @@ static void	change_state(int x, int y, t_cube *cube)
 
 void	door_interaction(t_cube *cube)
 {
-	int	x_player;
-	int	y_player;
-	int	points_diff;
+	double	x_player;
+	double	y_player;
+	double	points_diff;
 	t_list	*it;
 	t_door	*door;
 
 	it = cube->doors;
-	x_player = (int)cube->pj.posX;
-	y_player = (int)cube->pj.posY;
-
+	x_player = cube->pj.posX;
+	y_player = cube->pj.posY;
 	while (it)
 	{
 		door = it->content;
 		points_diff = points_distance(x_player, y_player, door->x, door->y);
-		if (points_diff <= INTERACTION_DISTANCE && points_diff > 0)
+		printf("=> %lf\n", points_diff);
+		if (points_diff <= INTERACTION_DISTANCE && points_diff > 1.3)
 			change_state(door->x, door->y, cube);
-
 		it = it->next;
 	}
 }
