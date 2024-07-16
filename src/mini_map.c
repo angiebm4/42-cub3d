@@ -69,18 +69,11 @@ void    mini_map(t_cube *cube)
     errase_minimap(cube);
     int start_x = cube->pj.posX - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
     int start_y = cube->pj.posY - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
-
-    // printf("%d\n", start_x);
-    // printf("%d\n", start_y);
-
-    
-    /* TODO: no se me imprime en el centro segun pj */
     int y;
     int x;
     int aux_y;
     int aux_x;
-
-    int iterable[2]; // [x, y]
+    int iterable[2];
 
     y = 0;
     aux_y = 0;
@@ -92,8 +85,6 @@ void    mini_map(t_cube *cube)
         {
             int mapX = start_x + aux_x;
             int mapY = start_y + aux_y;
-            //    printf("uwu\n");
-            // printf("mapX: %d, mapY: %d\n", mapX, mapY);
             if (mapX >= 0 && mapX < cube->map_w && mapY >= 0 && mapY < cube->map_h)
             {
                 iterable[1] = -1;
@@ -104,7 +95,6 @@ void    mini_map(t_cube *cube)
                     {
                         my_pixel_put(cube->grafic->mini_map, x + iterable[0],
                          y + iterable[1], set_color(cube, mapX, mapY));
-
                     }
                 }
             }

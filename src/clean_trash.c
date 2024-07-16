@@ -2,7 +2,8 @@
 
 void    clean_trash(t_cube *cube)
 {
-    /* TODO: eliminar parseo???'*/
+    /* TODO: eliminar parseo???*/
+    /* TODO: eliminar texturas ??*/
     if (cube->grafic->mini_map->img)
         mlx_destroy_image(cube->grafic->mlx, cube->grafic->mini_map->img);
     if (cube->grafic->img)

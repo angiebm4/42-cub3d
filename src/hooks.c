@@ -3,10 +3,6 @@
 int end_program(t_cube *cube)
 {
     clean_trash(cube);
-    // if (cube->grafic->win)
-    //     mlx_destroy_window(cube->grafic->mlx, cube->grafic->win);
-    // if (cube->map)
-    //     ft_free_split(cube->map);
     exit(0);
 }
 
