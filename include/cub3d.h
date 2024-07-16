@@ -290,5 +290,8 @@ int		mouse_move(int x, int y, t_cube *cube);
 void	mouse_display(t_cube *cube);
 void	mouse_fix(t_mouse *mouse);
 
+/* LEAVE MEMORY */
+void    clean_trash(t_cube *cube);
+
 
 #endif

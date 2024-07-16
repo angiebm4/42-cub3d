@@ -12,9 +12,22 @@ void	my_pixel_put(t_image *img, double x, double y, int color)
 
 void    draw_player(t_cube *cube)
 {
-    /* TODO: ta mal */
-    my_pixel_put(cube->grafic->mini_map, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, H_ORANGE);
+    int start_x = MINIMAP_WIDTH / 2 - 2;
+    int start_y = MINIMAP_HEIGHT / 2 - 2;
+    int i;
+    int j;
 
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            my_pixel_put(cube->grafic->mini_map, i + start_x, j + start_y, H_ORANGE);
+            j++;
+        }
+        i++;
+    }
 }
 
 int set_color(t_cube *cube, int mapX, int mapY)
@@ -29,14 +42,36 @@ int set_color(t_cube *cube, int mapX, int mapY)
         return(H_GREEN);
 }
 
+void    errase_minimap(t_cube *cube)
+{
+    int color;
+    int i;
+    int j;
+
+    color = H_BLACK;
+    i = 0;
+    while (i < MINIMAP_HEIGHT)
+    {
+        j = 0;
+        while (j < MINIMAP_WIDTH)
+        {
+            my_pixel_put(cube->grafic->mini_map, j, i, color);
+            j++;
+        }
+        i++;
+    }
+}
+
 void    mini_map(t_cube *cube)
 {
-    /* TODO: borrar contenido de imagen para volver a escribir*/
-    int start_x = cube->pj.posX - cube->map_w / 2;
-    int start_y = cube->pj.posY - cube->map_h / 2;
+    /* TODO: me sale un cacho de mapa a la izquierda y no se por que*/
+    /* TODO: la posicion el pj es un double y lo estas ajustando a int puede fallar por eso*/
+    errase_minimap(cube);
+    int start_x = cube->pj.posX - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
+    int start_y = cube->pj.posY - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
 
-    printf("%d\n", start_x);
-    printf("%d\n", start_y);
+    // printf("%d\n", start_x);
+    // printf("%d\n", start_y);
 
     
     /* TODO: no se me imprime en el centro segun pj */
@@ -83,3 +118,4 @@ void    mini_map(t_cube *cube)
     mlx_put_image_to_window(cube->grafic->mlx,
         cube->grafic->win, cube->grafic->mini_map->img, 0, 0);
 }
+

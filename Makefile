@@ -54,7 +54,8 @@ MOUSE =		mouse_controller.c	\
 
 UTILS =		line_utils.c	\
 			map_utils.c		\
-			pixel_utils.c
+			pixel_utils.c \
+			clean_trash.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \

@@ -52,6 +52,8 @@ void    get_map_measures(t_cube *cube)
                 cube->map_h = h;
         h++;
     }
+    cube->map_h += 1;
+    cube->map_w += 1;
 }
 
 void    init_map(t_cube *cube, t_parsed_data *parsed)
