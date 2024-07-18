@@ -10,26 +10,6 @@ void	my_pixel_put(t_image *img, double x, double y, int color)
 }
 
 
-void    draw_player(t_cube *cube)
-{
-    int start_x = MINIMAP_WIDTH / 2 - 2;
-    int start_y = MINIMAP_HEIGHT / 2 - 2;
-    int i;
-    int j;
-
-    i = 0;
-    while (i < 4)
-    {
-        j = 0;
-        while (j < 4)
-        {
-            my_pixel_put(cube->grafic->mini_map, i + start_x, j + start_y, H_ORANGE);
-            j++;
-        }
-        i++;
-    }
-}
-
 int set_color(t_cube *cube, int mapX, int mapY)
 {
     if (cube->map[mapY][mapX] == '0')
@@ -62,13 +42,12 @@ void    errase_minimap(t_cube *cube)
     }
 }
 
+
 void    mini_map(t_cube *cube)
 {
-    /* TODO: me sale un cacho de mapa a la izquierda y no se por que*/
-    /* TODO: la posicion el pj es un double y lo estas ajustando a int puede fallar por eso*/
     errase_minimap(cube);
-    int start_x = cube->pj.posX - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
-    int start_y = cube->pj.posY - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
+    int start_x = floor(cube->pj.posX) - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
+    int start_y = floor(cube->pj.posY) - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
     int y;
     int x;
     int aux_y;
@@ -93,8 +72,16 @@ void    mini_map(t_cube *cube)
                     iterable[0] = -1;
                     while (++iterable[0] < INCREMENT_VALUE_X)
                     {
-                        my_pixel_put(cube->grafic->mini_map, x + iterable[0],
-                         y + iterable[1], set_color(cube, mapX, mapY));
+                        if (floor(cube->pj.posX) == mapX && floor(cube->pj.posY) == mapY)
+                        {
+                            my_pixel_put(cube->grafic->mini_map, x + iterable[0],
+                            y + iterable[1], H_ORANGE);
+                        }
+                        else
+                        {
+                            my_pixel_put(cube->grafic->mini_map, x + iterable[0],
+                            y + iterable[1], set_color(cube, mapX, mapY));
+                        }
                     }
                 }
             }
@@ -104,7 +91,6 @@ void    mini_map(t_cube *cube)
         y += INCREMENT_VALUE_Y;
         aux_y++;
     }
-    draw_player(cube);
     mlx_put_image_to_window(cube->grafic->mlx,
         cube->grafic->win, cube->grafic->mini_map->img, 0, 0);
 }
