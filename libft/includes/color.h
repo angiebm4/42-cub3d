@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:55:37 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/06/04 11:33:39 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:19:52 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@
 # define H_LBLUE 0x3595F0
 # define H_GRAY 0xB0AEAE
 # define H_GOLD 0xD4AF37
+# define H_BROWN 0X57403B
+# define H_GRASS_GREEN 0X83A050
+# define H_SKIN 0xEACCB1
 
 // Background color
 

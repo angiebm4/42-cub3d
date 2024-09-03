@@ -13,13 +13,13 @@ void	my_pixel_put(t_image *img, double x, double y, int color)
 int set_color(t_cube *cube, int mapX, int mapY)
 {
     if (cube->map[mapY][mapX] == '0')
-        return(H_MAGENTA);
+        return(H_GRASS_GREEN);
     if (cube->map[mapY][mapX] == '1')
-        return(H_WHITE);
+        return(H_BROWN);
     if (cube->map[mapY][mapX] == 'D')
-        return(H_BLUE);
+        return(H_GRAY);
     else
-        return(H_GREEN);
+        return(H_RED);
 }
 
 void    errase_minimap(t_cube *cube)
@@ -75,7 +75,7 @@ void    mini_map(t_cube *cube)
                         if (floor(cube->pj.posX) == mapX && floor(cube->pj.posY) == mapY)
                         {
                             my_pixel_put(cube->grafic->mini_map, x + iterable[0],
-                            y + iterable[1], H_ORANGE);
+                            y + iterable[1], H_SKIN);
                         }
                         else
                         {
