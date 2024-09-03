@@ -14,9 +14,10 @@
 # endif
 
 /* WINDOW MEASURES */
-# define WINDOW_HEIGTH 960
-# define WINDOW_WIDTH 1280
-# define CUBE_SIZE	64
+# define WINDOW_HEIGTH		960
+# define WINDOW_WIDTH		1280
+# define TEXTURE_DIMENSION	64
+# define CUBE_SIZE			64
 
 /* Player moves */
 # define MOVE_SPEED				0.1
@@ -122,6 +123,15 @@ struct	s_mouse
 	int		fixed;
 };
 
+struct	s_image
+{
+	void	*img;
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+};
+
 struct	s_player
 {
 	/* Player position */
@@ -183,15 +193,11 @@ struct  s_mlx
 	
 	t_mouse	mouse;
 
-	void	*img;
-	char	*data_addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
+	t_image	screen;
 
 	t_raycasting	raycasting;
 
-	void        *textures[TEXTURES_COUNT];		/* Textures */
+	t_image		textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
 };
 
@@ -256,6 +262,11 @@ int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
 int	pixel_conversor(t_pixel *pixel);
+
+/* Image utils */
+int		load_image(char *path, t_image *image, t_mlx *mlx, int dim);
+int		create_image(t_image *image, t_mlx *mlx, int width, int heigth);
+char	*get_pixel(t_image *image, int x, int y);
 
 /* INIT GRAFIC */
 void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);

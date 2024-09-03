@@ -59,7 +59,8 @@ INTERACTIONS =		interactions.c	\
 
 UTILS =		line_utils.c	\
 			map_utils.c		\
-			pixel_utils.c
+			pixel_utils.c	\
+			image_utils.c
 
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \

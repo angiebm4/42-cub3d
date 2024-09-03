@@ -1,8 +1,8 @@
 # Views textures
-NO ./textures/tile000.xpm
-SO ./textures/tile000.xpm
-WE ./textures/tile000.xpm
-EA ./textures/tile000.xpm
+NO ./textures/wall64x64.xpm
+SO ./textures/wall64x64.xpm
+WE ./textures/wall64x64.xpm
+EA ./textures/wall64x64.xpm
 
 ; The next line can be commented
 DO ./textures/tile000.xpm

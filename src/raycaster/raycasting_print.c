@@ -16,7 +16,7 @@ static void	ray_draw_pixel(int x, int y, int color, t_cube *cube)
     char	*pixel;
 	
 	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGTH) {
-        pixel = cube->grafic->data_addr + (y * cube->grafic->size_line + x * (cube->grafic->bpp / 8));
+        pixel = get_pixel(&cube->grafic->screen, x, y);
         *(unsigned int*)pixel = color;
     }
 }

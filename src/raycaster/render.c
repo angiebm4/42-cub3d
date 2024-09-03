@@ -21,8 +21,7 @@ int render(t_cube *cube)
 		raycasting_main(x, cube);
 
 	/* Put the colored image on the window */
-	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, cube->grafic->img, 0, 0);
-	// mlx_do_sync(cube->grafic->mlx);
+	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, cube->grafic->screen.img, 0, 0);
 
 	return (0);
 }

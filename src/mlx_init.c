@@ -2,22 +2,24 @@
 
 void    init_textures(t_cube *cube, t_parsed_data *parsed)
 {
-    int img_width;
-    int img_height;
+    // int img_width;
+    // int img_height;
     int i;
+    int res;
 
     i = 0;
     while (i < TEXTURES_COUNT)
     {
-        if (i == DOOR_TEXTURE && cube->grafic->textures[i] == NULL)
+        if (i == DOOR_TEXTURE && parsed->textures_name[i] == NULL)
         {
             i++;
             continue ;
         }
-        cube->grafic->textures[i] = 
-            mlx_xpm_file_to_image(cube->grafic->mlx, parsed->textures_name[i],
-            &img_width, &img_height);
-        if (cube->grafic->textures[i] == NULL)
+        // cube->grafic->textures[i] = 
+        //     mlx_xpm_file_to_image(cube->grafic->mlx, parsed->textures_name[i],
+        //     &img_width, &img_height);
+        res = load_image(parsed->textures_name[i], &cube->grafic->textures[i], cube->grafic, TEXTURE_DIMENSION);
+        if (res)
         {
             ft_printf("%sINVALID TEXTURE%s\n", RED, CLEAR);
             destroy_parsed(parsed);
@@ -88,7 +90,6 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
     cube->grafic->mlx = mlx_init();
     if (cube->grafic->mlx == NULL)
         exit(1); /* TODO: error  create mlx*/
-
     init_map(cube, parsed);
     init_textures(cube, parsed);
     init_doors(cube, parsed);
@@ -100,8 +101,11 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
 
     /* Init the image information */
     /* TODO: Check errors on init */
-    cube->grafic->img = mlx_new_image(cube->grafic->mlx, WINDOW_WIDTH, WINDOW_HEIGTH);
-    cube->grafic->data_addr = mlx_get_data_addr(cube->grafic->img, &cube->grafic->bpp, &cube->grafic->size_line, &cube->grafic->endian);
+    if (create_image(&cube->grafic->screen, cube->grafic, WINDOW_WIDTH, WINDOW_HEIGTH))
+    {
+        /* TODO: Error */
+        exit(1);
+    }
 
     ft_bzero(&cube->pj, sizeof(t_player));
     init_player(cube, parsed);
