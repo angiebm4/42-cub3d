@@ -86,6 +86,22 @@ void	raycasting_print_textures(int x, t_cube *cube)
 	if (ray->side == 1 && ray->rayDirY < 0)
 		texX = TEXTURE_DIMENSION - texX - 1;
 
+	/* Select the texture */
+	t_image	*texture;
+	if (ray->side == 0)
+	{
+		if (ray->rayDirX > 0) /* West */
+			texture = &cube->grafic->textures[WEST_TEXTURE];
+		else /* East */
+			texture = &cube->grafic->textures[EAST_TEXTURE];
+	}
+	else
+	{
+		if (ray->rayDirX > 0) /* South */
+			texture = &cube->grafic->textures[SOUTH_TEXTURE];
+		else /* North */
+			texture = &cube->grafic->textures[NORTH_TEXTURE];
+	}
 
 	/* ====================================================== */
 
