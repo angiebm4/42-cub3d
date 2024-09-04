@@ -40,6 +40,11 @@ void	raycasting_print_pixels(t_cube *cube)
     }
 }
 
+void	ray_textures(t_cube *cube)
+{
+	
+}
+
 void	raycasting_print_textures(int x, t_cube *cube)
 {
 	int	lineHeight;
@@ -62,9 +67,34 @@ void	raycasting_print_textures(int x, t_cube *cube)
 		endPoint = WINDOW_HEIGTH - 1;
 
 	/* TODO: select the texture */
-	color = ray_select_color(cube);
+	// color = ray_select_color(cube);
+	// ray_textures(cube);
+
+	/* ====================================================== */
+
+	/* TODO: texNum? */
+	double wallX;
+	if (ray->side == 0)
+		wallX = ray->mapY + ray->perpWallDist * ray->rayDirY;
+	else
+		wallX = ray->mapX + ray->perpWallDist * ray->rayDirX;
+	wallX -= floor(wallX);
+
+	int texX = (int)(wallX * (double)TEXTURE_DIMENSION);
+	if (ray->side == 0 && ray->rayDirX > 0)
+		texX = TEXTURE_DIMENSION - texX - 1;
+	if (ray->side == 1 && ray->rayDirY < 0)
+		texX = TEXTURE_DIMENSION - texX - 1;
+
+
+	/* ====================================================== */
 
 	/* Color the line on the image */
+	double step = 1.0 * TEXTURE_DIMENSION / lineHeight;
+	double texPos = (startPoint - WINDOW_HEIGTH / 2 + lineHeight / 2) * step;
 	for(int y = startPoint; y <= endPoint; y++)
+	{
+
 		ray_draw_pixel(x, y, color, cube);
+	}
 }
