@@ -22,7 +22,7 @@
 /* Player moves */
 # define MOVE_SPEED				0.1
 # define ROTATION_SPEED			0.06
-# define MOUSE_ROTATION_SPEED	0.01
+# define MOUSE_ROTATION_SPEED	0.002
 # define SEPARATOR				0.1
 
 /* Distance to make an iteraction, like open a door */

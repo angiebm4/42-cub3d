@@ -1,15 +1,15 @@
 #include "../../include/cub3d.h"
 
 /* TODO: Get the texture pixel color instead of a default color */
-static int	ray_select_color(t_cube *cube)
-{
-	int	color;
+// static int	ray_select_color(t_cube *cube)
+// {
+// 	int	color;
 	
-	color = 0xFFFF00;
-	if (cube->grafic->raycasting.side)
-		color /= 2;
-	return (color);
-}
+// 	color = 0xFFFF00;
+// 	if (cube->grafic->raycasting.side)
+// 		color /= 2;
+// 	return (color);
+// }
 
 static void	ray_draw_pixel(int x, int y, int color, t_cube *cube)
 {
@@ -40,11 +40,6 @@ void	raycasting_print_pixels(t_cube *cube)
     }
 }
 
-void	ray_textures(t_cube *cube)
-{
-	
-}
-
 void	raycasting_print_textures(int x, t_cube *cube)
 {
 	int	lineHeight;
@@ -72,12 +67,11 @@ void	raycasting_print_textures(int x, t_cube *cube)
 
 	/* ====================================================== */
 
-	/* TODO: texNum? */
 	double wallX;
 	if (ray->side == 0)
-		wallX = ray->mapY + ray->perpWallDist * ray->rayDirY;
+		wallX = cube->pj.posY + ray->perpWallDist * ray->rayDirY;
 	else
-		wallX = ray->mapX + ray->perpWallDist * ray->rayDirX;
+		wallX = cube->pj.posX + ray->perpWallDist * ray->rayDirX;
 	wallX -= floor(wallX);
 
 	int texX = (int)(wallX * (double)TEXTURE_DIMENSION);
@@ -97,10 +91,10 @@ void	raycasting_print_textures(int x, t_cube *cube)
 	}
 	else
 	{
-		if (ray->rayDirX > 0) /* South */
-			texture = &cube->grafic->textures[SOUTH_TEXTURE];
-		else /* North */
+		if (ray->rayDirY > 0) /* South */
 			texture = &cube->grafic->textures[NORTH_TEXTURE];
+		else /* North */
+			texture = &cube->grafic->textures[SOUTH_TEXTURE];
 	}
 
 	/* ====================================================== */
@@ -110,7 +104,10 @@ void	raycasting_print_textures(int x, t_cube *cube)
 	double texPos = (startPoint - WINDOW_HEIGTH / 2 + lineHeight / 2) * step;
 	for(int y = startPoint; y <= endPoint; y++)
 	{
-
+		int texY = (int) texPos & (TEXTURE_DIMENSION - 1);
+		texPos += step;
+		color = (int)*get_pixel(texture, texX, texY);
 		ray_draw_pixel(x, y, color, cube);
 	}
 }
+

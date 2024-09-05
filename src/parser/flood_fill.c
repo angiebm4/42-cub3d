@@ -59,6 +59,8 @@ int	flood_fill(char **map, t_parsed_data *parsed)
 	while (!result && search_map(cpy, '0', &x, &y))
 		result = rec_floof_fill(x, y, cpy);
 
+	/* TODO: Check that there is only '1' on the matrix */
+
 	/* Delete the cpy of the map*/
 	ft_free_split(cpy);
 
