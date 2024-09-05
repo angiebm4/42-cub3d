@@ -177,6 +177,20 @@ struct	s_raycasting
 	int 	stepY;
 
 	int		side;
+
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	texPos;
+	t_image	*texture;
+	double	step;
+
+	int	lineHeight;
+	int	startPoint;
+	int	endPoint;
+	int color;
+
+
 };
 
 struct	s_door
@@ -286,6 +300,7 @@ int		render(t_cube *cube);
 void	raycasting_calcs(int x, t_cube *cube);
 void	raycasting_print_pixels(t_cube *cube);
 void	raycasting_print_textures(int x, t_cube *cube);
+void	ray_draw_pixel(int x, int y, int color, t_cube *cube);
 
 /* Player moves */
 void	moves(int keycode, t_cube *cube);

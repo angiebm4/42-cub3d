@@ -43,7 +43,8 @@ GRAFIC =	mlx_init.c	\
 			
 RENDER =	render.c			\
 			raycasting_calcs.c	\
-			raycasting_print.c
+			raycasting_print.c	\
+			raycasting_print_utils.c
 
 MOVES =		moves.c	\
 			mouse_move.c	\
