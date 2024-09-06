@@ -57,6 +57,8 @@ void	ray_select_texture(t_cube *cube)
 		else
 			ray->texture = &cube->grafic->textures[SOUTH_TEXTURE];
 	}
+	if (cube->map[cube->grafic->raycasting.mapY][cube->grafic->raycasting.mapX] == 'D')
+		ray->texture = &cube->grafic->textures[DOOR_TEXTURE];
 }
 
 void	ray_get_texture_pos(t_cube *cube)
@@ -70,9 +72,9 @@ void	ray_get_texture_pos(t_cube *cube)
 		ray->wallX = cube->pj.posX + ray->perpWallDist * ray->rayDirX;
 	ray->wallX -= floor(ray->wallX);
 	ray->texX = (int)(ray->wallX * (double)TEXTURE_DIMENSION);
-	if (ray->side == 0 && ray->rayDirX > 0)
+	if (ray->side == 0 && ray->rayDirX < 0)
 		ray->texX = TEXTURE_DIMENSION - ray->texX - 1;
-	if (ray->side == 1 && ray->rayDirY < 0)
+	if (ray->side == 1 && ray->rayDirY > 0)
 		ray->texX = TEXTURE_DIMENSION - ray->texX - 1;
 }
 
