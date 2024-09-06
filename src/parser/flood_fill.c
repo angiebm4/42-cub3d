@@ -43,6 +43,37 @@ int	rec_floof_fill(int x, int y, char **map)
 	return (count != 0);
 }
 
+static int	search_start_position(char **map, int *x, int *y)
+{
+	int	i;
+
+	i = -1;
+	while (PJ_CHARS[++i])
+	{
+		if (search_map(map, PJ_CHARS[i], x, y))
+			return (1);
+	}
+	return (0);
+}
+
+static int	check_result(char **map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] != '1' && map[i][j] != ' ')
+				return (1);
+		}
+	}
+	return (0);
+}
+
 int	flood_fill(char **map, t_parsed_data *parsed)
 {
 	char	**cpy;
@@ -56,10 +87,11 @@ int	flood_fill(char **map, t_parsed_data *parsed)
 
 	/* As long as there is a '0' in the map, we apply the algorithm */
 	result = 0;
-	while (!result && search_map(cpy, '0', &x, &y))
+	while (!result && (search_start_position(cpy, &x, &y) || search_map(cpy, '0', &x, &y)))
 		result = rec_floof_fill(x, y, cpy);
 
-	/* TODO: Check that there is only '1' on the matrix */
+	/* Check that there is only '1' on the matrix */
+	result += check_result(cpy);
 
 	/* Delete the cpy of the map*/
 	ft_free_split(cpy);
