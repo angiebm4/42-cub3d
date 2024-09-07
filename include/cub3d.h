@@ -100,6 +100,14 @@
 # define MOUSE_VISIBILITY_KEY	M
 # define MOUSE_FIX_KEY			N
 
+/* Compass */
+# define NORTH_COMPASS	""
+# define SOUTH_COMPASS	""
+# define EAST_COMPASS	""
+# define WEST_COMPASS	""
+
+#define COMPASS_SIZE	64
+
 typedef struct s_cube  		t_cube;
 typedef struct s_mlx   		t_mlx;
 typedef struct s_pixel 		t_pixel;
@@ -295,12 +303,18 @@ int		end_program(t_cube *cube);
 /* MINI MAP */
 void    mini_map(t_cube *cube);
 
-/* Raycasting */
+/* Render */
 int		render(t_cube *cube);
+
+/* Raycasting */
+void	raycasting(t_cube *cube);
 void	raycasting_calcs(int x, t_cube *cube);
 void	raycasting_print_pixels(t_cube *cube);
 void	raycasting_print_textures(int x, t_cube *cube);
 void	ray_draw_pixel(int x, int y, int color, t_cube *cube);
+
+/* Compass */
+void		compass(t_cube *cube);
 
 /* Player moves */
 void	moves(int keycode, t_cube *cube);

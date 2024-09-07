@@ -19,7 +19,7 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions
+VPATH = src:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass
 
 SRC =		main.c
 
@@ -40,11 +40,14 @@ GRAFIC =	mlx_init.c	\
 			hooks.c		\
 			init_player.c
 			
-			
-RENDER =	render.c			\
-			raycasting_calcs.c	\
-			raycasting_print.c	\
-			raycasting_print_utils.c
+RENDER =	render.c
+
+RAYCASTING =	raycasting.c			\
+				raycasting_calcs.c	\
+				raycasting_print.c	\
+				raycasting_print_utils.c
+
+COMPASS =	compass.c
 
 MOVES =		moves.c	\
 			mouse_move.c	\
@@ -68,6 +71,8 @@ OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(PARSER:%.c=$(OBJ_DIR)%.o) \
 		$(GRAFIC:%.c=$(OBJ_DIR)%.o)	\
 		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
+		$(RAYCASTING:%.c=$(OBJ_DIR)%.o)	\
+		$(COMPASS:%.c=$(OBJ_DIR)%.o)	\
 		$(MOVES:%.c=$(OBJ_DIR)%.o)	\
 		$(UTILS:%.c=$(OBJ_DIR)%.o)	\
 		$(MOUSE:%.c=$(OBJ_DIR)%.o)	\
