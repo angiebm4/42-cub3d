@@ -2,5 +2,23 @@
 
 void	compass(t_cube *cube)
 {
-	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, cube->grafic->textures[NORTH_TEXTURE].img, 0, 0);
+	double	x;
+	double	y;
+	t_image *image;
+
+	x = cube->pj.dirX;
+	y = cube->pj.dirY;
+
+	if (fabs(y) > fabs(x)) {
+		if (y < 0)
+			image = &cube->grafic->compass[NORTH_TEXTURE];
+		else
+			image = &cube->grafic->compass[SOUTH_TEXTURE];
+	} else {
+		if (x > 0)
+			image = &cube->grafic->compass[EAST_TEXTURE];
+		else
+			image = &cube->grafic->compass[WEST_TEXTURE];
+	}
+	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, image->img, 20, WINDOW_HEIGTH - COMPASS_SIZE - 20);
 }

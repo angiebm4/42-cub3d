@@ -101,10 +101,10 @@
 # define MOUSE_FIX_KEY			N
 
 /* Compass */
-# define NORTH_COMPASS	""
-# define SOUTH_COMPASS	""
-# define EAST_COMPASS	""
-# define WEST_COMPASS	""
+# define NORTH_COMPASS	"textures/north64x64.xpm"
+# define SOUTH_COMPASS	"textures/south64x64.xpm"
+# define WEST_COMPASS	"textures/west64x64.xpm"
+# define EAST_COMPASS	"textures/east64x64.xpm"
 
 #define COMPASS_SIZE	64
 
@@ -221,6 +221,7 @@ struct  s_mlx
 
 	t_image		textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
+	t_image		compass[4];
 };
 
 
@@ -314,6 +315,7 @@ void	raycasting_print_textures(int x, t_cube *cube);
 void	ray_draw_pixel(int x, int y, int color, t_cube *cube);
 
 /* Compass */
+int	load_compass(t_cube *cube);
 void		compass(t_cube *cube);
 
 /* Player moves */

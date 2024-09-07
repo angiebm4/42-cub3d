@@ -47,7 +47,8 @@ RAYCASTING =	raycasting.c			\
 				raycasting_print.c	\
 				raycasting_print_utils.c
 
-COMPASS =	compass.c
+COMPASS =	compass.c	\
+			load_compass.c
 
 MOVES =		moves.c	\
 			mouse_move.c	\

@@ -107,6 +107,12 @@ void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed)
         exit(1);
     }
 
+    if (load_compass(cube))
+    {
+        /* TODO: ERROR */
+        exit(1);
+    }
+
     ft_bzero(&cube->pj, sizeof(t_player));
     init_player(cube, parsed);
 

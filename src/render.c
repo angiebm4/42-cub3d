@@ -2,7 +2,7 @@
 
 int	render(t_cube *cube)
 {
-	// raycasting(cube);
+	raycasting(cube);
 	compass(cube);
 	return (0);
 }
