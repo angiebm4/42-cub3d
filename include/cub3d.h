@@ -19,6 +19,10 @@
 # define TEXTURE_DIMENSION	64
 # define CUBE_SIZE			64
 
+/* Frames */
+# define FRAMES				2
+# define FRAME_DURATION		100
+
 /* Player moves */
 # define MOVE_SPEED				0.1
 # define ROTATION_SPEED			0.06
@@ -158,6 +162,9 @@ struct	s_player
 struct   s_cube
 {
 	char    **map;		/* Map data*/
+
+	int		frame;
+	int		frame_duration;
 
 	t_mlx   *grafic;	/* Grafic data */
 	t_player	pj;
