@@ -105,12 +105,27 @@
 # define MOUSE_FIX_KEY			N
 
 /* Compass */
-# define NORTH_COMPASS	"textures/north64x64.xpm"
-# define SOUTH_COMPASS	"textures/south64x64.xpm"
-# define WEST_COMPASS	"textures/west64x64.xpm"
-# define EAST_COMPASS	"textures/east64x64.xpm"
+# define NORTH_COMPASS1	"textures/cn1.xpm"
+# define SOUTH_COMPASS1	"textures/cs1.xpm"
+# define WEST_COMPASS1	"textures/cw1.xpm"
+# define EAST_COMPASS1	"textures/ce1.xpm"
 
-#define COMPASS_SIZE	64
+# define NORTH_COMPASS2	"textures/cn2.xpm"
+# define SOUTH_COMPASS2	"textures/cs2.xpm"
+# define WEST_COMPASS2	"textures/cw2.xpm"
+# define EAST_COMPASS2	"textures/ce2.xpm"
+
+# define NORTH_COMPASS_F1	0
+# define NORTH_COMPASS_F2	1
+# define SOUTH_COMPASS_F1	2
+# define SOUTH_COMPASS_F2	3
+# define WEST_COMPASS_F1	4
+# define WEST_COMPASS_F2	5
+# define EAST_COMPASS_F1	6
+# define EAST_COMPASS_F2	7
+# define COMPASS_TEXTURES	8
+
+#define COMPASS_SIZE	128
 
 typedef struct s_cube  		t_cube;
 typedef struct s_mlx   		t_mlx;
@@ -228,7 +243,7 @@ struct  s_mlx
 
 	t_image		textures[TEXTURES_COUNT];		/* Textures */
 	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
-	t_image		compass[4];
+	t_image		compass[COMPASS_TEXTURES];		/* Compass textures */
 };
 
 
