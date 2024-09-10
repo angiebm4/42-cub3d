@@ -162,16 +162,16 @@ struct	s_image
 struct	s_player
 {
 	/* Player position */
-	double	posX;
-	double	posY;
+	double	pos_x;
+	double	pos_y;
 
 	/* View directions */
-	double	dirX;
-	double	dirY;
+	double	dir_x;
+	double	dir_y;
 
 	/* Camera plane */
-	double	planeX;
-	double	planeY;
+	double	plane_x;
+	double	plane_y;
 };
 
 struct   s_cube
@@ -189,8 +189,8 @@ struct   s_cube
 struct	s_raycasting
 {
 	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
+	double	raydir_x;
+	double	raydir_y;
 
 	int		mapX;
 	int		mapY;

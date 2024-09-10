@@ -22,15 +22,15 @@ void	door_interaction(t_cube *cube)
 	t_door	*door;
 
 	it = cube->doors;
-	x_player = cube->pj.posX;
-	y_player = cube->pj.posY;
+	x_player = cube->pj.pos_x;
+	y_player = cube->pj.pos_y;
 	while (it)
 	{
 		door = it->content;
-		points_diff = points_distance(x_player, y_player, door->x + 0.5, door->y + 0.5);
+		points_diff = points_distance(x_player, y_player, door->x + 0.5,
+				door->y + 0.5);
 		if (points_diff <= INTERACTION_DISTANCE && points_diff > 0.51)
 			change_state(door->x, door->y, cube);
 		it = it->next;
 	}
 }
-

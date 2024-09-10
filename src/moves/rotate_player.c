@@ -2,14 +2,17 @@
 
 void	rotate_player(double angle, t_player *player)
 {
-	double		old_dirX;
-	double		old_planeX;
+	double		old_dir_x;
+	double		old_plane_x;
 
-	old_dirX = player->dirX;
-	old_planeX = player->planeX;
-
-	player->dirX = player->dirX * cos(angle) - player->dirY * sin(angle);
-	player->dirY = old_dirX * sin(angle) + player->dirY * cos(angle);
-	player->planeX = player->planeX * cos(angle) - player->planeY * sin(angle);
-	player->planeY = old_planeX * sin(angle) + player->planeY * cos(angle);
+	old_dir_x = player->dir_x;
+	old_plane_x = player->plane_x;
+	player->dir_x = player->dir_x * cos(angle) - player->dir_y
+		* sin(angle);
+	player->dir_y = old_dir_x * sin(angle) + player->dir_y
+		* cos(angle);
+	player->plane_x = player->plane_x * cos(angle) - player->plane_y
+		* sin(angle);
+	player->plane_y = old_plane_x * sin(angle) + player->plane_y
+		* cos(angle);
 }

@@ -45,14 +45,14 @@ void	ray_select_texture(t_cube *cube)
 	ray = &cube->grafic->raycasting;
 	if (ray->side == 0)
 	{
-		if (ray->rayDirX > 0)
+		if (ray->raydir_x > 0)
 			ray->texture = &cube->grafic->textures[WEST_TEXTURE];
 		else
 			ray->texture = &cube->grafic->textures[EAST_TEXTURE];
 	}
 	else
 	{
-		if (ray->rayDirY > 0)
+		if (ray->raydir_y > 0)
 			ray->texture = &cube->grafic->textures[NORTH_TEXTURE];
 		else
 			ray->texture = &cube->grafic->textures[SOUTH_TEXTURE];
@@ -67,14 +67,14 @@ void	ray_get_texture_pos(t_cube *cube)
 
 	ray = &cube->grafic->raycasting;
 	if (ray->side == 0)
-		ray->wallX = cube->pj.posY + ray->perpWallDist * ray->rayDirY;
+		ray->wallX = cube->pj.pos_y + ray->perpWallDist * ray->raydir_y;
 	else
-		ray->wallX = cube->pj.posX + ray->perpWallDist * ray->rayDirX;
+		ray->wallX = cube->pj.pos_x + ray->perpWallDist * ray->raydir_x;
 	ray->wallX -= floor(ray->wallX);
 	ray->texX = (int)(ray->wallX * (double)TEXTURE_DIMENSION);
-	if (ray->side == 0 && ray->rayDirX < 0)
+	if (ray->side == 0 && ray->raydir_x < 0)
 		ray->texX = TEXTURE_DIMENSION - ray->texX - 1;
-	if (ray->side == 1 && ray->rayDirY > 0)
+	if (ray->side == 1 && ray->raydir_y > 0)
 		ray->texX = TEXTURE_DIMENSION - ray->texX - 1;
 }
 

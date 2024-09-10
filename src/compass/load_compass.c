@@ -1,19 +1,23 @@
 #include "../../include/cub3d.h"
 
+int	load_compass_image(char *path, int index, t_mlx *graphic)
+{
+	return (load_image(path, &graphic->compass[index], graphic, COMPASS_SIZE));
+}
+
 int	load_compass(t_cube *cube)
 {
-	int	result;
+	int		result;
+	t_mlx	*graphic;
 
-	result =  load_image(NORTH_COMPASS1, &cube->grafic->compass[NORTH_COMPASS_F1], cube->grafic, COMPASS_SIZE);
-	result += load_image(NORTH_COMPASS2, &cube->grafic->compass[NORTH_COMPASS_F2], cube->grafic, COMPASS_SIZE);
-
-	result += load_image(SOUTH_COMPASS1, &cube->grafic->compass[SOUTH_COMPASS_F1], cube->grafic, COMPASS_SIZE);
-	result += load_image(SOUTH_COMPASS2, &cube->grafic->compass[SOUTH_COMPASS_F2], cube->grafic, COMPASS_SIZE);
-
-	result += load_image(WEST_COMPASS1, &cube->grafic->compass[WEST_COMPASS_F1], cube->grafic, COMPASS_SIZE);
-	result += load_image(WEST_COMPASS2, &cube->grafic->compass[WEST_COMPASS_F2], cube->grafic, COMPASS_SIZE);
-
-	result += load_image(EAST_COMPASS1, &cube->grafic->compass[EAST_COMPASS_F1], cube->grafic, COMPASS_SIZE);
-	result += load_image(EAST_COMPASS2, &cube->grafic->compass[EAST_COMPASS_F2], cube->grafic, COMPASS_SIZE);
+	graphic = cube->grafic;
+	result = load_compass_image(NORTH_COMPASS1, NORTH_COMPASS_F1, graphic);
+	result += load_compass_image(NORTH_COMPASS2, NORTH_COMPASS_F2, graphic);
+	result += load_compass_image(SOUTH_COMPASS1, SOUTH_COMPASS_F1, graphic);
+	result += load_compass_image(SOUTH_COMPASS2, SOUTH_COMPASS_F2, graphic);
+	result += load_compass_image(WEST_COMPASS1, WEST_COMPASS_F1, graphic);
+	result += load_compass_image(WEST_COMPASS2, WEST_COMPASS_F2, graphic);
+	result += load_compass_image(EAST_COMPASS1, EAST_COMPASS_F1, graphic);
+	result += load_compass_image(EAST_COMPASS2, EAST_COMPASS_F2, graphic);
 	return (result != 0);
 }

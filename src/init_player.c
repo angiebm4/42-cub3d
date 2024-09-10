@@ -2,10 +2,10 @@
 
 typedef struct	s_player_pos
 {
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 } t_player_pos;
 
 static void	init_position(int *x, int *y, t_parsed_data *parsed)
@@ -21,10 +21,10 @@ static void	init_position(int *x, int *y, t_parsed_data *parsed)
 
 static void set_vision(t_player_pos pos, t_player *player)
 {
-	player->dirX = pos.dirX;
-	player->dirY = pos.dirY;
-	player->planeX = pos.planeX;
-	player->planeY = pos.planeY;
+	player->dir_x = pos.dir_x;
+	player->dir_y = pos.dir_y;
+	player->plane_x = pos.plane_x;
+	player->plane_y = pos.plane_y;
 }
 
 static void init_vision(int x, int y, t_cube *cube)
@@ -44,8 +44,8 @@ void    init_player(t_cube *cube, t_parsed_data *parsed)
     int x, y;
 
 	init_position(&x, &y, parsed);
-    cube->pj.posX = x + 0.5;
-    cube->pj.posY = y + 0.5;
+    cube->pj.pos_x = x + 0.5;
+    cube->pj.pos_y = y + 0.5;
 
     init_vision(x, y, cube);
     cube->map[y][x] = '0';
