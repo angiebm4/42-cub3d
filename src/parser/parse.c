@@ -17,13 +17,10 @@ void	parse_error(int error, t_parsed_data *parsed, int print)
 		printf("Error while analyzing pixels\n");
 	else
 		printf("Success(\\\\(·o·;)\n");
-
 	if (parsed && print)
 		parse_print(parsed);
-
 	if (parsed)
 		destroy_parsed(parsed);
-
 	exit(ERROR_EXIT_VALUE);
 }
 
@@ -31,16 +28,11 @@ static void	init_parser_data(t_parsed_data *parsed, char *filename)
 {
 	size_t	index;
 
-	/* Clean the struct data */
 	ft_bzero(parsed, sizeof(*parsed));
-
-	/* Init the main fd */
 	parsed->config_filename = filename;
 	parsed->fd = open(filename, O_RDONLY);
 	if (parsed->fd < 0)
 		parse_error(ERROR_OPEN, NULL, 0);
-
-	/* Init the pixels */
 	index = -1;
 	while (++index < PIXELS_COUNT)
 		reset_pixel(&parsed->default_pixels[index]);
@@ -52,20 +44,10 @@ void	parse(int argc, char **argv, t_parsed_data *parsed)
 {
 	if (argc != 2 || !check_extension(argv[1], CONFIG_EXTENSION))
 		parse_error(ERROR_INVALID_ARGS, NULL, 0);
-
-	/* Init the struct */
 	init_parser_data(parsed, argv[1]);
-
-	/* Get all the information from the file */
 	parse_file(parsed);
-
-	/* Check if the textures and pixels are okay */
 	check_graphic(parsed);
-
-	/* Check if the map is correct */
 	check_map(parsed);
-
-	/* Clean a bit the map, deleting the final empty lines */
 	clean_map(parsed->map);
 }
 
@@ -73,24 +55,15 @@ void	destroy_parsed(t_parsed_data *parsed)
 {
 	size_t	index;
 
-	/* Close the config file fd */
-	ft_close(&(parsed->fd));
-
 	index = -1;
+	ft_close(&(parsed->fd));
 	while (++index < TEXTURES_COUNT)
 	{
-		/* Delete the files names and their fds */
 		if (parsed->textures_name[index])
 			free(parsed->textures_name[index]);
 	}
-
-	/* Delete the map */
 	if (parsed->map)
 		ft_free_split(parsed->map);
-	
-	/* Delete the doors linked list */
 	ft_lstclear(&parsed->doors, free);
-
-	/* Set the defaults values */
 	init_parser_data(parsed, parsed->config_filename);
 }

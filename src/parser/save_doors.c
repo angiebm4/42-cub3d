@@ -29,7 +29,6 @@ void	save_doors(t_parsed_data *parsed)
 		door->x = x;
 		door->y = y;
 		door->open = 0;
-
 		node = ft_lstnew(door);
 		if (!node)
 		{

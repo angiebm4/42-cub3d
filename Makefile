@@ -25,6 +25,7 @@ SRC =		main.c
 
 PARSER =	parse.c				\
 			parse_print.c		\
+			parse_print_utils.c	\
 			parse_file.c		\
 			save_placeholders.c	\
 			save_map.c			\

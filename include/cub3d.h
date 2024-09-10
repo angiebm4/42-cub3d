@@ -266,9 +266,10 @@ typedef struct s_parser
 /* Principal parser struct functions */
 void	parse(int argc, char **argv, t_parsed_data *parsed);
 void	destroy_parsed(t_parsed_data *parsed);
-void	parse_print(t_parsed_data *parsed);
 void	parse_error(int error, t_parsed_data *parsed, int print);
-
+void	parse_print(t_parsed_data *parsed);
+char	*parse_check_texture(char *texture);
+void	parse_check_pixel(t_pixel *pixel, char **check);
 
 /* Function to check an extension */
 int		check_extension(char *buffer, char *extension);
