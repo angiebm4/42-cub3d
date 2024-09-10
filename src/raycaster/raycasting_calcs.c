@@ -51,13 +51,11 @@ static void	ray_rays_directions(t_cube *cube)
 	}
 }
 
-static void	ray_hits(t_cube *cube)
+static void	ray_hit_loop(t_raycasting *ray, t_cube *cube)
 {
-	int				hit;
-	t_raycasting	*ray;
+	int	hit;
 
 	hit = 0;
-	ray = &cube->grafic->raycasting;
 	while (hit == 0)
 	{
 		if (ray->sideDistX < ray->sideDistY)
@@ -75,10 +73,20 @@ static void	ray_hits(t_cube *cube)
 		if (cube->map[ray->mapY][ray->mapX] != '0')
 			hit = 1;
 	}
+}
+
+static void	ray_hits(t_cube *cube)
+{
+	t_raycasting	*ray;
+
+	ray = &cube->grafic->raycasting;
+	ray_hit_loop(ray, cube);
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - cube->pj.pos_x + (1 - ray->stepX) / 2) / ray->raydir_x;
+		ray->perpWallDist = (ray->mapX - cube->pj.pos_x + (1 - ray->stepX) / 2)
+			/ ray->raydir_x;
 	else
-		ray->perpWallDist = (ray->mapY - cube->pj.pos_y + (1 - ray->stepY) / 2) / ray->raydir_y;
+		ray->perpWallDist = (ray->mapY - cube->pj.pos_y + (1 - ray->stepY) / 2)
+			/ ray->raydir_y;
 }
 
 void	raycasting_calcs(int x, t_cube *cube)

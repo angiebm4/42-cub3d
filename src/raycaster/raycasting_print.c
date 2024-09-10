@@ -2,18 +2,22 @@
 
 void	raycasting_print_pixels(t_cube *cube)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_pixel	*ceiling_pixel;
+	t_pixel	*floor_pixel;
 
 	x = -1;
+	ceiling_pixel = &cube->grafic->default_pixels[CEILING_PIXEL];
+	floor_pixel = &cube->grafic->default_pixels[FLOOR_PIXEL];
 	while (++x < WINDOW_WIDTH)
 	{
 		y = -1;
 		while (++y < WINDOW_HEIGTH / 2)
-			ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[CEILING_PIXEL]), cube);
+			ray_draw_pixel(x, y, pixel_conversor(ceiling_pixel), cube);
 		while (y < WINDOW_HEIGTH)
 		{
-			ray_draw_pixel(x, y, pixel_conversor(&cube->grafic->default_pixels[FLOOR_PIXEL]), cube);
+			ray_draw_pixel(x, y, pixel_conversor(floor_pixel), cube);
 			y++;
 		}
 	}
@@ -26,7 +30,8 @@ static void	ray_print_texture_loop(int x, t_cube *cube)
 
 	ray = &cube->grafic->raycasting;
 	ray->step = 1.0 * TEXTURE_DIMENSION / ray->lineHeight;
-	ray->texPos = (ray->startPoint - WINDOW_HEIGTH / 2 + ray->lineHeight / 2) * ray->step;
+	ray->texPos = (ray->startPoint - WINDOW_HEIGTH / 2 + ray->lineHeight / 2)
+		* ray->step;
 	y = ray->startPoint;
 	while (y <= ray->endPoint)
 	{
@@ -57,7 +62,8 @@ void	ray_select_texture(t_cube *cube)
 		else
 			ray->texture = &cube->grafic->textures[SOUTH_TEXTURE];
 	}
-	if (cube->map[cube->grafic->raycasting.mapY][cube->grafic->raycasting.mapX] == 'D')
+	if (cube->map[cube->grafic->raycasting.mapY]
+		[cube->grafic->raycasting.mapX] == 'D')
 		ray->texture = &cube->grafic->textures[DOOR_TEXTURE];
 }
 
