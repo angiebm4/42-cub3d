@@ -31,11 +31,12 @@ static void	init_vision(int x, int y, t_cube *cube)
 		set_vision((t_player_pos){-1.0, 0.0, 0.0, -0.66}, &cube->pj);
 }
 
-void	init_player(t_cube *cube, t_parsed_data *parsed)
+void	player_init(t_cube *cube, t_parsed_data *parsed)
 {
 	int	x;
 	int	y;
 
+	ft_bzero(&cube->pj, sizeof(t_player));
 	init_position(&x, &y, parsed);
 	cube->pj.pos_x = x + 0.5;
 	cube->pj.pos_y = y + 0.5;

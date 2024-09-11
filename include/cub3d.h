@@ -184,12 +184,12 @@ typedef struct	s_player_pos
 
 struct   s_cube
 {
-	char    **map;		/* Map data*/
+	char    	**map;		/* Map data*/
 
-	int		frame;
-	int		frame_duration;
+	int			frame;
+	int			frame_duration;
 
-	t_mlx   *grafic;	/* Grafic data */
+	t_mlx   	*grafic;	/* Grafic data */
 	t_player	pj;
 	t_list		*doors;	/* Doors */
 };
@@ -322,11 +322,14 @@ int		load_image(char *path, t_image *image, t_mlx *mlx, int dim);
 int		create_image(t_image *image, t_mlx *mlx, int width, int heigth);
 char	*get_pixel(t_image *image, int x, int y);
 
-/* INIT GRAFIC */
-void	cube_mlx_init(t_cube *cube, t_parsed_data *parsed);
-
-/* Init player */
-void    init_player(t_cube *cube, t_parsed_data *parsed);
+/* Init data */
+void	cube_init(t_cube *cube, t_parsed_data *parsed);
+void    textures_init(t_cube *cube, t_parsed_data *parsed);
+void    player_init(t_cube *cube, t_parsed_data *parsed);
+void    map_init(t_cube *cube, t_parsed_data *parsed);
+void    doors_init(t_cube *cube, t_parsed_data *parsed);
+void	screen_init(t_cube *cube);
+void	mouse_init(t_cube *cube);
 
 /* HOOKS */
 void    hooking(t_cube *cube);

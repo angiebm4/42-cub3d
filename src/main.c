@@ -12,7 +12,7 @@ int	main(int argc, char *argv[])
 		destroy_parsed(&parsed);
 		return (0);
 	}
-	cube_mlx_init(&cube, &parsed);
+	cube_init(&cube, &parsed);
 	hooking(&cube);
 	mlx_loop(cube.grafic->mlx);
 	return (0);
