@@ -19,7 +19,7 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/cube_init:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass
+VPATH = src:src/cube_init:src/cube_destroy:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass
 
 SRC =		main.c
 
@@ -31,6 +31,7 @@ INIT =		cube_init.c		\
 			screen_init.c	\
 			textures_init.c
 
+DESTROY =	cube_destroy.c
 
 PARSER =	parse.c				\
 			parse_print.c		\
@@ -78,6 +79,7 @@ UTILS =		line_utils.c	\
 OBJ_DIR = obj/
 OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(INIT:%.c=$(OBJ_DIR)%.o) \
+		$(DESTROY:%.c=$(OBJ_DIR)%.o) \
 		$(PARSER:%.c=$(OBJ_DIR)%.o) \
 		$(GRAFIC:%.c=$(OBJ_DIR)%.o)	\
 		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
@@ -142,7 +144,7 @@ run: all
 
 v: valgrind
 valgrind: all
-	@valgrind --track-origins=yes ./$(NAME) $(TRY_MAP)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(TRY_MAP)
 
 t: test
 test: debug

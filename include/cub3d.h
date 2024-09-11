@@ -227,8 +227,6 @@ struct	s_raycasting
 	int	startPoint;
 	int	endPoint;
 	int color;
-
-
 };
 
 struct	s_door
@@ -330,6 +328,9 @@ void    map_init(t_cube *cube, t_parsed_data *parsed);
 void    doors_init(t_cube *cube, t_parsed_data *parsed);
 void	screen_init(t_cube *cube);
 void	mouse_init(t_cube *cube);
+
+/* Delete data */
+void	cube_destroy(t_cube *cube);
 
 /* HOOKS */
 void    hooking(t_cube *cube);
