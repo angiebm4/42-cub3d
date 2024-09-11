@@ -18,7 +18,7 @@ int	create_image(t_image *image, t_mlx *mlx, int width, int heigth)
 }
 
 int	load_image(char *path, t_image *image, t_mlx *mlx, int dim)
-{	
+{
 	int	width;
 	int	height;
 

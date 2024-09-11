@@ -32,7 +32,7 @@ void	parse_file(t_parsed_data *parsed)
 
 	buffer = get_next_line(parsed->fd);
 	while (buffer)
-	{	
+	{
 		if (!line_can_omitted(buffer))
 		{
 			if (!add_placeholder(parsed, buffer))

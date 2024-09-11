@@ -174,6 +174,14 @@ struct	s_player
 	double	plane_y;
 };
 
+typedef struct	s_player_pos
+{
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+} t_player_pos;
+
 struct   s_cube
 {
 	char    **map;		/* Map data*/
