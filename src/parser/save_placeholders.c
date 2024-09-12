@@ -1,5 +1,42 @@
 #include "../../include/cub3d.h"
 
+/******************************************************/
+
+void	move_arguments(char **buffer, int replace)
+{
+	while (buffer[replace])
+	{
+		buffer[replace] = buffer[replace + 1];
+		replace++;
+	}
+}
+
+void	trim_arguments(t_parsed_data *parsed, char **buffer)
+{
+	int		i;
+	char	*trimmed;
+
+	i = 1;
+	while (buffer[i])
+	{
+		trimmed = ft_strtrim(buffer[i], EMPTY_SET);
+		if (!trimmed)
+			parse_error(ERROR_MALLOC, parsed, 0);
+		if (!trimmed[0])
+		{
+			free(trimmed);
+			free(buffer[i]);
+			move_arguments(buffer, i);
+			continue ;
+		}
+		free(buffer[i]);
+		buffer[i] = trimmed;
+		i++;
+	}
+}
+
+/******************************************************/
+
 void	save_texture(t_parsed_data *parsed, char *filename, int ph)
 {
 	if (check_extension(filename, TEXTURE_EXTENSION))
@@ -29,6 +66,7 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 
 int	save_placeholder(t_parsed_data *parsed, char **buffer, int ph)
 {
+	trim_arguments(parsed, buffer);
 	if (ph < 0 || map_length(buffer) != 2)
 		return (0);
 	if (ph < TEXTURES_COUNT)
