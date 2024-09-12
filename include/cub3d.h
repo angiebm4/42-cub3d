@@ -193,7 +193,7 @@ struct	s_cube
 	int			frame_duration;
 
 	/* Grafic data */
-	t_mlx		*grafic;
+	t_mlx		*graphic;
 
 	/* Player data */
 	t_player	pj;
@@ -208,32 +208,32 @@ struct	s_raycasting
 	double	raydir_x;
 	double	raydir_y;
 
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 
-	double	deltaDistX;
-	double	deltaDistY;
+	double	delta_dist_x;
+	double	delta_dist_y;
 
-	double	sideDistX;
-	double	sideDistY;
+	double	side_dist_x;
+	double	side_dist_y;
 
 	double	perpWallDist;
 
-	int		stepX;
-	int		stepY;
+	int		step_x;
+	int		step_y;
 
 	int		side;
 
-	double	wallX;
-	int		texX;
-	int		texY;
-	double	texPos;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	tex_pos;
 	t_image	*texture;
 	double	step;
 
-	int		lineHeight;
-	int		startPoint;
-	int		endPoint;
+	int		line_height;
+	int		start_point;
+	int		end_point;
 	int		color;
 };
 
@@ -360,6 +360,8 @@ void	raycasting_calcs(int x, t_cube *cube);
 void	raycasting_print_pixels(t_cube *cube);
 void	raycasting_print_textures(int x, t_cube *cube);
 void	ray_draw_pixel(int x, int y, int color, t_cube *cube);
+void	ray_rays_directions_x(t_cube *cube);
+void	ray_rays_directions_y(t_cube *cube);
 
 /* Compass */
 int		load_compass(t_cube *cube);

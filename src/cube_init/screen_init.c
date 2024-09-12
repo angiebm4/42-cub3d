@@ -2,17 +2,17 @@
 
 void	screen_init(t_cube *cube)
 {
-	cube->grafic = ft_calloc(1, sizeof(t_mlx));
-	if (cube->grafic == NULL)
+	cube->graphic = ft_calloc(1, sizeof(t_mlx));
+	if (cube->graphic == NULL)
 		cube_destroy(cube, 1);
-	cube->grafic->mlx = mlx_init();
-	if (cube->grafic->mlx == NULL)
+	cube->graphic->mlx = mlx_init();
+	if (cube->graphic->mlx == NULL)
 		cube_destroy(cube, 1);
-	cube->grafic->win = mlx_new_window(cube->grafic->mlx,
+	cube->graphic->win = mlx_new_window(cube->graphic->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
-	if (cube->grafic->win == NULL)
+	if (cube->graphic->win == NULL)
 		cube_destroy(cube, 1);
-	if (create_image(&cube->grafic->screen, cube->grafic,
+	if (create_image(&cube->graphic->screen, cube->graphic,
 			WINDOW_WIDTH, WINDOW_HEIGTH))
 		cube_destroy(cube, 1);
 }

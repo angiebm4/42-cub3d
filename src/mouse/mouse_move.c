@@ -11,7 +11,7 @@ static void	move_fixed(int x, t_cube *cube)
 		angle = delta_x * (MOUSE_ROTATION_SPEED);
 		rotate_player(angle, &cube->pj);
 	}
-	mlx_mouse_move(cube->grafic->mlx, cube->grafic->win,
+	mlx_mouse_move(cube->graphic->mlx, cube->graphic->win,
 		WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
 }
 
@@ -21,7 +21,7 @@ static void	move_not_fixed(int x, t_cube *cube)
 	double	angle;
 	t_mouse	*ray;
 
-	ray = &cube->grafic->mouse;
+	ray = &cube->graphic->mouse;
 	if (ray->lastX != -1)
 	{
 		delta_x = x - ray->lastX;
@@ -37,7 +37,7 @@ static void	move_not_fixed(int x, t_cube *cube)
 int	mouse_move(int x, int y, t_cube *cube)
 {
 	(void)y;
-	if (cube->grafic->mouse.fixed)
+	if (cube->graphic->mouse.fixed)
 		move_fixed(x, cube);
 	else
 		move_not_fixed(x, cube);

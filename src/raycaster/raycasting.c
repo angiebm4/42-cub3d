@@ -6,7 +6,7 @@ void	raycasting(t_cube *cube)
 	t_mlx	*mlx;
 
 	x = -1;
-	mlx = cube->grafic;
+	mlx = cube->graphic;
 	raycasting_print_pixels(cube);
 	while (++x < WINDOW_WIDTH)
 	{

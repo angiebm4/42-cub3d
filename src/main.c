@@ -14,6 +14,6 @@ int	main(int argc, char *argv[])
 	}
 	cube_init(&cube, &parsed);
 	hooking(&cube);
-	mlx_loop(cube.grafic->mlx);
+	mlx_loop(cube.graphic->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@ void	ray_draw_pixel(int x, int y, int color, t_cube *cube)
 
 	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGTH)
 	{
-		pixel = get_pixel(&cube->grafic->screen, x, y);
+		pixel = get_pixel(&cube->graphic->screen, x, y);
 		*(unsigned int *)pixel = color;
 	}
 }

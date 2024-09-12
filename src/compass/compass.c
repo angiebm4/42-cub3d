@@ -11,17 +11,17 @@ void	compass(t_cube *cube)
 	if (fabs(y) > fabs(x))
 	{
 		if (y < 0)
-			image = &cube->grafic->compass[NORTH_COMPASS_F1 + cube->frame];
+			image = &cube->graphic->compass[NORTH_COMPASS_F1 + cube->frame];
 		else
-			image = &cube->grafic->compass[SOUTH_COMPASS_F1 + cube->frame];
+			image = &cube->graphic->compass[SOUTH_COMPASS_F1 + cube->frame];
 	}
 	else
 	{
 		if (x > 0)
-			image = &cube->grafic->compass[EAST_COMPASS_F1 + cube->frame];
+			image = &cube->graphic->compass[EAST_COMPASS_F1 + cube->frame];
 		else
-			image = &cube->grafic->compass[WEST_COMPASS_F1 + cube->frame];
+			image = &cube->graphic->compass[WEST_COMPASS_F1 + cube->frame];
 	}
-	mlx_put_image_to_window(cube->grafic->mlx, cube->grafic->win, image->img,
+	mlx_put_image_to_window(cube->graphic->mlx, cube->graphic->win, image->img,
 		20, WINDOW_HEIGTH - COMPASS_SIZE - 20);
 }

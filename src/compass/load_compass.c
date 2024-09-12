@@ -10,7 +10,7 @@ int	load_compass(t_cube *cube)
 	int		result;
 	t_mlx	*graphic;
 
-	graphic = cube->grafic;
+	graphic = cube->graphic;
 	result = load_compass_image(NORTH_COMPASS1, NORTH_COMPASS_F1, graphic);
 	result += load_compass_image(NORTH_COMPASS2, NORTH_COMPASS_F2, graphic);
 	result += load_compass_image(SOUTH_COMPASS1, SOUTH_COMPASS_F1, graphic);

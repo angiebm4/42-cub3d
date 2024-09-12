@@ -8,7 +8,7 @@ void	cube_init(t_cube *cube, t_parsed_data *parsed)
 	textures_init(cube, parsed);
 	doors_init(cube, parsed);
 	player_init(cube, parsed);
-	ft_bzero(&cube->grafic->raycasting, sizeof(t_raycasting));
+	ft_bzero(&cube->graphic->raycasting, sizeof(t_raycasting));
 	mouse_init(cube);
 	if (load_compass(cube))
 		cube_destroy(cube, 1);

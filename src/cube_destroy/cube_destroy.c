@@ -15,17 +15,17 @@ static void	clean_images(t_image *images, size_t size, void *mlx)
 
 static void	screen_destroy(t_cube *cube)
 {
-	mlx_loop_end(cube->grafic->mlx);
-	if (cube->grafic->screen.img)
+	mlx_loop_end(cube->graphic->mlx);
+	if (cube->graphic->screen.img)
 	{
-		mlx_destroy_image(cube->grafic->mlx, cube->grafic->screen.img);
-		mlx_destroy_window(cube->grafic->mlx, cube->grafic->win);
+		mlx_destroy_image(cube->graphic->mlx, cube->graphic->screen.img);
+		mlx_destroy_window(cube->graphic->mlx, cube->graphic->win);
 	}
-	clean_images(cube->grafic->textures, TEXTURES_COUNT, cube->grafic->mlx);
-	clean_images(cube->grafic->compass, COMPASS_TEXTURES, cube->grafic->mlx);
-	mlx_destroy_display(cube->grafic->mlx);
-	free(cube->grafic->mlx);
-	free(cube->grafic);
+	clean_images(cube->graphic->textures, TEXTURES_COUNT, cube->graphic->mlx);
+	clean_images(cube->graphic->compass, COMPASS_TEXTURES, cube->graphic->mlx);
+	mlx_destroy_display(cube->graphic->mlx);
+	free(cube->graphic->mlx);
+	free(cube->graphic);
 }
 
 void	cube_destroy(t_cube *cube, int ret_value)
@@ -34,7 +34,7 @@ void	cube_destroy(t_cube *cube, int ret_value)
 		ft_free_split(cube->map);
 	if (cube->doors)
 		ft_lstclear(&cube->doors, free);
-	if (cube->grafic->mlx)
+	if (cube->graphic->mlx)
 		screen_destroy(cube);
 	if (ret_value >= 0)
 		exit(ret_value);

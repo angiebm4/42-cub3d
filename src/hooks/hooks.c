@@ -18,8 +18,8 @@ int	key_hooks(int keycode, t_cube *cube)
 
 void	hooking(t_cube *cube)
 {
-	mlx_hook(cube->grafic->win, ON_KEYDOWN, 1L << 0, key_hooks, cube);
-	mlx_hook(cube->grafic->win, ON_DESTROY, 0, end_program, cube);
-	mlx_hook(cube->grafic->win, ON_MOUSEMOVE, 1L << 6, mouse_move, cube);
-	mlx_loop_hook(cube->grafic->mlx, render, cube);
+	mlx_hook(cube->graphic->win, ON_KEYDOWN, 1L << 0, key_hooks, cube);
+	mlx_hook(cube->graphic->win, ON_DESTROY, 0, end_program, cube);
+	mlx_hook(cube->graphic->win, ON_MOUSEMOVE, 1L << 6, mouse_move, cube);
+	mlx_loop_hook(cube->graphic->mlx, render, cube);
 }

@@ -60,9 +60,10 @@ HOOKS =		hooks.c		\
 			render.c	\
 			mini_map.c
 
-RAYCASTING =	raycasting.c			\
-				raycasting_calcs.c	\
-				raycasting_print.c	\
+RAYCASTING =	raycasting.c				\
+				raycasting_calcs.c			\
+				raycasting_calcs_utils.c	\
+				raycasting_print.c			\
 				raycasting_print_utils.c
 
 COMPASS =	compass.c	\

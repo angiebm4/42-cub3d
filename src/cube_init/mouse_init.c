@@ -2,8 +2,8 @@
 
 void	mouse_init(t_cube *cube)
 {
-	ft_bzero(&cube->grafic->mouse, sizeof(t_mouse));
-	cube->grafic->mouse.lastX = -1;
-	cube->grafic->mouse.mouse_vision = 1;
-	cube->grafic->mouse.fixed = 0;
+	ft_bzero(&cube->graphic->mouse, sizeof(t_mouse));
+	cube->graphic->mouse.lastX = -1;
+	cube->graphic->mouse.mouse_vision = 1;
+	cube->graphic->mouse.fixed = 0;
 }

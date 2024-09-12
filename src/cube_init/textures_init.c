@@ -13,8 +13,8 @@ void	textures_init(t_cube *cube, t_parsed_data *parsed)
 			i++;
 			continue ;
 		}
-		res = load_image(parsed->textures_name[i], &cube->grafic->textures[i],
-				cube->grafic, TEXTURE_DIMENSION);
+		res = load_image(parsed->textures_name[i], &cube->graphic->textures[i],
+				cube->graphic, TEXTURE_DIMENSION);
 		if (res)
 		{
 			ft_printf("%sINVALID TEXTURE%s\n", RED, CLEAR);
@@ -25,6 +25,6 @@ void	textures_init(t_cube *cube, t_parsed_data *parsed)
 	}
 	i = -1;
 	while (++i < PIXELS_COUNT)
-		pixel_copy(&cube->grafic->default_pixels[i],
+		pixel_copy(&cube->graphic->default_pixels[i],
 			&parsed->default_pixels[i]);
 }

@@ -13,7 +13,7 @@ void    print_ch(t_cube *cube, char ch, int x, int y)
         color = H_BG_ORANGE;
 
 
-    mlx_pixel_put(cube->grafic->mlx, cube->grafic->win, x, y, color);
+    mlx_pixel_put(cube->graphic->mlx, cube->graphic->win, x, y, color);
 }
 
 void    mini_map(t_cube *cube)
@@ -48,7 +48,7 @@ void    mini_map(t_cube *cube)
                 iterable[0] = -1;
                 while (++iterable[0] < INCREMENT_VALUE_X)
                 {
-                    // mlx_pixel_put(cube->grafic->mlx, cube->grafic->win, start_x + iterable[0], start_y + iterable[1], H_BG_GREENFOSFI);
+                    // mlx_pixel_put(cube->graphic->mlx, cube->graphic->win, start_x + iterable[0], start_y + iterable[1], H_BG_GREENFOSFI);
                     print_ch(cube, cube->map[i][j], start_x + iterable[0], start_y + iterable[1]);
                 }
             }

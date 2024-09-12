@@ -4,51 +4,30 @@ static void	ray_initial_data(int x, t_cube *cube)
 {
 	t_raycasting	*ray;
 
-	ray = &cube->grafic->raycasting;
+	ray = &cube->graphic->raycasting;
 	ray->cameraX = 2 * x / (double)WINDOW_WIDTH - 1;
 	ray->raydir_x = cube->pj.dir_x + cube->pj.plane_x * ray->cameraX;
 	ray->raydir_y = cube->pj.dir_y + cube->pj.plane_y * ray->cameraX;
-	ray->mapX = (int) cube->pj.pos_x;
-	ray->mapY = (int) cube->pj.pos_y;
+	ray->map_x = (int) cube->pj.pos_x;
+	ray->map_y = (int) cube->pj.pos_y;
 	if (ray->raydir_x == 0)
-		ray->deltaDistX = 1e30;
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->raydir_x);
+		ray->delta_dist_x = fabs(1 / ray->raydir_x);
 	if (ray->raydir_y == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->raydir_y);
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
 	if (ray->raydir_y == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->raydir_y);
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
 }
 
 static void	ray_rays_directions(t_cube *cube)
 {
-	t_raycasting	*ray;
-
-	ray = &cube->grafic->raycasting;
-	if (ray->raydir_x < 0)
-	{
-		ray->stepX = -1;
-		ray->sideDistX = (cube->pj.pos_x - ray->mapX) * ray->deltaDistX;
-	}
-	else
-	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - cube->pj.pos_x) * ray->deltaDistX;
-	}
-	if (ray->raydir_y < 0)
-	{
-		ray->stepY = -1;
-		ray->sideDistY = (cube->pj.pos_y - ray->mapY) * ray->deltaDistY;
-	}
-	else
-	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - cube->pj.pos_y) * ray->deltaDistY;
-	}
+	ray_rays_directions_x(cube);
+	ray_rays_directions_y(cube);
 }
 
 static void	ray_hit_loop(t_raycasting *ray, t_cube *cube)
@@ -58,19 +37,19 @@ static void	ray_hit_loop(t_raycasting *ray, t_cube *cube)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (cube->map[ray->mapY][ray->mapX] != '0')
+		if (cube->map[ray->map_y][ray->map_x] != '0')
 			hit = 1;
 	}
 }
@@ -79,14 +58,14 @@ static void	ray_hits(t_cube *cube)
 {
 	t_raycasting	*ray;
 
-	ray = &cube->grafic->raycasting;
+	ray = &cube->graphic->raycasting;
 	ray_hit_loop(ray, cube);
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - cube->pj.pos_x + (1 - ray->stepX) / 2)
-			/ ray->raydir_x;
+		ray->perpWallDist = (ray->map_x - cube->pj.pos_x + \
+			(1 - ray->step_x) / 2) / ray->raydir_x;
 	else
-		ray->perpWallDist = (ray->mapY - cube->pj.pos_y + (1 - ray->stepY) / 2)
-			/ ray->raydir_y;
+		ray->perpWallDist = (ray->map_y - cube->pj.pos_y + \
+			(1 - ray->step_y) / 2) / ray->raydir_y;
 }
 
 void	raycasting_calcs(int x, t_cube *cube)
