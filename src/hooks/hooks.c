@@ -2,8 +2,8 @@
 
 int	end_program(t_cube *cube)
 {
-	cube_destroy(cube);
-	exit(0);
+	cube_destroy(cube, 0);
+	return (0);
 }
 
 int	key_hooks(int keycode, t_cube *cube)
