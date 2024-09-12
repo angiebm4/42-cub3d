@@ -125,22 +125,23 @@
 # define EAST_COMPASS_F2	7
 # define COMPASS_TEXTURES	8
 
-#define COMPASS_SIZE	128
+# define COMPASS_SIZE	128
 
-typedef struct s_cube  		t_cube;
-typedef struct s_mlx   		t_mlx;
-typedef struct s_pixel 		t_pixel;
-typedef struct s_player 	t_player;
-typedef struct s_image 		t_image;
+typedef struct s_cube		t_cube;
+typedef struct s_mlx		t_mlx;
+typedef struct s_pixel		t_pixel;
+typedef struct s_player		t_player;
+typedef struct s_image		t_image;
 typedef struct s_raycasting	t_raycasting;
-typedef struct s_mouse 		t_mouse;
+typedef struct s_mouse		t_mouse;
 typedef struct s_door		t_door;
+typedef struct s_player_pos	t_player_pos;
 
-struct  s_pixel
+struct	s_pixel
 {
-	int red;	/* r */
-	int green;	/* g */
-	int blue;	/* b */
+	int	red;
+	int	green;
+	int	blue;
 };
 
 struct	s_mouse
@@ -174,24 +175,31 @@ struct	s_player
 	double	plane_y;
 };
 
-typedef struct	s_player_pos
+struct	s_player_pos
 {
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-} t_player_pos;
+};
 
-struct   s_cube
+struct	s_cube
 {
-	char    	**map;		/* Map data*/
+	/* Map data*/
+	char		**map;
 
+	/* Frames data */
 	int			frame;
 	int			frame_duration;
 
-	t_mlx   	*grafic;	/* Grafic data */
+	/* Grafic data */
+	t_mlx		*grafic;
+
+	/* Player data */
 	t_player	pj;
-	t_list		*doors;	/* Doors */
+
+	/* Doors */
+	t_list		*doors;
 };
 
 struct	s_raycasting
@@ -211,8 +219,8 @@ struct	s_raycasting
 
 	double	perpWallDist;
 
-	int 	stepX;
-	int 	stepY;
+	int		stepX;
+	int		stepY;
 
 	int		side;
 
@@ -223,10 +231,10 @@ struct	s_raycasting
 	t_image	*texture;
 	double	step;
 
-	int	lineHeight;
-	int	startPoint;
-	int	endPoint;
-	int color;
+	int		lineHeight;
+	int		startPoint;
+	int		endPoint;
+	int		color;
 };
 
 struct	s_door
@@ -236,38 +244,42 @@ struct	s_door
 	int	open;
 };
 
-struct  s_mlx
+struct	s_mlx
 {
-	void    *mlx;		/* Screen reference */
-	void    *win;		/* Window reference*/
-	
-	t_mouse	mouse;
+	void			*mlx;
+	void			*win;
 
-	t_image	screen;
+	t_mouse			mouse;
+
+	t_image			screen;
 
 	t_raycasting	raycasting;
 
-	t_image		textures[TEXTURES_COUNT];		/* Textures */
-	t_pixel     default_pixels[PIXELS_COUNT];	/* Default pixels*/
-	t_image		compass[COMPASS_TEXTURES];		/* Compass textures */
+	t_image			textures[TEXTURES_COUNT];		/* Textures */
+	t_pixel			default_pixels[PIXELS_COUNT];	/* Default pixels*/
+	t_image			compass[COMPASS_TEXTURES];		/* Compass textures */
 };
-
 
 /*_____________________________________________________________________*/
 
 typedef struct s_parser
 {
+	/* Config file data */
 	char	*config_filename;
-	int		fd;								/* File descriptor of the config file */
-	
-	char	*textures_name[TEXTURES_COUNT];	/* Name of the textures paths */
-	t_pixel	default_pixels[PIXELS_COUNT];	/* Default pixels*/
+	int		fd;
 
+	/* Textures paths */
+	char	*textures_name[TEXTURES_COUNT];
+
+	/* Pixels data */
+	t_pixel	default_pixels[PIXELS_COUNT];
+
+	/* Doors loaded*/
 	t_list	*doors;
 
-	char	**map;							/* Map readed */
+	/* Map read */
+	char	**map;
 }				t_parsed_data;
-
 
 /* Principal parser struct functions */
 void	parse(int argc, char **argv, t_parsed_data *parsed);
@@ -281,7 +293,7 @@ void	parse_check_pixel(t_pixel *pixel, char **check);
 int		check_extension(char *buffer, char *extension);
 
 /* Function to save the config data */
-void    parse_file(t_parsed_data *parsed);
+void	parse_file(t_parsed_data *parsed);
 int		save_placeholder(t_parsed_data *parsed, char **buffer, int ph);
 char	**save_map(t_parsed_data *parsed, char *buffer);
 void	save_doors(t_parsed_data *parsed);
@@ -301,9 +313,9 @@ int		search_map(char **map, char ch, int *x, int *y);
 size_t	map_length(char **matrix);
 
 /* Line utils */
-int 	line_is_empty(char *line, char *empty_set);
-int 	line_is_comment(char *line, char *comment_set);
-int 	line_is_placeholder(char *supposed_ph, t_parsed_data *parsed);
+int		line_is_empty(char *line, char *empty_set);
+int		line_is_comment(char *line, char *comment_set);
+int		line_is_placeholder(char *supposed_ph, t_parsed_data *parsed);
 int		line_can_omitted(char *line);
 
 /*_____________________________________________________________________*/
@@ -313,7 +325,7 @@ void	reset_pixel(t_pixel *pixel);
 int		pixel_is_valid(t_pixel *pixel);
 int		pixel_is_default(t_pixel *pixel);
 void	pixel_copy(t_pixel *dest, t_pixel *src);
-int	pixel_conversor(t_pixel *pixel);
+int		pixel_conversor(t_pixel *pixel);
 
 /* Image utils */
 int		load_image(char *path, t_image *image, t_mlx *mlx, int dim);
@@ -322,10 +334,10 @@ char	*get_pixel(t_image *image, int x, int y);
 
 /* Init data */
 void	cube_init(t_cube *cube, t_parsed_data *parsed);
-void    textures_init(t_cube *cube, t_parsed_data *parsed);
-void    player_init(t_cube *cube, t_parsed_data *parsed);
-void    map_init(t_cube *cube, t_parsed_data *parsed);
-void    doors_init(t_cube *cube, t_parsed_data *parsed);
+void	textures_init(t_cube *cube, t_parsed_data *parsed);
+void	player_init(t_cube *cube, t_parsed_data *parsed);
+void	map_init(t_cube *cube, t_parsed_data *parsed);
+void	doors_init(t_cube *cube, t_parsed_data *parsed);
 void	screen_init(t_cube *cube);
 void	mouse_init(t_cube *cube);
 
@@ -333,11 +345,11 @@ void	mouse_init(t_cube *cube);
 void	cube_destroy(t_cube *cube, int ret_value);
 
 /* HOOKS */
-void    hooking(t_cube *cube);
+void	hooking(t_cube *cube);
 int		end_program(t_cube *cube);
 
 /* MINI MAP */
-void    mini_map(t_cube *cube);
+void	mini_map(t_cube *cube);
 
 /* Render */
 int		render(t_cube *cube);
@@ -350,8 +362,8 @@ void	raycasting_print_textures(int x, t_cube *cube);
 void	ray_draw_pixel(int x, int y, int color, t_cube *cube);
 
 /* Compass */
-int	load_compass(t_cube *cube);
-void		compass(t_cube *cube);
+int		load_compass(t_cube *cube);
+void	compass(t_cube *cube);
 
 /* Player moves */
 void	moves(int keycode, t_cube *cube);

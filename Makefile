@@ -19,7 +19,17 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/cube_init:src/cube_destroy:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass:src/hooks
+VPATH = src:					\
+		src/cube_init:			\
+		src/cube_destroy:		\
+		src/parser:				\
+		src/utils:				\
+		src/raycaster:			\
+		src/moves:				\
+		src/mouse:				\
+		src/interactions:		\
+		src/compass:			\
+		src/hooks
 
 SRC =		main.c
 
