@@ -19,7 +19,7 @@ HEADERS_FOLDER =	include/
 HEADERS_NAME =		cub3d.h
 HEADERS=$(HEADERS_NAME:%.h=$(HEADERS_FOLDER)%.h)
 
-VPATH = src:src/cube_init:src/cube_destroy:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass
+VPATH = src:src/cube_init:src/cube_destroy:src/parser:src/utils:src/raycaster:src/moves:src/mouse:src/interactions:src/compass:src/hooks
 
 SRC =		main.c
 
@@ -46,10 +46,9 @@ PARSER =	parse.c				\
 			check_graphic.c		\
 			clean_map.c
 
-GRAFIC =	mini_map.c	\
-			hooks.c
-			
-RENDER =	render.c
+HOOKS =		hooks.c		\
+			render.c	\
+			mini_map.c
 
 RAYCASTING =	raycasting.c			\
 				raycasting_calcs.c	\
@@ -81,8 +80,7 @@ OBJ =	$(SRC:%.c=$(OBJ_DIR)%.o) \
 		$(INIT:%.c=$(OBJ_DIR)%.o) \
 		$(DESTROY:%.c=$(OBJ_DIR)%.o) \
 		$(PARSER:%.c=$(OBJ_DIR)%.o) \
-		$(GRAFIC:%.c=$(OBJ_DIR)%.o)	\
-		$(RENDER:%.c=$(OBJ_DIR)%.o)	\
+		$(HOOKS:%.c=$(OBJ_DIR)%.o)	\
 		$(RAYCASTING:%.c=$(OBJ_DIR)%.o)	\
 		$(COMPASS:%.c=$(OBJ_DIR)%.o)	\
 		$(MOVES:%.c=$(OBJ_DIR)%.o)	\

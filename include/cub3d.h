@@ -330,7 +330,7 @@ void	screen_init(t_cube *cube);
 void	mouse_init(t_cube *cube);
 
 /* Delete data */
-void	cube_destroy(t_cube *cube);
+void	cube_destroy(t_cube *cube, int ret_value);
 
 /* HOOKS */
 void    hooking(t_cube *cube);

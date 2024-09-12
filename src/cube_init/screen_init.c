@@ -4,15 +4,15 @@ void	screen_init(t_cube *cube)
 {
 	cube->grafic = ft_calloc(1, sizeof(t_mlx));
 	if (cube->grafic == NULL)
-		exit(1); /* TODO: malloc error*/
+		cube_destroy(cube, 1);
 	cube->grafic->mlx = mlx_init();
 	if (cube->grafic->mlx == NULL)
-		exit(1); /* TODO: error  create mlx*/
+		cube_destroy(cube, 1);
 	cube->grafic->win = mlx_new_window(cube->grafic->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGTH, PROGRAM_NAME);
 	if (cube->grafic->win == NULL)
-		exit(1); /* TODO: error win create*/
+		cube_destroy(cube, 1);
 	if (create_image(&cube->grafic->screen, cube->grafic,
 			WINDOW_WIDTH, WINDOW_HEIGTH))
-		exit(1); /* TODO: Error */
+		cube_destroy(cube, 1);
 }

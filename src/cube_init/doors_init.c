@@ -11,13 +11,13 @@ void	doors_init(t_cube *cube, t_parsed_data *parsed)
 	{
 		door = ft_calloc(1, sizeof(t_door));
 		if (!door)
-			exit(1); /* TODO: Check malloc */
+			cube_destroy(cube, 1);
 		door->x = ((t_door *)it->content)->x;
 		door->y = ((t_door *)it->content)->y;
 		door->open = ((t_door *)it->content)->open;
 		node = ft_lstnew(door);
 		if (!node)
-			exit(1); /* TODO: Check malloc */
+			cube_destroy(cube, 1);
 		ft_lstadd_back(&cube->doors, node);
 		it = it->next;
 	}
