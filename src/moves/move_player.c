@@ -2,16 +2,17 @@
 
 void	move_player(int inc, t_cube *cube)
 {
-	
-	double		posX;
-	double		posY;
-	t_player	*player = &cube->pj;
+	double		pos_x;
+	double		pos_y;
+	t_player	*player;
 
-	posX = player->posX + inc * player->dirX * MOVE_SPEED;
-	posY = player->posY + inc * player->dirY * MOVE_SPEED;
-
-	if (cube->map[(int)player->posY][(int)(posX + inc * player->dirX * SEPARATOR)] == '0')
-		player->posX = posX;
-	if (cube->map[(int)(posY + inc * player->dirY * SEPARATOR)][(int)player->posX] == '0')
-		player->posY = posY;
+	player = &cube->pj;
+	pos_x = player->pos_x + inc * player->dir_x * MOVE_SPEED;
+	pos_y = player->pos_y + inc * player->dir_y * MOVE_SPEED;
+	if (cube->map[(int)player->pos_y]
+		[(int)(pos_x + inc * player->dir_x * SEPARATOR)] == '0')
+		player->pos_x = pos_x;
+	if (cube->map[(int)(pos_y + inc * player->dir_y * SEPARATOR)]
+		[(int)player->pos_x] == '0')
+		player->pos_y = pos_y;
 }

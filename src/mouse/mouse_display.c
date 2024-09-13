@@ -2,14 +2,14 @@
 
 void	mouse_display(t_cube *cube)
 {
-	if (cube->grafic->mouse.mouse_vision == 1)
+	if (cube->graphic->mouse.mouse_vision == 1)
 	{
-		cube->grafic->mouse.mouse_vision = 0;
-		mlx_mouse_hide(cube->grafic->mlx, cube->grafic->win);
+		cube->graphic->mouse.mouse_vision = 0;
+		mlx_mouse_hide(cube->graphic->mlx, cube->graphic->win);
 	}
 	else
 	{
-		cube->grafic->mouse.mouse_vision = 1;
-		mlx_mouse_show(cube->grafic->mlx, cube->grafic->win);
+		cube->graphic->mouse.mouse_vision = 1;
+		mlx_mouse_show(cube->graphic->mlx, cube->graphic->win);
 	}
 }

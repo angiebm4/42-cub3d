@@ -1,8 +1,44 @@
 #include "../../include/cub3d.h"
 
+/******************************************************/
+
+void	move_arguments(char **buffer, int replace)
+{
+	while (buffer[replace])
+	{
+		buffer[replace] = buffer[replace + 1];
+		replace++;
+	}
+}
+
+void	trim_arguments(t_parsed_data *parsed, char **buffer)
+{
+	int		i;
+	char	*trimmed;
+
+	i = 1;
+	while (buffer[i])
+	{
+		trimmed = ft_strtrim(buffer[i], EMPTY_SET);
+		if (!trimmed)
+			parse_error(ERROR_MALLOC, parsed, 0);
+		if (!trimmed[0])
+		{
+			free(trimmed);
+			free(buffer[i]);
+			move_arguments(buffer, i);
+			continue ;
+		}
+		free(buffer[i]);
+		buffer[i] = trimmed;
+		i++;
+	}
+}
+
+/******************************************************/
+
 void	save_texture(t_parsed_data *parsed, char *filename, int ph)
 {
-	/* If the filename extension is correct, save it */
 	if (check_extension(filename, TEXTURE_EXTENSION))
 		parsed->textures_name[ph] = ft_strdup(filename);
 }
@@ -12,15 +48,10 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 	char	**pixel_spl;
 	int		index;
 
-	/* Get the index on the pixels array */
 	index = ph - TEXTURES_COUNT;
-
-	/* Split the file value by the pixel separator*/
 	pixel_spl = ft_split(buffer, PIXEL_SEPARATOR);
 	if (!pixel_spl)
 		parse_error(ERROR_MALLOC, parsed, 0);
-
-	/* If there are 3 numbers, try to save their values */
 	if (map_length(pixel_spl) == 3)
 	{
 		if (ft_isnumber(pixel_spl[0]))
@@ -35,15 +66,12 @@ static void	save_pixel(t_parsed_data *parsed, char *buffer, int ph)
 
 int	save_placeholder(t_parsed_data *parsed, char **buffer, int ph)
 {
-	/* Check if the placeholder is valid or not */
+	trim_arguments(parsed, buffer);
 	if (ph < 0 || map_length(buffer) != 2)
 		return (0);
-
-	/* Check if the placeholder is a texture or a pixel */
 	if (ph < TEXTURES_COUNT)
 		save_texture(parsed, buffer[1], ph);
 	else
 		save_pixel(parsed, buffer[1], ph);
-
 	return (1);
 }
