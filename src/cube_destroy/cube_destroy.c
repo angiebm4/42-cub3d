@@ -13,6 +13,12 @@ static void	clean_images(t_image *images, size_t size, void *mlx)
 	}
 }
 
+static void	clean_minimap(t_cube *cube)
+{
+	mlx_destroy_image(cube->graphic->mlx, cube->graphic->mini_map->img);
+	free(cube->graphic->mini_map);
+}
+
 static void	screen_destroy(t_cube *cube)
 {
 	mlx_loop_end(cube->graphic->mlx);
@@ -23,6 +29,7 @@ static void	screen_destroy(t_cube *cube)
 	}
 	clean_images(cube->graphic->textures, TEXTURES_COUNT, cube->graphic->mlx);
 	clean_images(cube->graphic->compass, COMPASS_TEXTURES, cube->graphic->mlx);
+	clean_minimap(cube);
 	mlx_destroy_display(cube->graphic->mlx);
 	free(cube->graphic->mlx);
 	free(cube->graphic);

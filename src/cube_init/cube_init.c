@@ -12,5 +12,6 @@ void	cube_init(t_cube *cube, t_parsed_data *parsed)
 	mouse_init(cube);
 	if (load_compass(cube))
 		cube_destroy(cube, 1);
+	minimap_init(cube);
 	destroy_parsed(parsed);
 }

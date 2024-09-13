@@ -12,5 +12,6 @@ int	render(t_cube *cube)
 	frame_increment(cube);
 	raycasting(cube);
 	compass(cube);
+	mini_map(cube);
 	return (0);
 }

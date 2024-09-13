@@ -23,6 +23,13 @@
 # define FRAMES				2
 # define FRAME_DURATION		100
 
+/* MINI MAP MEASURES */
+# define MINIMAP_HEIGHT WINDOW_HEIGTH / 7
+# define MINIMAP_WIDTH WINDOW_WIDTH / 7
+
+# define INCREMENT_VALUE_Y 10
+# define INCREMENT_VALUE_X 10
+
 /* Player moves */
 # define MOVE_SPEED				0.1
 # define ROTATION_SPEED			0.06
@@ -52,7 +59,7 @@
 # define VALID_MAP_CHARS "01NSWED "
 # define PJ_CHARS "NSWE"
 
-/* REXTURES */
+/* TEXTURES */
 # define NORTH_TEXTURE  0
 # define SOUTH_TEXTURE  1
 # define WEST_TEXTURE   2
@@ -187,6 +194,8 @@ struct	s_cube
 {
 	/* Map data*/
 	char		**map;
+	int			map_h;
+	int			map_w;
 
 	/* Frames data */
 	int			frame;
@@ -252,6 +261,8 @@ struct	s_mlx
 	t_mouse			mouse;
 
 	t_image			screen;
+
+	t_image	*mini_map;
 
 	t_raycasting	raycasting;
 
@@ -340,6 +351,7 @@ void	map_init(t_cube *cube, t_parsed_data *parsed);
 void	doors_init(t_cube *cube, t_parsed_data *parsed);
 void	screen_init(t_cube *cube);
 void	mouse_init(t_cube *cube);
+void	minimap_init(t_cube *cube);
 
 /* Delete data */
 void	cube_destroy(t_cube *cube, int ret_value);
@@ -378,6 +390,10 @@ int		mouse_move(int x, int y, t_cube *cube);
 void	mouse_display(t_cube *cube);
 void	mouse_fix(t_mouse *mouse);
 
+/* Leave memory */
+void    clean_trash(t_cube *cube);
+
+/* Interactions */
 void	interactions_manage(int keycode, t_cube *cube);
 void	door_interaction(t_cube *cube);
 
