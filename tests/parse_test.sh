@@ -30,21 +30,23 @@ EXECUTION_RESULT_ANALYSIS=
 EXECUTION_CMD_VALGRIND=
 EXECUTION_RESULT_LEAKS=
 
-
 ##############################################################################
 #                              PRINT FUNCTIONS                               #
 ##############################################################################
 
-
+print_pre()
+{
+	echo -ne "[........] ${C_YELLOW}$EXECUTION_MAP${C_RESET}"
+}
 
 # NOTE: Function to print the result of the execution, saved on the above variables
 print_execution()
 {
 	# Print the line with the final check and the map that is being testing
 	if [ "$EXECUTION_RESULT_ANALYSIS" -eq 1 ] && [ "$EXECUTION_RESULT_LEAKS" -ne "$VALGRIND_ERROR" ]; then
-		echo -ne "${C_GREEN}[   OK   ]${C_RESET}"
+		echo -ne "\r${C_GREEN}[   OK   ]${C_RESET}"
 	else
-		echo -ne "${C_RED}[ FAILED ]${C_RESET}"
+		echo -ne "\r${C_RED}[ FAILED ]${C_RESET}"
 	fi
 	echo -e " ${C_YELLOW}$EXECUTION_MAP${C_RESET}"
 
@@ -101,6 +103,7 @@ check_execution()
 
 	# Set the map that is going to be tested
 	EXECUTION_MAP=$1
+	print_pre
 
 	# Execute the programm, and save the line code, saving the result
 	EXECUTION_CMD_NORMAL="$EXECUTABLE $1 > "$1.$RESULT_EXTENSION""
@@ -234,6 +237,10 @@ main()
 	echo -e "\t\t\t\t\t${C_CYAN}$border${C_RESET}"
 	echo -e "\t\t\t\t\t${C_CYAN}# ${C_YELLOW}$msg ${C_CYAN}#${C_RESET}"
 	echo -e "\t\t\t\t\t${C_CYAN}$border${C_RESET}"
+
+	if [[ "$PASSED_TESTS" -eq "$TOTAL_TESTS" ]]; then
+		clean
+	fi
 
 	exit 0
 }

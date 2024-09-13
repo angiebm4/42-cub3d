@@ -5,8 +5,8 @@ void	my_pixel_put(t_image *img, double x, double y, int color)
 {
 	int	offset;
 
-	offset = (img->line_len * y) + (x * (img->bpp / 8));
-	*((unsigned int *)(offset + img->pix_addr)) = color;
+	offset = (img->size_line * y) + (x * (img->bpp / 8));
+	*((unsigned int *)(offset + img->data_addr)) = color;
 }
 
 
@@ -35,7 +35,7 @@ void    errase_minimap(t_cube *cube)
         j = 0;
         while (j < MINIMAP_WIDTH)
         {
-            my_pixel_put(cube->grafic->mini_map, j, i, color);
+            my_pixel_put(cube->graphic->mini_map, j, i, color);
             j++;
         }
         i++;
@@ -46,8 +46,8 @@ void    errase_minimap(t_cube *cube)
 void    mini_map(t_cube *cube)
 {
     errase_minimap(cube);
-    int start_x = floor(cube->pj.posX) - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
-    int start_y = floor(cube->pj.posY) - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
+    int start_x = floor(cube->pj.pos_x) - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
+    int start_y = floor(cube->pj.pos_y) - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
     int y;
     int x;
     int aux_y;
@@ -72,14 +72,14 @@ void    mini_map(t_cube *cube)
                     iterable[0] = -1;
                     while (++iterable[0] < INCREMENT_VALUE_X)
                     {
-                        if (floor(cube->pj.posX) == mapX && floor(cube->pj.posY) == mapY)
+                        if (floor(cube->pj.pos_x) == mapX && floor(cube->pj.pos_y) == mapY)
                         {
-                            my_pixel_put(cube->grafic->mini_map, x + iterable[0],
+                            my_pixel_put(cube->graphic->mini_map, x + iterable[0],
                             y + iterable[1], H_SKIN);
                         }
                         else
                         {
-                            my_pixel_put(cube->grafic->mini_map, x + iterable[0],
+                            my_pixel_put(cube->graphic->mini_map, x + iterable[0],
                             y + iterable[1], set_color(cube, mapX, mapY));
                         }
                     }
@@ -91,7 +91,7 @@ void    mini_map(t_cube *cube)
         y += INCREMENT_VALUE_Y;
         aux_y++;
     }
-    mlx_put_image_to_window(cube->grafic->mlx,
-        cube->grafic->win, cube->grafic->mini_map->img, 0, 0);
+    mlx_put_image_to_window(cube->graphic->mlx,
+        cube->graphic->win, cube->graphic->mini_map->img, 0, 0);
 }
 

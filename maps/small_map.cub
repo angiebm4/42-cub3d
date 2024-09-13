@@ -1,11 +1,11 @@
 # Views textures
-NO ./textures/tile000.xpm
-SO ./textures/tile000.xpm
-WE ./textures/tile000.xpm
-EA ./textures/tile000.xpm
+NO ./textures/north64x64.xpm
+SO ./textures/south64x64.xpm
+WE ./textures/west64x64.xpm
+EA ./textures/east64x64.xpm
 
 ; The next line can be commented
-DO ./textures/tile000.xpm
+DO ./textures/door64x64.xpm
 
 # Floor color (RGB)
 F 171,96,89
@@ -23,7 +23,7 @@ C 100,252,252
 100000100010000000000001
 100000100010000100010001
 100000100010000000000001
-100000110110000101010001
+100000110110000101D10001
 100000000000000000000001
 100000000000000000000001
 100000000000000000000001

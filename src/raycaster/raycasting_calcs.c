@@ -2,93 +2,75 @@
 
 static void	ray_initial_data(int x, t_cube *cube)
 {
-	t_raycasting	*ray = &cube->grafic->raycasting;
-	
-	/* Calculate the initial data values */
+	t_raycasting	*ray;
+
+	ray = &cube->graphic->raycasting;
 	ray->cameraX = 2 * x / (double)WINDOW_WIDTH - 1;
-	ray->rayDirX = cube->pj.dirX + cube->pj.planeX * ray->cameraX;
-	ray->rayDirY = cube->pj.dirY + cube->pj.planeY * ray->cameraX;
-
-	/* Player's map position */
-	ray->mapX = (int) cube->pj.posX;
-	ray->mapY = (int) cube->pj.posY;
-
-	/* Get the X ray increment */
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->raydir_x = cube->pj.dir_x + cube->pj.plane_x * ray->cameraX;
+	ray->raydir_y = cube->pj.dir_y + cube->pj.plane_y * ray->cameraX;
+	ray->map_x = (int) cube->pj.pos_x;
+	ray->map_y = (int) cube->pj.pos_y;
+	if (ray->raydir_x == 0)
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-
-	/* Get the Y ray increment */
-	ray->deltaDistY = (ray->rayDirY == 0) ? 1e30 : fabs(1 / ray->rayDirY);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
+	if (ray->raydir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
 }
 
 static void	ray_rays_directions(t_cube *cube)
 {
-	t_raycasting *ray = &cube->grafic->raycasting;
+	ray_rays_directions_x(cube);
+	ray_rays_directions_y(cube);
+}
 
-	/* Check where the X ray is going to move */
-	if (ray->rayDirX < 0) {
-		ray->stepX = -1;
-		ray->sideDistX = (cube->pj.posX - ray->mapX) * ray->deltaDistX;
-	} else {
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - cube->pj.posX) * ray->deltaDistX;
-	}
+static void	ray_hit_loop(t_raycasting *ray, t_cube *cube)
+{
+	int	hit;
 
-	/* Check where the Y ray is going to move */
-	if (ray->rayDirY < 0) {
-		ray->stepY = -1;
-		ray->sideDistY = (cube->pj.posY - ray->mapY) * ray->deltaDistY;
-	} else {
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - cube->pj.posY) * ray->deltaDistY;
+	hit = 0;
+	while (hit == 0)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (cube->map[ray->map_y][ray->map_x] != '0')
+			hit = 1;
 	}
 }
 
 static void	ray_hits(t_cube *cube)
 {
-	int	hit;
-	t_raycasting *ray = &cube->grafic->raycasting;
+	t_raycasting	*ray;
 
-	hit = 0;
-
-	/* Loop until the ray hit with a block different of a '0' ('1' or 'D')*/
-	while (hit == 0)
-	{
-		if (ray->sideDistX < ray->sideDistY) {
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
-			ray->side = 0;
-		} else {
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
-			ray->side = 1;
-		}
-		if (cube->map[ray->mapY][ray->mapX] != '0')
-			hit = 1;
-	}
-
-	/* Check the distance between the player and the hit point */
+	ray = &cube->graphic->raycasting;
+	ray_hit_loop(ray, cube);
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - cube->pj.posX + (1 - ray->stepX) / 2) / ray->rayDirX;
+		ray->perpWallDist = (ray->map_x - cube->pj.pos_x + \
+			(1 - ray->step_x) / 2) / ray->raydir_x;
 	else
-		ray->perpWallDist = (ray->mapY - cube->pj.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
-
+		ray->perpWallDist = (ray->map_y - cube->pj.pos_y + \
+			(1 - ray->step_y) / 2) / ray->raydir_y;
 }
 
 void	raycasting_calcs(int x, t_cube *cube)
 {
-	/* Initial rays and map data */
 	ray_initial_data(x, cube);
-
-	/* Calc rays directions and increments */
 	ray_rays_directions(cube);
-
-	/* Get the rays hits */
 	ray_hits(cube);
 }

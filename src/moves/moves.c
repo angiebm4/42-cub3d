@@ -4,16 +4,14 @@ static void	change_position(int keycode, t_cube *cube)
 {
 	if (keycode == W || keycode == UP)
 		move_player(1, cube);
-
 	if (keycode == S || keycode == DOWN)
 		move_player(-1, cube);
 }
 
-static void change_vision(int keycode, t_cube *cube)
+static void	change_vision(int keycode, t_cube *cube)
 {
 	if (keycode == A || keycode == LEFT)
 		rotate_player(-ROTATION_SPEED, &cube->pj);
-
 	if (keycode == D || keycode == RIGHT)
 		rotate_player(ROTATION_SPEED, &cube->pj);
 }
