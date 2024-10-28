@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 14:01:24 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/10/28 14:13:09 by abarrio-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -24,8 +36,8 @@
 # define FRAME_DURATION		100
 
 /* MINI MAP MEASURES */
-# define MINIMAP_HEIGHT WINDOW_HEIGTH / 7
-# define MINIMAP_WIDTH WINDOW_WIDTH / 7
+# define MINIMAP_HEIGHT 140
+# define MINIMAP_WIDTH 183
 
 # define INCREMENT_VALUE_Y 10
 # define INCREMENT_VALUE_X 10
@@ -154,7 +166,7 @@ struct	s_pixel
 struct	s_mouse
 {
 	int		mouse_vision;
-	int		lastX;
+	int		last_x;
 	int		fixed;
 };
 
@@ -213,7 +225,7 @@ struct	s_cube
 
 struct	s_raycasting
 {
-	double	cameraX;
+	double	camera_x;
 	double	raydir_x;
 	double	raydir_y;
 
@@ -226,7 +238,7 @@ struct	s_raycasting
 	double	side_dist_x;
 	double	side_dist_y;
 
-	double	perpWallDist;
+	double	perp_wall_dist;
 
 	int		step_x;
 	int		step_y;
@@ -262,7 +274,7 @@ struct	s_mlx
 
 	t_image			screen;
 
-	t_image	*mini_map;
+	t_image			*mini_map;
 
 	t_raycasting	raycasting;
 
@@ -361,6 +373,19 @@ void	hooking(t_cube *cube);
 int		end_program(t_cube *cube);
 
 /* MINI MAP */
+typedef struct s_mapaux
+{
+	int	start_x;
+	int	start_y;
+	int	aux_y;
+	int	aux_x;
+	int	x;
+	int	y;
+	int	map_x;
+	int	map_y;
+}	t_mapaux;
+
+void	my_pixel_put(t_image *img, double x, double y, int color);
 void	mini_map(t_cube *cube);
 
 /* Render */
@@ -391,7 +416,7 @@ void	mouse_display(t_cube *cube);
 void	mouse_fix(t_mouse *mouse);
 
 /* Leave memory */
-void    clean_trash(t_cube *cube);
+void	clean_trash(t_cube *cube);
 
 /* Interactions */
 void	interactions_manage(int keycode, t_cube *cube);

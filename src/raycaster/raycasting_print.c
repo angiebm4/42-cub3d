@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_print.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 14:00:03 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/10/28 14:08:40 by abarrio-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	raycasting_print_pixels(t_cube *cube)
@@ -73,9 +85,9 @@ void	ray_get_texture_pos(t_cube *cube)
 
 	ray = &cube->graphic->raycasting;
 	if (ray->side == 0)
-		ray->wall_x = cube->pj.pos_y + ray->perpWallDist * ray->raydir_y;
+		ray->wall_x = cube->pj.pos_y + ray->perp_wall_dist * ray->raydir_y;
 	else
-		ray->wall_x = cube->pj.pos_x + ray->perpWallDist * ray->raydir_x;
+		ray->wall_x = cube->pj.pos_x + ray->perp_wall_dist * ray->raydir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x * (double)TEXTURE_DIMENSION);
 	if (ray->side == 0 && ray->raydir_x < 0)
@@ -89,7 +101,7 @@ void	raycasting_print_textures(int x, t_cube *cube)
 	t_raycasting	*ray;
 
 	ray = &cube->graphic->raycasting;
-	ray->line_height = (int)(WINDOW_HEIGTH / ray->perpWallDist);
+	ray->line_height = (int)(WINDOW_HEIGTH / ray->perp_wall_dist);
 	ray->start_point = -ray->line_height / 2 + WINDOW_HEIGTH / 2;
 	if (ray->start_point < 0)
 		ray->start_point = 0;

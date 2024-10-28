@@ -1,97 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 13:51:17 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/10/28 14:05:12 by abarrio-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
-
-void	my_pixel_put(t_image *img, double x, double y, int color)
+int	set_color(t_cube *cube, int mapX, int mapY)
 {
-	int	offset;
-
-	offset = (img->size_line * y) + (x * (img->bpp / 8));
-	*((unsigned int *)(offset + img->data_addr)) = color;
+	if (cube->map[mapY][mapX] == '0')
+		return (H_GRASS_GREEN);
+	if (cube->map[mapY][mapX] == '1')
+		return (H_BROWN);
+	if (cube->map[mapY][mapX] == 'D')
+		return (H_GRAY);
+	else
+		return (H_RED);
 }
 
-
-int set_color(t_cube *cube, int mapX, int mapY)
+void	errase_minimap(t_cube *cube)
 {
-    if (cube->map[mapY][mapX] == '0')
-        return(H_GRASS_GREEN);
-    if (cube->map[mapY][mapX] == '1')
-        return(H_BROWN);
-    if (cube->map[mapY][mapX] == 'D')
-        return(H_GRAY);
-    else
-        return(H_RED);
+	int	color;
+	int	i;
+	int	j;
+
+	color = H_BLACK;
+	i = 0;
+	while (i < MINIMAP_HEIGHT)
+	{
+		j = 0;
+		while (j < MINIMAP_WIDTH)
+		{
+			my_pixel_put(cube->graphic->mini_map, j, i, color);
+			j++;
+		}
+		i++;
+	}
 }
 
-void    errase_minimap(t_cube *cube)
+void	draw_minimap(t_cube *cube, t_mapaux *mapaux)
 {
-    int color;
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    color = H_BLACK;
-    i = 0;
-    while (i < MINIMAP_HEIGHT)
-    {
-        j = 0;
-        while (j < MINIMAP_WIDTH)
-        {
-            my_pixel_put(cube->graphic->mini_map, j, i, color);
-            j++;
-        }
-        i++;
-    }
+	j = -1;
+	while (++j < INCREMENT_VALUE_Y)
+	{
+		i = -1;
+		while (++i < INCREMENT_VALUE_X)
+		{
+			if (floor(cube->pj.pos_x) == mapaux->map_x
+				&& floor(cube->pj.pos_y) == mapaux->map_y)
+			{
+				my_pixel_put(cube->graphic->mini_map, mapaux->x + i, mapaux->y
+					+ j, H_SKIN);
+			}
+			else
+			{
+				my_pixel_put(cube->graphic->mini_map, mapaux->x + i, mapaux->y
+					+ j, set_color(cube, mapaux->map_x, mapaux->map_y));
+			}
+		}
+	}
 }
 
-
-void    mini_map(t_cube *cube)
+void	init_mapaux(t_cube *cube, t_mapaux *mapaux)
 {
-    errase_minimap(cube);
-    int start_x = floor(cube->pj.pos_x) - MINIMAP_WIDTH / 2 / INCREMENT_VALUE_X;
-    int start_y = floor(cube->pj.pos_y) - MINIMAP_HEIGHT / 2 / INCREMENT_VALUE_Y;
-    int y;
-    int x;
-    int aux_y;
-    int aux_x;
-    int iterable[2];
-
-    y = 0;
-    aux_y = 0;
-    while (y < MINIMAP_HEIGHT)
-    {
-        x = 0;
-        aux_x = 0;
-        while(x < MINIMAP_WIDTH)
-        {
-            int mapX = start_x + aux_x;
-            int mapY = start_y + aux_y;
-            if (mapX >= 0 && mapX < cube->map_w && mapY >= 0 && mapY < cube->map_h)
-            {
-                iterable[1] = -1;
-                while (++iterable[1] < INCREMENT_VALUE_Y)
-                {
-                    iterable[0] = -1;
-                    while (++iterable[0] < INCREMENT_VALUE_X)
-                    {
-                        if (floor(cube->pj.pos_x) == mapX && floor(cube->pj.pos_y) == mapY)
-                        {
-                            my_pixel_put(cube->graphic->mini_map, x + iterable[0],
-                            y + iterable[1], H_SKIN);
-                        }
-                        else
-                        {
-                            my_pixel_put(cube->graphic->mini_map, x + iterable[0],
-                            y + iterable[1], set_color(cube, mapX, mapY));
-                        }
-                    }
-                }
-            }
-            x += INCREMENT_VALUE_X;
-            aux_x++;
-        }
-        y += INCREMENT_VALUE_Y;
-        aux_y++;
-    }
-    mlx_put_image_to_window(cube->graphic->mlx,
-        cube->graphic->win, cube->graphic->mini_map->img, 0, 0);
+	mapaux->start_x = floor(cube->pj.pos_x) - MINIMAP_WIDTH / 2
+		/ INCREMENT_VALUE_X;
+	mapaux->start_y = floor(cube->pj.pos_y) - MINIMAP_HEIGHT / 2
+		/ INCREMENT_VALUE_Y;
+	mapaux->y = 0;
+	mapaux->aux_y = 0;
+	mapaux->x = 0;
+	mapaux->aux_x = 0;
+	mapaux->map_x = 0;
+	mapaux->map_y = 0;
 }
 
+void	mini_map(t_cube *cube)
+{
+	t_mapaux	mapaux;
+
+	errase_minimap(cube);
+	init_mapaux(cube, &mapaux);
+	while (mapaux.y < MINIMAP_HEIGHT)
+	{
+		mapaux.x = 0;
+		mapaux.aux_x = 0;
+		while (mapaux.x < MINIMAP_WIDTH)
+		{
+			mapaux.map_x = mapaux.start_x + mapaux.aux_x;
+			mapaux.map_y = mapaux.start_y + mapaux.aux_y;
+			if (mapaux.map_x >= 0 && mapaux.map_x < cube->map_w
+				&& mapaux.map_y >= 0 && mapaux.map_y < cube->map_h)
+				draw_minimap(cube, &mapaux);
+			mapaux.x += INCREMENT_VALUE_X;
+			mapaux.aux_x++;
+		}
+		mapaux.y += INCREMENT_VALUE_Y;
+		mapaux.aux_y++;
+	}
+	mlx_put_image_to_window(cube->graphic->mlx, cube->graphic->win,
+		cube->graphic->mini_map->img, 0, 0);
+}
