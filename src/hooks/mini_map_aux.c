@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   mini_map_aux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:04:17 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/10/28 13:04:20 by abarrio-         ###   ########.fr       */
+/*   Created: 2024/10/28 13:53:46 by abarrio-          #+#    #+#             */
+/*   Updated: 2024/10/28 13:54:47 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
-void	map_init(t_cube *cube, t_parsed_data *parsed)
+void	my_pixel_put(t_image *img, double x, double y, int color)
 {
-	int	i;
+	int	offset;
 
-	i = 0;
-	cube->map = malloc(sizeof(char *) * (map_length(parsed->map) + 1));
-	if (cube->map == NULL)
-		cube_destroy(cube, 1);
-	while (parsed->map[i])
-	{
-		cube->map[i] = ft_strdup(parsed->map[i]);
-		if (cube->map[i] == NULL)
-			cube_destroy(cube, 1);
-		i++;
-	}
-	cube->map[i] = NULL;
+	offset = (img->size_line * y) + (x * (img->bpp / 8));
+	*((unsigned int *)(offset + img->data_addr)) = color;
 }

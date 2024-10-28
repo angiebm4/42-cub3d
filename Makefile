@@ -58,9 +58,10 @@ PARSER =	parse.c				\
 			check_graphic.c		\
 			clean_map.c
 
-HOOKS =		hooks.c		\
-			render.c	\
-			mini_map.c
+HOOKS =		hooks.c			\
+			render.c		\
+			mini_map.c  	\
+			mini_map_aux.c
 
 RAYCASTING =	raycasting.c				\
 				raycasting_calcs.c			\
