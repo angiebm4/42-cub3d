@@ -1,11 +1,11 @@
 # Views textures
-NO ./textures/north64x64.xpm
-SO ./textures/south64x64.xpm
-WE ./textures/west64x64.xpm
-EA ./textures/east64x64.xpm
+NO ./textures/brain_coral_block.xpm
+SO ./textures/structure_block_data.xpm
+WE ./textures/chiseled_tuff_top.xpm
+EA ./textures/daylight_detector_inverted_top.xpm
 
 ; The next line can be commented
-DO ./textures/door64x64.xpm
+DO ./textures/spruce_door_bottom.xpm
 
 # Floor color (RGB)
 F 171,96,89

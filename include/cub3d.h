@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:01:24 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/10/28 14:13:09 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:04:14 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,15 @@
 # define MOUSE_FIX_KEY			N
 
 /* Compass */
-# define NORTH_COMPASS1	"textures/cn1.xpm"
-# define SOUTH_COMPASS1	"textures/cs1.xpm"
-# define WEST_COMPASS1	"textures/cw1.xpm"
-# define EAST_COMPASS1	"textures/ce1.xpm"
+# define NORTH_COMPASS1	"textures/north.xpm"
+# define SOUTH_COMPASS1	"textures/south.xpm"
+# define WEST_COMPASS1	"textures/west.xpm"
+# define EAST_COMPASS1	"textures/east.xpm"
 
-# define NORTH_COMPASS2	"textures/cn2.xpm"
-# define SOUTH_COMPASS2	"textures/cs2.xpm"
-# define WEST_COMPASS2	"textures/cw2.xpm"
-# define EAST_COMPASS2	"textures/ce2.xpm"
+# define NORTH_COMPASS2	"textures/north_east.xpm"
+# define SOUTH_COMPASS2	"textures/south_west.xpm"
+# define WEST_COMPASS2	"textures/north_west.xpm"
+# define EAST_COMPASS2	"textures/south_east.xpm"
 
 # define NORTH_COMPASS_F1	0
 # define NORTH_COMPASS_F2	1
@@ -144,7 +144,7 @@
 # define EAST_COMPASS_F2	7
 # define COMPASS_TEXTURES	8
 
-# define COMPASS_SIZE	128
+# define COMPASS_SIZE	64
 
 typedef struct s_cube		t_cube;
 typedef struct s_mlx		t_mlx;
