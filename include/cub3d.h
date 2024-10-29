@@ -6,7 +6,7 @@
 /*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:01:24 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/10/28 17:04:14 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:50:58 by abarrio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,15 @@
 # define MOUSE_FIX_KEY			N
 
 /* Compass */
-# define NORTH_COMPASS1	"textures/north.xpm"
-# define SOUTH_COMPASS1	"textures/south.xpm"
-# define WEST_COMPASS1	"textures/west.xpm"
-# define EAST_COMPASS1	"textures/east.xpm"
+# define NORTH_COMPASS1	"textures/compass/north.xpm"
+# define SOUTH_COMPASS1	"textures/compass/south.xpm"
+# define WEST_COMPASS1	"textures/compass/west.xpm"
+# define EAST_COMPASS1	"textures/compass/east.xpm"
 
-# define NORTH_COMPASS2	"textures/north_east.xpm"
-# define SOUTH_COMPASS2	"textures/south_west.xpm"
-# define WEST_COMPASS2	"textures/north_west.xpm"
-# define EAST_COMPASS2	"textures/south_east.xpm"
+# define NORTH_COMPASS2	"textures/compass/north_1.xpm"
+# define SOUTH_COMPASS2	"textures/compass/south_1.xpm"
+# define WEST_COMPASS2	"textures/compass/west_1.xpm"
+# define EAST_COMPASS2	"textures/compass/east_1.xpm"
 
 # define NORTH_COMPASS_F1	0
 # define NORTH_COMPASS_F2	1

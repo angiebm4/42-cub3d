@@ -42,8 +42,7 @@ INIT =		cube_init.c		\
 			textures_init.c	\
 			minimap_init.c
 
-DESTROY =	cube_destroy.c	\
-			clean_trash.c
+DESTROY =	cube_destroy.c
 
 PARSER =	parse.c				\
 			parse_print.c		\
