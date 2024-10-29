@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:03:27 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/10/28 13:03:30 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:31:24 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static void	clean_images(t_image *images, size_t size, void *mlx)
 
 static void	clean_minimap(t_cube *cube)
 {
-	mlx_destroy_image(cube->graphic->mlx, cube->graphic->mini_map->img);
-	free(cube->graphic->mini_map);
+	if (cube->graphic->mlx && cube->graphic->mini_map)
+		mlx_destroy_image(cube->graphic->mlx, cube->graphic->mini_map->img);
+	if (cube->graphic->mini_map)
+		free(cube->graphic->mini_map);
 }
 
 static void	screen_destroy(t_cube *cube)

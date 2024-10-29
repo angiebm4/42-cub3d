@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_print.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarrio- <abarrio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lpastor- <lpastor-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:00:03 by abarrio-          #+#    #+#             */
-/*   Updated: 2024/10/28 14:08:40 by abarrio-         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:32:37 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ray_print_texture_loop(int x, t_cube *cube)
 {
 	int				y;
 	t_raycasting	*ray;
+	unsigned int	*color;
 
 	ray = &cube->graphic->raycasting;
 	ray->step = 1.0 * TEXTURE_DIMENSION / ray->line_height;
@@ -49,7 +50,8 @@ static void	ray_print_texture_loop(int x, t_cube *cube)
 	{
 		ray->tex_y = (int) ray->tex_pos & (TEXTURE_DIMENSION - 1);
 		ray->tex_pos += ray->step;
-		ray->color = (int)*get_pixel(ray->texture, ray->tex_x, ray->tex_y);
+		color = (unsigned int *)get_pixel(ray->texture, ray->tex_x, ray->tex_y);;
+		ray->color = *color;
 		ray_draw_pixel(x, y, ray->color, cube);
 		y++;
 	}
