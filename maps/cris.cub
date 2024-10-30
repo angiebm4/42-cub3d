@@ -1,7 +1,7 @@
-NO ./textures/tile000.xpm
-SO ./textures/tile000.xpm
-WE ./textures/tile000.xpm      
-EA ./textures/tile000.xpm
+NO ./textures/brain_coral_block.xpm
+SO ./textures/structure_block_data.xpm
+WE ./textures/chiseled_tuff_top.xpm
+EA ./textures/daylight_detector_inverted_top.xpm
 F 0,126,100       
 C 120,128,100       
 

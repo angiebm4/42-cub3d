@@ -1,8 +1,8 @@
 # textures
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/brain_coral_block.xpm
+SO ./textures/structure_block_data.xpm
+WE ./textures/chiseled_tuff_top.xpm
+EA ./textures/daylight_detector_inverted_top.xpm
 
 # Pixels
 F 220,100,0
